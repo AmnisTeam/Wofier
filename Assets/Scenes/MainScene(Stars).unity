@@ -19617,14 +19617,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.93333334, g: 0.93333334, b: 0.9411765, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4770c3385dd3d664cba2c5d658aca2d1, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -24558,7 +24558,7 @@ GameObject:
   m_Component:
   - component: {fileID: 726378762}
   m_Layer: 5
-  m_Name: Philosophica
+  m_Name: Wofier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63786,7 +63786,7 @@ GameObject:
   - component: {fileID: 1364203488}
   - component: {fileID: 1364203487}
   m_Layer: 5
-  m_Name: Coliseum
+  m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63809,8 +63809,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 416.01007, y: 0.0019989014}
-  m_SizeDelta: {x: 126.49, y: 126.49}
+  m_AnchoredPosition: {x: -360, y: 3}
+  m_SizeDelta: {x: 164.78, y: 164.78}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1364203487
 MonoBehaviour:
@@ -63832,7 +63832,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bd5a176edde5b1149a94ef647c7f2188, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e4e59e0ea55aeb94bad174ff7fcea2df, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -68805,9 +68805,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5ff3c528d8d649e4e9e57c857e6921ba, type: 3}
   backgroundMusicSource: {fileID: 1499825405}
   backgroundVolume: 0
-  tap: {fileID: 8300000, guid: f96bbe1ef81cca54ca5c2495ad23fefe, type: 3}
-  soundSource: {fileID: 1499825405}
-  soundVolume: 0
 --- !u!82 &1499825405
 AudioSource:
   m_ObjectHideFlags: 0
@@ -78769,7 +78766,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1926520563
 RectTransform:
   m_ObjectHideFlags: 0
@@ -78840,7 +78837,7 @@ GameObject:
   - component: {fileID: 2064178133}
   - component: {fileID: 2064178132}
   m_Layer: 5
-  m_Name: Philosophica
+  m_Name: Wofier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78863,8 +78860,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -54.98993, y: 0.0019989014}
-  m_SizeDelta: {x: 848.52, y: 192.03}
+  m_AnchoredPosition: {x: 8, y: 0.0010032}
+  m_SizeDelta: {x: 479.25, y: 192.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2064178132
 MonoBehaviour:
@@ -78886,7 +78883,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Philosophica
+  m_text: Wofier
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -78895,8 +78892,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4290357159
+  m_fontColor: {r: 0.654902, g: 0.654902, b: 0.7254902, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -78919,7 +78916,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
