@@ -44484,7 +44484,7 @@ GameObject:
   - component: {fileID: 843593483}
   - component: {fileID: 843593482}
   m_Layer: 0
-  m_Name: CreateLobbyOnServer
+  m_Name: PhotonCreateLobbyOnServer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70936,9 +70936,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bc95c4cb6c68d5488389e3087051b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconScroller: {fileID: 878558054}
-  lobbyName: {fileID: 299048232}
-  lobbyPassword: {fileID: 1444878641}
 --- !u!4 &1665670966
 Transform:
   m_ObjectHideFlags: 0

@@ -25,4 +25,11 @@ public class JoinLobby : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel(lobbbySceneName);
     }
 
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        base.OnJoinRoomFailed(returnCode, message);
+        Debug.Log(returnCode);
+        Debug.Log(message);
+    }
+
 }
