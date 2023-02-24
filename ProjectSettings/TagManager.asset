@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BACKGROUND_MUSIC_TAG
   - SOUND_EFFECTS_TAG
+  - PLAYERS_LOBBY_TAG
   layers:
   - Default
   - TransparentFX

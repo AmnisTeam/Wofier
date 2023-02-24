@@ -94,7 +94,9 @@ public class RoomManager : NetworkRoomManager
     /// <returns>The new room-player object.</returns>
     public override GameObject OnRoomServerCreateRoomPlayer(NetworkConnectionToClient conn)
     {
-        return base.OnRoomServerCreateRoomPlayer(conn);
+        return Instantiate(playerPrefab, GameObject.FindGameObjectWithTag("PLAYERS_LOBBY_TAG").transform);
+
+        //return base.OnRoomServerCreateRoomPlayer(conn);
     }
 
     /// <summary>
@@ -117,6 +119,7 @@ public class RoomManager : NetworkRoomManager
     /// <param name="conn">The connection the player object is for.</param>
     public override void OnRoomServerAddPlayer(NetworkConnectionToClient conn)
     {
+        Debug.Log("123");
         base.OnRoomServerAddPlayer(conn);
     }
 
