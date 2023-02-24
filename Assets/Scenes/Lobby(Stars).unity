@@ -43817,6 +43817,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4111138451885012679, guid: ff549d6d0a12b574d88ec602521aaba9, type: 3}
+      propertyPath: sceneId
+      value: 4149400770
+      objectReference: {fileID: 0}
     - target: {fileID: 6044939556774525399, guid: ff549d6d0a12b574d88ec602521aaba9, type: 3}
       propertyPath: m_text
       value: Player 4
@@ -70103,6 +70107,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4111138451885012679, guid: ff549d6d0a12b574d88ec602521aaba9, type: 3}
+      propertyPath: sceneId
+      value: 276041404
+      objectReference: {fileID: 0}
     - target: {fileID: 6044939556774525399, guid: ff549d6d0a12b574d88ec602521aaba9, type: 3}
       propertyPath: m_text
       value: Player 3
@@ -89918,7 +89926,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1954961772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99622,6 +99630,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4111138451885012679, guid: ff549d6d0a12b574d88ec602521aaba9, type: 3}
+      propertyPath: sceneId
+      value: 776976694
+      objectReference: {fileID: 0}
     - target: {fileID: 6044939556774525399, guid: ff549d6d0a12b574d88ec602521aaba9, type: 3}
       propertyPath: m_text
       value: Player 2
@@ -104644,6 +104656,10 @@ PrefabInstance:
     - target: {fileID: 1089952454414005330, guid: ff549d6d0a12b574d88ec602521aaba9, type: 3}
       propertyPath: m_Name
       value: Player 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4111138451885012679, guid: ff549d6d0a12b574d88ec602521aaba9, type: 3}
+      propertyPath: sceneId
+      value: 2420288353
       objectReference: {fileID: 0}
     - target: {fileID: 7389513900268596090, guid: ff549d6d0a12b574d88ec602521aaba9, type: 3}
       propertyPath: m_Pivot.x
