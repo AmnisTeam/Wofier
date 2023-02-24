@@ -7,6 +7,7 @@ public class MapGenerator : MonoBehaviour
 
     public Transform mapCenter;
     public GameObject tilePrifab;
+    public Inventory inventory;
 
     public int mapSizeX;
     public int mapSizeY;
@@ -38,6 +39,7 @@ public class MapGenerator : MonoBehaviour
             {
                 map[x][y] = Instantiate(tilePrifab, GetLeftTopMap() + new Vector3(x * sizeTile.x, y * sizeTile.y), 
                     Quaternion.identity);
+                map[x][y].GetComponent<Tile>().ConstructorTile(inventory);
             }
         }
     }

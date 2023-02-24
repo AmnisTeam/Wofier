@@ -11,6 +11,9 @@ public class GamePlayManager : MonoBehaviour
     public GameObject findingMenu;
     public TMPro.TMP_Text findingMenuNickname;
 
+    public TMPro.TMP_Text timeNickname;
+    public TMPro.TMP_Text time;
+
     public int idPlayingPerson = -1;
 
     public float timeToPlayingOnePerson;
@@ -24,11 +27,16 @@ public class GamePlayManager : MonoBehaviour
     {
         idPlayingPerson = (idPlayingPerson + 1) % personManager.persons.Count;
         timerToPlayerOnePerson = timeToPlayingOnePerson;
+
         findingMenuNickname.text = personManager.persons[idPlayingPerson].nickname;
         findingMenuNickname.color = personManager.persons[idPlayingPerson].color;
         findingMenu.SetActive(true);
         findingMenu.GetComponent<CanvasGroup>().LeanAlpha(1, timeToAppearanceFindingMenu);
         findingMenuShowingTimer = findingMenuShowingTime;
+
+        timeNickname.text = personManager.persons[idPlayingPerson].nickname;
+        timeNickname.color = personManager.persons[idPlayingPerson].color;
+
         scoreTableManager.updateTable();
     }
 
@@ -66,5 +74,10 @@ public class GamePlayManager : MonoBehaviour
         {
             SelectNextPersonToPlay();
         }
+
+        int secundes = (int)(timerToPlayerOnePerson % 60);
+        int minutes = (int)(timerToPlayerOnePerson / 60);
+
+        time.text = minutes.ToString("00") + ":" + secundes.ToString("00");
     }
 }

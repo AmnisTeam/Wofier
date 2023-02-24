@@ -2,29 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class DragInventoryItems : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DragInventoryItems : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public int idSlot;
-    public Inventory inventory;
-    public GameObject container;
+    private bool mouseOver = false;
 
-    public void OnBeginDrag(PointerEventData eventData)
+    public void OnDrop(PointerEventData eventData)
     {
-        if(inventory.items[idSlot])
-            inventory.items[idSlot].GetComponent<Item>().OnDrag(eventData, container);
+        Item item = eventData.pointerDrag.GetComponent<Item>();
+        if(!item.inventory.items[idSlot])
+            item.MoveItemToSlot(idSlot);
+        else
+            item.MoveItemToSlot(item.idInInventory);
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        if (inventory.items[idSlot])
-            inventory.items[idSlot].GetComponent<Item>().OnDragging(eventData, container);
+        mouseOver = true;
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public void OnPointerExit(PointerEventData eventData)
     {
-        if (inventory.items[idSlot])
-            inventory.items[idSlot].GetComponent<Item>().onEndDrag(eventData, container);
+        mouseOver = false;
+    }
+
+    public void OnPointerOver()
+    {
+        if(MouseObject.isDrag && !Input.GetMouseButton(0))
+        {
+            Item item = MouseObject.draggedObject.GetComponent<Item>();
+            item.GetComponent<CanvasGroup>().blocksRaycasts = true;
+            item.GetComponent<Image>().raycastTarget = true;
+            if (!item.inventory.items[idSlot])
+                item.MoveItemToSlot(idSlot);
+            else
+                item.MoveItemToSlot(item.idInInventory);
+
+            MouseObject.EndDrag();
+        }
     }
 
     void Start()
@@ -34,6 +51,7 @@ public class DragInventoryItems : MonoBehaviour, IBeginDragHandler, IDragHandler
 
     void Update()
     {
-        
+        if (mouseOver)
+            OnPointerOver();
     }
 }

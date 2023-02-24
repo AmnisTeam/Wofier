@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public abstract class Item : MonoBehaviour
+public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public GameObject draggedObjectPrifab;
     public bool canDragging = true;
@@ -13,7 +13,6 @@ public abstract class Item : MonoBehaviour
     public int idInInventory;
 
     public Inventory inventory;
-    public MapGenerator mapGenerator;
 
     void Start()
     {
@@ -25,39 +24,74 @@ public abstract class Item : MonoBehaviour
 
     }
 
+    public void ConstructorItem(Inventory inventory, int idInInventory)
+    {
+        this.inventory = inventory;
+        this.idInInventory = idInInventory;
+    }
+
     public GameObject GetTile()
     {
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
-        if (hit.collider.gameObject.GetComponent<Tile>())
-            return hit.collider.gameObject;
+        if(hit)
+            if (hit.collider.gameObject.GetComponent<Tile>())
+                return hit.collider.gameObject;
         return null;
+    }
+
+    public void MoveItemToSlot(int id)
+    {
+        if(idInInventory >= 0)
+        inventory.items[idInInventory] = null;
+
+        idInInventory = id >= 0 ? id : inventory.GetLastFreeSlotId();
+        transform.SetParent(inventory.slots[idInInventory].transform);
+        inventory.items[idInInventory] = gameObject;
+        transform.localPosition = new Vector3(0, 0, 0);
+        transform.localScale = new Vector3(1, 1, 1);
     }
 
     public abstract GameObject GetDraggedObject();
 
-    public virtual void OnDrag(PointerEventData eventData, GameObject container)
+    public void OnBeginDrag(PointerEventData eventData)
     {
-        //container.GetComponent<Image>().color = colorOnDrag;
+        MouseObject.draggedObject = gameObject;
+        MouseObject.isDrag = true;
+        GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
-    public virtual void OnDragging(PointerEventData eventData, GameObject container)
+
+    public void OnDrag(PointerEventData eventData)
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = mousePosition;
         transform.localScale = new Vector3(sizeOnDrag, sizeOnDrag, 1);
-
     }
 
-    public virtual void onEndDrag(PointerEventData eventData, GameObject container)
+    public void OnEndDrag(PointerEventData eventData)
     {
-        //container.GetComponent<Image>().color = new Color(0, 0, 0, 0);
-        transform.position = inventory.slots[idInInventory].transform.position;
-        transform.localScale = new Vector3(1, 1, 1);
-
-        GameObject tileObject = GetTile();
-        if (tileObject)
-            tileObject.GetComponent<Tile>().OnSetItem(this);
-        inventory.items[idInInventory] = null;
-        Destroy(gameObject);
+        MouseObject.draggedObject = null;
+        MouseObject.isDrag = false;
+        GetComponent<CanvasGroup>().blocksRaycasts = true;
+        GetComponent<Image>().raycastTarget = true;
+        if (inventory.gamePlayManager.me.id == inventory.gamePlayManager.personManager.persons[inventory.gamePlayManager.idPlayingPerson].id)
+        {
+            GameObject tile = GetTile();
+            if (tile && tile.GetComponent<Tile>().isCanSetItem)
+            {
+                tile.GetComponent<Tile>().OnSetItem(this, inventory.gamePlayManager.me);
+                if(idInInventory >= 0)
+                    inventory.items[idInInventory] = null;
+                Destroy(gameObject);
+            }
+            else
+            {
+                MoveItemToSlot(idInInventory);
+            }
+        }
+        else
+        {
+            MoveItemToSlot(idInInventory);
+        }
     }
 }

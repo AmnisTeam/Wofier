@@ -276,6 +276,7 @@ MonoBehaviour:
   letterText: {fileID: 1786622048}
   letter: 65
   isHaveLetter: 0
+  colorWithoutLetter: {r: 1, g: 1, b: 1, a: 1}
   colorWithLetter: {r: 1, g: 0.84705883, b: 0.84705883, a: 1}
 --- !u!50 &5862275652679631625
 Rigidbody2D:
