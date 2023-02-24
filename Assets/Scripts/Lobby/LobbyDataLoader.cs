@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,13 +14,16 @@ public class LobbyDataLoader : MonoBehaviour
     public TextMeshProUGUI lobbyCode;
     public TextMeshProUGUI lobbyPassword;
 
-    void Awake()
+    void Start()
     {
+        var roomName = PhotonNetwork.CurrentRoom.Name;
+        Debug.Log($"Joined room {roomName}");
+
         lobbyIcon = lobbyGameObject.GetComponent<Image>();
 
         lobbyIcon.sprite = CreateLobbyDataHolder.icons[CreateLobbyDataHolder.lobbyIconID];
         lobbyName.text = CreateLobbyDataHolder.lobbyName;
-        lobbyCode.text = "#123456";
+        lobbyCode.text = PhotonNetwork.CurrentRoom.Name;
         lobbyPassword.text = CreateLobbyDataHolder.lobbyPassword;
     }
 }
