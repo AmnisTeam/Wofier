@@ -14,6 +14,7 @@ public class CreateLobby : MonoBehaviourPunCallbacks
     public TextMeshProUGUI lobbyNameTMP;
     public TextMeshProUGUI lobbyPasswordTMP;
     public IconScroller iconScroller;
+    public CreateLobbySaveData createLobbySaveData;
 
 
     private string lobbyName;
@@ -23,6 +24,9 @@ public class CreateLobby : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {
+        System.Random rnd = new System.Random();
+        int value = rnd.Next(100000, 999999);
+        string code = "#" + value.ToString();
 
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 4;
@@ -31,30 +35,20 @@ public class CreateLobby : MonoBehaviourPunCallbacks
         lobbyPassword = lobbyPasswordTMP.text;
         lobbyIconID = iconScroller.selectedId.ToString();
 
-        roomOptions.CustomRoomPropertiesForLobby = new string[] { "lobbyName", "lobbyPassword", "lobbyIconID" };
-        roomOptions.CustomRoomProperties = new Hashtable 
-        { { "lobbyName", lobbyName }, { "lobbyPassword", lobbyPassword }, {"lobbyIconID", lobbyIconID } };
-
-        System.Random rnd = new System.Random();
-        int value = rnd.Next(100000, 999999);
-
-        PhotonNetwork.CreateRoom(value.ToString(), roomOptions, null);
-        //PhotonNetwork.JoinRoom(value.ToString());
-        Debug.Log(value.ToString());
+        roomOptions.CustomRoomPropertiesForLobby = new string[] { "lobbyName", "lobbyPassword", "lobbyIconID", "lobbyCode" };
+        roomOptions.CustomRoomProperties = new Hashtable
+        { { "lobbyName", lobbyName }, { "lobbyPassword", lobbyPassword }, {"lobbyIconID", lobbyIconID }, {"lobbyCode", code} };
 
 
-        //lobbyIcon = lobbyGameObject.GetComponent<Image>();
-        //lobbyIcon.sprite = CreateLobbyDataHolder.icons[CreateLobbyDataHolder.lobbyIconID];
 
-        //PhotonNetwork.CreateRoom()
+        PhotonNetwork.CreateRoom(code, roomOptions, null);
+
+        Debug.Log(code);
+
     }
 
     public override void OnCreatedRoom()
     {
         PhotonNetwork.LoadLevel(lobbbySceneName);
     }
-    //public override void OnJoinedRoom()
-    //{
-    //    base.OnJoinedRoom();
-    //}
 }

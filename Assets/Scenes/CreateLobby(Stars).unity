@@ -44506,6 +44506,7 @@ MonoBehaviour:
   lobbyNameTMP: {fileID: 299048232}
   lobbyPasswordTMP: {fileID: 1444878641}
   iconScroller: {fileID: 878558054}
+  createLobbySaveData: {fileID: 1665670965}
 --- !u!4 &843593483
 Transform:
   m_ObjectHideFlags: 0

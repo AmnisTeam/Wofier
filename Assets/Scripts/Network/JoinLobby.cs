@@ -24,4 +24,5 @@ public class JoinLobby : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.LoadLevel(lobbbySceneName);
     }
+
 }
