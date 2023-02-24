@@ -42,7 +42,7 @@ public class TableCompiler : MonoBehaviour
             answer[x].text = questionManager.activeQuestion.answer[answerData.answerId];
             if (answerData.answerId == questionManager.rightAnswer)
                 answer[x].color = colorRightAnswer;
-            icons[x].sprite = iconsContent.icons[table[x].iconId].sprite;
+            icons[x].sprite = iconsContent.icons[table[x].iconId];
             icons[x].color = table[x].color;
 
             minutes[x].text = "";
@@ -65,7 +65,7 @@ public class TableCompiler : MonoBehaviour
 
         winner = table[0];
         winnerNickname.SetText(winner.nickname);
-        winnerIcon.sprite = iconsContent.icons[table[0].iconId].sprite;
+        winnerIcon.sprite = iconsContent.icons[table[0].iconId];
         winnerIcon.color = table[0].color;
     }
 

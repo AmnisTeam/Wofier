@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,6 +9,8 @@ using UnityEngine.UI;
 
 public class LobbyDataLoader : MonoBehaviour
 {
+    public string iconsTag;
+
     public GameObject lobbyGameObject;
     Image lobbyIcon;
     public TextMeshProUGUI lobbyName;
@@ -16,15 +19,14 @@ public class LobbyDataLoader : MonoBehaviour
 
     void Start()
     {
+        GameObject iconsGameObject = GameObject.FindGameObjectWithTag(this.iconsTag);
+        IconsContent iconsContentInstance = iconsGameObject.GetComponent<IconsContent>();
+        Sprite[] icons = iconsContentInstance.icons;
+
         lobbyIcon = lobbyGameObject.GetComponent<Image>();
 
-        //lobbyIcon.sprite = CreateLobbyDataHolder.icons[CreateLobbyDataHolder.lobbyIconID];
-        //lobbyName.text = CreateLobbyDataHolder.lobbyName;
-        //lobbyCode.text = CreateLobbyDataHolder.lobbyCode;
-        //lobbyPassword.text = CreateLobbyDataHolder.lobbyPassword;
-
         lobbyCode.text = PhotonNetwork.CurrentRoom.CustomProperties["lobbyCode"].ToString();
-        lobbyIcon.sprite = PhotonNetwork.CurrentRoom.CustomProperties["lobbyIconID"];
+        lobbyIcon.sprite = icons[Convert.ToInt32(PhotonNetwork.CurrentRoom.CustomProperties["lobbyIconID"])];
         lobbyName.text = PhotonNetwork.CurrentRoom.CustomProperties["lobbyName"].ToString();
         lobbyPassword.text = PhotonNetwork.CurrentRoom.CustomProperties["lobbyPassword"].ToString();
     }

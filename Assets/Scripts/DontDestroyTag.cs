@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DontDestroySound : MonoBehaviour
+public class DontDestroyTag : MonoBehaviour
 {
     public string createdTag;
 

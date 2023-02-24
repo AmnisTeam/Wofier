@@ -34454,6 +34454,73 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &799080613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 799080615}
+  - component: {fileID: 799080614}
+  - component: {fileID: 799080616}
+  m_Layer: 0
+  m_Name: Icons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &799080614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799080613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a9368bd967d25f4f9a0675e174fe70b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icons:
+  - {fileID: 21300000, guid: b6c8fa383d2692c42aaa236860ff3195, type: 3}
+  - {fileID: 21300000, guid: 7951c81a8f4ba81428e4c3437c686901, type: 3}
+  - {fileID: 21300000, guid: 5688eca440b30fd41a7cc0ca271a390e, type: 3}
+  - {fileID: 21300000, guid: 5c23197d490560f42babe165b76f2be1, type: 3}
+  - {fileID: 21300000, guid: 4d92b04ca6b99aa4f9dcfbd294d1eab0, type: 3}
+  - {fileID: 21300000, guid: adb451624805d5849a1b1edcd54788fb, type: 3}
+  - {fileID: 21300000, guid: 17034f6b163f39640b003fc7c64c904d, type: 3}
+  - {fileID: 21300000, guid: 3ec9bbcf51b1f9c40b90032123980b57, type: 3}
+--- !u!4 &799080615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799080613}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.25674772, y: 0.26438326, z: -0.0015474188}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &799080616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799080613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4360fa58a9e7891459b3af6b1196f3fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  createdTag: ICONS_CONTENT_TAG
 --- !u!1 &835833374
 GameObject:
   m_ObjectHideFlags: 0
@@ -54060,7 +54127,7 @@ GameObject:
   - component: {fileID: 1247736754}
   - component: {fileID: 1247736753}
   - component: {fileID: 1247736752}
-  - component: {fileID: 1247736751}
+  - component: {fileID: 1247736755}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -54068,19 +54135,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1247736751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1247736750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a9c2f1b7ab68b44e91957f3f978f915, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  createdTag: SOUND_EFFECTS_TAG
 --- !u!114 &1247736752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54208,6 +54262,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1247736755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247736750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4360fa58a9e7891459b3af6b1196f3fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  createdTag: SOUND_EFFECTS_TAG
 --- !u!1 &1306449288
 GameObject:
   m_ObjectHideFlags: 0
@@ -68892,7 +68959,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1499825403}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a9c2f1b7ab68b44e91957f3f978f915, type: 3}
+  m_Script: {fileID: 11500000, guid: 4360fa58a9e7891459b3af6b1196f3fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   createdTag: BACKGROUND_MUSIC_TAG
