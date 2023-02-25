@@ -17,7 +17,7 @@ public class JoinLobby : MonoBehaviourPunCallbacks
     public void JoinLobbyFunc()
     {
         Debug.Log(lobbyCodeTMP.text);
-        PhotonNetwork.JoinRoom(lobbyCodeTMP.text);
+        PhotonNetwork.JoinRoom(lobbyCodeTMP.text/*.ToString()*/);
     }
 
     public override void OnJoinedRoom()

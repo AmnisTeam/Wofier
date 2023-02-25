@@ -30,8 +30,13 @@ public class CreateLobby : MonoBehaviourPunCallbacks
             return;
         }
 
+        //System.Random rnd = new System.Random();
+        //string code = rnd.Next(100000, 999999).ToString();
+        string alhp = "abcdefghijklmnopqrstuvwxyz";
+        string code = "";
         System.Random rnd = new System.Random();
-        int code = rnd.Next(100000, 999999);
+        for (int i = 0; i < 6; i++)
+            code += alhp[rnd.Next(0, alhp.Length)];
 
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 4;
@@ -46,11 +51,12 @@ public class CreateLobby : MonoBehaviourPunCallbacks
 
         roomOptions.CustomRoomPropertiesForLobby = new string[] { "lobbyName", "lobbyPassword", "lobbyIconID", "lobbyCode" };
         roomOptions.CustomRoomProperties = new Hashtable
-        { { "lobbyName", lobbyName }, { "lobbyPassword", lobbyPassword }, {"lobbyIconID", lobbyIconID }, {"lobbyCode", lobbyNameTMP.text} };
+        { { "lobbyName", lobbyName }, { "lobbyPassword", lobbyPassword }, 
+          {"lobbyIconID", lobbyIconID }, {"lobbyCode", lobbyName} };
 
 
 
-        PhotonNetwork.CreateRoom(lobbyNameTMP.text, roomOptions, TypedLobby.Default);
+        PhotonNetwork.CreateRoom(lobbyName, roomOptions, TypedLobby.Default);
         
 
         //Debug.Log(code);
@@ -59,8 +65,6 @@ public class CreateLobby : MonoBehaviourPunCallbacks
 
     public override void OnCreatedRoom()
     {
-        //Debug.Log(PhotonNetwork.CountOfRooms.ToString());
-        //Debug.Log(PhotonNetwork.CurrentRoom.Name);
         PhotonNetwork.LoadLevel(lobbbySceneName);
         Debug.Log("Количество комнат: " + PhotonNetwork.CountOfRooms.ToString());
         Debug.Log("Создана комната: " + PhotonNetwork.CurrentRoom.Name);
