@@ -1,5 +1,6 @@
 using Photon.Pun;
 using Photon.Realtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -16,13 +17,48 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
     public Transform[] spawnPoints;
     private int spawnIndex = 0;
 
+    public string avatarSpritesTag;
+    GameObject avatarSprites;
+    IconsContent iconsContent;
+    Sprite[] icons;
+
+    public string colorsHolderTag;
+    private GameObject colorsHolder;
+
+
+    //border
+    //icon
+    //nickname
+    //color
+    //button
+
+
     private void Start()
     {
+        avatarSprites = GameObject.FindGameObjectWithTag(avatarSpritesTag);
+        iconsContent = avatarSprites.GetComponent<IconsContent>();
+        icons = iconsContent.icons;
+
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
             GameObject tempListing = Instantiate(playerPrefab, spawnPoints[spawnIndex]);
+
+            Image playerIcon = tempListing.transform.GetChild(1).GetComponent<Image>();
             TextMeshProUGUI tempText = tempListing.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-            tempText.text = player.NickName;
+            Image playerImg = tempListing.transform.GetChild(3).GetComponent<Image>();
+
+            //Color32 color = new Color32(
+            //    (byte)player.CustomProperties["r"],
+            //    (byte)player.CustomProperties["g"],
+            //    (byte)player.CustomProperties["b"],
+            //    255);
+            Color32 color = (Color32)player.CustomProperties["color"];
+
+            playerIcon.sprite = icons[(int)player.CustomProperties["iconID"]];  //icon
+            playerIcon.color = color;                                           //icon color
+            playerImg.color = color;                                            //player color
+            tempText.text = player.NickName;                                    //player nickname
+
             spawnIndex++;
         }
     }
@@ -32,7 +68,21 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
         Debug.Log("»грок " + newPlayer.NickName + " зашЄл");
 
         GameObject tempListing = Instantiate(playerPrefab, spawnPoints[spawnIndex]);
+
+        Image playerIcon = tempListing.transform.GetChild(1).GetComponent<Image>();
         TextMeshProUGUI tempText = tempListing.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        Image playerImg = tempListing.transform.GetChild(3).GetComponent<Image>();
+
+        //Color32 color = new Color32(
+        //    (byte)player.CustomProperties["r"],
+        //    (byte)player.CustomProperties["g"],
+        //    (byte)player.CustomProperties["b"],
+        //    255);
+        Color32 color = (Color32)newPlayer.CustomProperties["color"];
+
+        playerIcon.sprite = icons[(int)newPlayer.CustomProperties["iconID"]];   //icon
+        playerIcon.color = color;                                               //icon color
+        playerImg.color = color;                                                //player color
         tempText.text = newPlayer.NickName;
 
         spawnIndex++;
@@ -42,11 +92,17 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("»грок " + otherPlayer.NickName + " вышел");
 
+        //colorsHolder = GameObject.FindGameObjectWithTag(colorsHolderTag);
+        //ColorsHolder colors = colorsHolder.GetComponent<ColorsHolder>();
+        //Color32 oldColor;
+
+        //colors.AddColor(oldColor);
+
         foreach (Transform spawn in spawnPoints)
         {
             for (var i = spawn.childCount - 1; i >= 0; i--)
             {
-                Object.Destroy(spawn.GetChild(i).gameObject);
+                Destroy(spawn.GetChild(i).gameObject);
                 spawnIndex--;
             }
         }
@@ -54,8 +110,23 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
             GameObject tempListing = Instantiate(playerPrefab, spawnPoints[spawnIndex]);
+
+            Image playerIcon = tempListing.transform.GetChild(1).GetComponent<Image>();
             TextMeshProUGUI tempText = tempListing.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+            Image playerImg = tempListing.transform.GetChild(3).GetComponent<Image>();
+
+            //Color32 color = new Color32(
+            //    (byte)player.CustomProperties["r"],
+            //    (byte)player.CustomProperties["g"],
+            //    (byte)player.CustomProperties["b"],
+            //    255);
+            Color32 color = (Color32)player.CustomProperties["color"];
+
+            playerIcon.sprite = icons[(int)player.CustomProperties["iconID"]];  //icon
+            playerIcon.color = color;                                           //icon color
+            playerImg.color = color;                                            //player color
             tempText.text = player.NickName;
+
             spawnIndex++;
         }
     }

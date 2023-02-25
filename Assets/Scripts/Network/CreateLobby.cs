@@ -1,5 +1,6 @@
 using Photon.Pun;
 using Photon.Realtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -16,11 +17,12 @@ public class CreateLobby : MonoBehaviourPunCallbacks
     public IconScroller iconScroller;
     public CreateLobbySaveData createLobbySaveData;
 
-
     private string lobbyName;
     private string lobbyPassword;
     private string lobbyIconID;
 
+    public string colorsHolderTag;
+    private GameObject colorsHolder;
 
     public void CreateRoom()
     {
@@ -68,8 +70,23 @@ public class CreateLobby : MonoBehaviourPunCallbacks
 
     public override void OnCreatedRoom()
     {
+        var data = SaveManager.Load<SaveData>(ConfigManager.saveKey);
+
+        colorsHolder = GameObject.FindGameObjectWithTag(colorsHolderTag);
+        ColorsHolder colors = colorsHolder.GetComponent<ColorsHolder>();
+        Color32 randColor = colors.GetRandomColor();
+
+        Hashtable hash = new Hashtable();
+        hash.Add("nickname", PhotonNetwork.NickName);
+        hash.Add("iconID", data.iconID);
+        hash.Add("color", randColor);
+        //hash.Add("r", Convert.ToByte(randColor.r));
+        //hash.Add("g", Convert.ToByte(randColor.g));
+        //hash.Add("b", Convert.ToByte(randColor.b));
+
+        PhotonNetwork.MasterClient.CustomProperties = hash;
+
         PhotonNetwork.LoadLevel(lobbbySceneName);
-        //Debug.Log("Количество комнат: " + PhotonNetwork.CountOfRooms.ToString());
         Debug.Log("Создана комната: " + PhotonNetwork.CurrentRoom.Name);
     }
 

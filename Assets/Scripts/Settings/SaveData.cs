@@ -9,6 +9,7 @@ public class SaveData
 
     public string playerUuid;
     public string nickname;
+    public int iconID;
 
     public SaveData()
     {

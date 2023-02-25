@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - settingsMusicVolumeTag
   - ICONS_CONTENT_TAG
+  - COLORS_HOLDER_TAG
   layers:
   - Default
   - TransparentFX

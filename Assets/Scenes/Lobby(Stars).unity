@@ -14754,6 +14754,8 @@ MonoBehaviour:
   - {fileID: 1700339362}
   - {fileID: 201125602}
   - {fileID: 730465454}
+  avatarSpritesTag: ICONS_CONTENT_TAG
+  colorsHolderTag: COLORS_HOLDER_TAG
 --- !u!1 &352122396
 GameObject:
   m_ObjectHideFlags: 0

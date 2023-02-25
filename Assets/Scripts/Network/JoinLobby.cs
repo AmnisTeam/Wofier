@@ -1,5 +1,6 @@
 using Photon.Pun;
 using Photon.Realtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -14,7 +15,8 @@ public class JoinLobby : MonoBehaviourPunCallbacks
     public TextMeshProUGUI lobbyCodeTMP;
     public TextMeshProUGUI lobbyPasswordTMP;
 
-    public PlayerManager playerManager;
+    public string colorsHolderTag;
+    private GameObject colorsHolder;
 
     public void JoinLobbyFunc()
     {
@@ -30,6 +32,22 @@ public class JoinLobby : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        var data = SaveManager.Load<SaveData>(ConfigManager.saveKey);
+
+        colorsHolder = GameObject.FindGameObjectWithTag(colorsHolderTag);
+        ColorsHolder colors = colorsHolder.GetComponent<ColorsHolder>();
+        Color32 randColor = colors.GetRandomColor();
+
+        Hashtable hash = new Hashtable();
+        hash.Add("nickname", PhotonNetwork.NickName);
+        hash.Add("iconID", data.iconID);
+        hash.Add("color", randColor);
+        //hash.Add("r", Convert.ToByte(randColor.r));
+        //hash.Add("g", Convert.ToByte(randColor.g));
+        //hash.Add("b", Convert.ToByte(randColor.b));
+
+        PhotonNetwork.MasterClient.CustomProperties = hash;
+
         PhotonNetwork.LoadLevel(lobbbySceneName);
         Debug.Log("Вы присоеденились к комнате: " + PhotonNetwork.CurrentRoom.Name);
     }
