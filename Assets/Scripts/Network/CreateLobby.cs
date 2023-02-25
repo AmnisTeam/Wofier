@@ -40,13 +40,13 @@ public class CreateLobby : MonoBehaviourPunCallbacks
         //roomOptions.IsOpen = true;
         //roomOptions.IsVisible = true;
 
-        //lobbyName = lobbyNameTMP.text;
-        //lobbyPassword = lobbyPasswordTMP.text;
-        //lobbyIconID = iconScroller.selectedId.ToString();
+        lobbyName = lobbyNameTMP.text;
+        lobbyPassword = lobbyPasswordTMP.text;
+        lobbyIconID = iconScroller.selectedId.ToString();
 
-        //roomOptions.CustomRoomPropertiesForLobby = new string[] { "lobbyName", "lobbyPassword", "lobbyIconID", "lobbyCode" };
-        //roomOptions.CustomRoomProperties = new Hashtable
-        //{ { "lobbyName", lobbyName }, { "lobbyPassword", lobbyPassword }, {"lobbyIconID", lobbyIconID }, {"lobbyCode", "qwe"} };
+        roomOptions.CustomRoomPropertiesForLobby = new string[] { "lobbyName", "lobbyPassword", "lobbyIconID", "lobbyCode" };
+        roomOptions.CustomRoomProperties = new Hashtable
+        { { "lobbyName", lobbyName }, { "lobbyPassword", lobbyPassword }, {"lobbyIconID", lobbyIconID }, {"lobbyCode", lobbyNameTMP.text} };
 
 
 
@@ -64,7 +64,6 @@ public class CreateLobby : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel(lobbbySceneName);
         Debug.Log("Количество комнат: " + PhotonNetwork.CountOfRooms.ToString());
         Debug.Log("Создана комната: " + PhotonNetwork.CurrentRoom.Name);
-        //PhotonNetwork.JoinRoom(lobbyNameTMP.text);
         Debug.Log("Количество комнат: " + PhotonNetwork.CountOfRooms.ToString());
     }
 

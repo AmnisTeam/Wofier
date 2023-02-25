@@ -23,6 +23,7 @@ public class JoinLobby : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         PhotonNetwork.LoadLevel(lobbbySceneName);
+        Debug.Log("Вы присоеденились к комнате: " + PhotonNetwork.CurrentRoom.Name);
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
