@@ -41,7 +41,23 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         Debug.Log("Игрок " + otherPlayer.NickName + " вышел");
-        spawnIndex--;
+
+        foreach (Transform spawn in spawnPoints)
+        {
+            for (var i = spawn.childCount - 1; i >= 0; i--)
+            {
+                Object.Destroy(spawn.GetChild(i).gameObject);
+                spawnIndex--;
+            }
+        }
+
+        foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
+        {
+            GameObject tempListing = Instantiate(playerPrefab, spawnPoints[spawnIndex]);
+            TextMeshProUGUI tempText = tempListing.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+            tempText.text = player.NickName;
+            spawnIndex++;
+        }
     }
 
     public override void OnLeftRoom()
