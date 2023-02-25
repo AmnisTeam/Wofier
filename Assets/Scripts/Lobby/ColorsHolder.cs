@@ -6,6 +6,7 @@ public class ColorsHolder : MonoBehaviour
 {
     public static ColorsHolder instance;
     public List<Color32> colors;
+    public List<int> freeColorsIdx;
 
     public ColorsHolder()
     {
@@ -20,28 +21,59 @@ public class ColorsHolder : MonoBehaviour
             Color.green,
             Color.blue,
             Color.yellow,
+            Color.yellow,
+            Color.yellow,
+            Color.yellow,
+            Color.yellow,
+            Color.yellow,
+            Color.yellow,
+            Color.yellow,
             Color.magenta
         };
+        freeColorsIdx = new List<int>();
+            
+        for (int i = 0; i < colors.Count; i++)
+            freeColorsIdx.Add(i);
     }
 
-    public Color32 GetRandomColor()
+    //public Color32 GetRandomColor()
+    //{
+    //    if (colors.Count > 0)
+    //    {
+    //        var rnd = new System.Random();
+    //        var n = rnd.Next(0, colors.Count);
+
+    //        Color32 savedColor = colors[n];
+    //        colors.RemoveAt(n);
+
+    //        return savedColor; 
+    //    }
+    //    else { return Color.white; }
+    //}
+
+    //public void AddColor(Color32 color)
+    //{
+    //    colors.Add(color);
+    //}
+
+    public int GetRandomIdx()
     {
-        if (colors.Count > 0)
+        if (freeColorsIdx.Count > 0)
         {
             var rnd = new System.Random();
             var n = rnd.Next(0, colors.Count);
 
-            Color32 savedColor = colors[n];
-            colors.RemoveAt(n);
+            int savedColorIdx = freeColorsIdx[n];
+            freeColorsIdx.RemoveAt(n);
 
-            return savedColor; 
+            return savedColorIdx;
         }
-        else { return Color.white; }
+        else { return -1; }
     }
 
-    public void AddColor(Color32 color)
+    public void AddColor(int colorIdx)
     {
-        colors.Add(color);
+        freeColorsIdx.Add(colorIdx);
     }
 
 }

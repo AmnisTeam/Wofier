@@ -36,17 +36,17 @@ public class JoinLobby : MonoBehaviourPunCallbacks
 
         colorsHolder = GameObject.FindGameObjectWithTag(colorsHolderTag);
         ColorsHolder colors = colorsHolder.GetComponent<ColorsHolder>();
-        Color32 randColor = colors.GetRandomColor();
+        int randColorIdx = colors.GetRandomIdx();
 
         Hashtable hash = new Hashtable();
         hash.Add("nickname", PhotonNetwork.NickName);
         hash.Add("iconID", data.iconID);
-        hash.Add("color", randColor);
+        hash.Add("colorIdx", randColorIdx);
         //hash.Add("r", Convert.ToByte(randColor.r));
         //hash.Add("g", Convert.ToByte(randColor.g));
         //hash.Add("b", Convert.ToByte(randColor.b));
 
-        PhotonNetwork.MasterClient.CustomProperties = hash;
+        PhotonNetwork.LocalPlayer.CustomProperties = hash;
 
         PhotonNetwork.LoadLevel(lobbbySceneName);
         Debug.Log("Вы присоеденились к комнате: " + PhotonNetwork.CurrentRoom.Name);

@@ -24,6 +24,8 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
 
     public string colorsHolderTag;
     private GameObject colorsHolder;
+    private ColorsHolder inctanceColorHolder;
+    List <Color32> colors;
 
 
     //border
@@ -39,6 +41,10 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
         iconsContent = avatarSprites.GetComponent<IconsContent>();
         icons = iconsContent.icons;
 
+        colorsHolder = GameObject.FindGameObjectWithTag(colorsHolderTag);
+        inctanceColorHolder = colorsHolder.GetComponent<ColorsHolder>();
+        colors = inctanceColorHolder.colors;
+
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
             GameObject tempListing = Instantiate(playerPrefab, spawnPoints[spawnIndex]);
@@ -47,16 +53,17 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
             TextMeshProUGUI tempText = tempListing.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
             Image playerImg = tempListing.transform.GetChild(3).GetComponent<Image>();
 
-            //Color32 color = new Color32(
-            //    (byte)player.CustomProperties["r"],
-            //    (byte)player.CustomProperties["g"],
-            //    (byte)player.CustomProperties["b"],
-            //    255);
-            Color32 color = (Color32)player.CustomProperties["color"];
+            /*
+            Color32 color = new Color32(
+                (byte)player.CustomProperties["r"],
+                (byte)player.CustomProperties["g"],
+                (byte)player.CustomProperties["b"],
+                255);*/
+            //int colorIdx = (int)player.CustomProperties["colorIdx"];
 
             playerIcon.sprite = icons[(int)player.CustomProperties["iconID"]];  //icon
-            playerIcon.color = color;                                           //icon color
-            playerImg.color = color;                                            //player color
+            playerIcon.color = colors[(int)player.CustomProperties["iconID"]];                                //icon color
+            playerImg.color = colors[(int)player.CustomProperties["iconID"]];                                 //player color
             tempText.text = player.NickName;                                    //player nickname
 
             spawnIndex++;
@@ -73,17 +80,18 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
         TextMeshProUGUI tempText = tempListing.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         Image playerImg = tempListing.transform.GetChild(3).GetComponent<Image>();
 
-        //Color32 color = new Color32(
-        //    (byte)player.CustomProperties["r"],
-        //    (byte)player.CustomProperties["g"],
-        //    (byte)player.CustomProperties["b"],
-        //    255);
-        Color32 color = (Color32)newPlayer.CustomProperties["color"];
+        /*
+        Color32 color = new Color32(
+            (byte)player.CustomProperties["r"],
+            (byte)player.CustomProperties["g"],
+            (byte)player.CustomProperties["b"],
+            255);*/
+        //int colorIdx = (int)newPlayer.CustomProperties["colorIdx"];
 
-        playerIcon.sprite = icons[(int)newPlayer.CustomProperties["iconID"]];   //icon
-        playerIcon.color = color;                                               //icon color
-        playerImg.color = color;                                                //player color
-        tempText.text = newPlayer.NickName;
+        playerIcon.sprite = icons[(int)newPlayer.CustomProperties["iconID"]];  //icon
+        playerIcon.color = colors[(int)newPlayer.CustomProperties["iconID"]];                                //icon color
+        playerImg.color = colors[(int)newPlayer.CustomProperties["iconID"]];                                 //player color
+        tempText.text = newPlayer.NickName;                                    //player nickname
 
         spawnIndex++;
     }
@@ -115,17 +123,18 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
             TextMeshProUGUI tempText = tempListing.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
             Image playerImg = tempListing.transform.GetChild(3).GetComponent<Image>();
 
-            //Color32 color = new Color32(
-            //    (byte)player.CustomProperties["r"],
-            //    (byte)player.CustomProperties["g"],
-            //    (byte)player.CustomProperties["b"],
-            //    255);
-            Color32 color = (Color32)player.CustomProperties["color"];
+            /*
+            Color32 color = new Color32(
+                (byte)player.CustomProperties["r"],
+                (byte)player.CustomProperties["g"],
+                (byte)player.CustomProperties["b"],
+                255);*/
+            //int colorIdx = (int)player.CustomProperties["colorIdx"];
 
             playerIcon.sprite = icons[(int)player.CustomProperties["iconID"]];  //icon
-            playerIcon.color = color;                                           //icon color
-            playerImg.color = color;                                            //player color
-            tempText.text = player.NickName;
+            playerIcon.color = colors[(int)player.CustomProperties["iconID"]];                                //icon color
+            playerImg.color = colors[(int)player.CustomProperties["iconID"]];                                 //player color
+            tempText.text = player.NickName;                                    //player nickname
 
             spawnIndex++;
         }
