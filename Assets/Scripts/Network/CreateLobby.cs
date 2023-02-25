@@ -32,11 +32,12 @@ public class CreateLobby : MonoBehaviourPunCallbacks
 
         //System.Random rnd = new System.Random();
         //string code = rnd.Next(100000, 999999).ToString();
-        string alhp = "abcdefghijklmnopqrstuvwxyz";
-        string code = "";
-        System.Random rnd = new System.Random();
-        for (int i = 0; i < 6; i++)
-            code += alhp[rnd.Next(0, alhp.Length)];
+
+        //string alhp = "abcdefghijklmnopqrstuvwxyz";
+        //string code = "";
+        //System.Random rnd = new System.Random();
+        //for (int i = 0; i < 6; i++)
+        //    code += alhp[rnd.Next(0, alhp.Length)];
 
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 4;
