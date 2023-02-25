@@ -45,7 +45,7 @@ public class LocalColor
 public class PlayerManager : MonoBehaviour
 {
     const int amountPlayers = 4;
-    int id = 0;
+    public int id = 0;
 
 
 
@@ -57,7 +57,7 @@ public class PlayerManager : MonoBehaviour
     public List<LocalColor> colors = new List<LocalColor>();
     public Sprite[] icons;
 
-    ConfigManager configManager = new ConfigManager();
+    public ConfigManager configManager = new ConfigManager();
 
     void AddColors()
     {
@@ -75,7 +75,7 @@ public class PlayerManager : MonoBehaviour
         for (int i = 0; i < playerObjects.Length; i++)
             playerObjects[i].SetActive(false);
 
-        AddPlayer(new Client(id, configManager.GetNickname()));
+        //AddPlayer(new Client(id, configManager.GetNickname()));
 
 
         //AddPlayer(new Client(id, "123"));

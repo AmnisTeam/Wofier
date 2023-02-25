@@ -14662,6 +14662,7 @@ GameObject:
   m_Component:
   - component: {fileID: 254502515}
   - component: {fileID: 254502514}
+  - component: {fileID: 254502516}
   m_Layer: 0
   m_Name: ManagerObject
   m_TagString: Untagged
@@ -14697,6 +14698,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &254502516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254502513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93d58ace6fd20a449a4967e89b1c9c5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainSceneName: MainScene(Stars)
 --- !u!1 &352122396
 GameObject:
   m_ObjectHideFlags: 0
@@ -59591,21 +59605,37 @@ PrefabInstance:
     - target: {fileID: 596018239386280912, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1236915604}
+      objectReference: {fileID: 254502516}
+    - target: {fileID: 596018239386280912, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 254502516}
     - target: {fileID: 596018239386280912, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 596018239386280912, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: changeScene
+      value: LeaveLobbyFunc
+      objectReference: {fileID: 0}
+    - target: {fileID: 596018239386280912, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: LeaveLobbyFunc
       objectReference: {fileID: 0}
     - target: {fileID: 596018239386280912, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TransitionToLevel, Assembly-CSharp
+      value: PhotonLobbyManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 596018239386280912, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: PhotonLobbyManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 596018239386280912, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 596018239386280912, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 596018239454886810, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
@@ -59735,17 +59765,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 596018239454886811, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
   m_PrefabInstance: {fileID: 1236915602}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1236915604 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5072586178644101813, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
-  m_PrefabInstance: {fileID: 1236915602}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b7948a1d231adc4bb6f6f915385c641, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1265018309
 GameObject:
   m_ObjectHideFlags: 0
@@ -69542,7 +69561,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100.00003, y: -70.475006}
+  m_AnchoredPosition: {x: -100.00006, y: -70.475006}
   m_SizeDelta: {x: 199.99977, y: 140.95}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1301204399
@@ -90109,6 +90128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e45b6e3b44804ab468a19d9be622972f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   clients: []
   playerObjects:
   - {fileID: 1298550791}
@@ -90140,6 +90160,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: adb451624805d5849a1b1edcd54788fb, type: 3}
   - {fileID: 21300000, guid: 17034f6b163f39640b003fc7c64c904d, type: 3}
   - {fileID: 21300000, guid: 3ec9bbcf51b1f9c40b90032123980b57, type: 3}
+  configManager: {fileID: 0}
 --- !u!4 &1954961773
 Transform:
   m_ObjectHideFlags: 0

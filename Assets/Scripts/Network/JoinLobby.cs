@@ -14,15 +14,24 @@ public class JoinLobby : MonoBehaviourPunCallbacks
     public TextMeshProUGUI lobbyCodeTMP;
     public TextMeshProUGUI lobbyPasswordTMP;
 
+    public PlayerManager playerManager;
+
     public void JoinLobbyFunc()
     {
-        Debug.Log(lobbyCodeTMP.text);
+        if (!PhotonNetwork.IsConnected)
+        {
+            Debug.Log("Вы не можете создать лобби так как не подключены к серверу");
+            return;
+        }
+
+        Debug.Log("Поделючение к лобби: " + lobbyCodeTMP.text);
         PhotonNetwork.JoinRoom(lobbyCodeTMP.text/*.ToString()*/);
     }
 
     public override void OnJoinedRoom()
     {
         PhotonNetwork.LoadLevel(lobbbySceneName);
+        playerManager.AddPlayer(new Client(playerManager.id, playerManager.configManager.GetNickname()));
         Debug.Log("Вы присоеденились к комнате: " + PhotonNetwork.CurrentRoom.Name);
     }
 
