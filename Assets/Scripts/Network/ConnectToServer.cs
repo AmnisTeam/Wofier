@@ -19,6 +19,8 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("Вы подключилиь к: " + PhotonNetwork.CloudRegion);
+        var data = SaveManager.Load<SaveData>(ConfigManager.saveKey);
+        PhotonNetwork.NickName = data.nickname;
         //PhotonNetwork.JoinLobby();
 
         SceneManager.LoadScene(mainSceneName);

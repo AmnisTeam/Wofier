@@ -30,21 +30,23 @@ public class CreateLobby : MonoBehaviourPunCallbacks
             return;
         }
 
-        //System.Random rnd = new System.Random();
-        //string code = rnd.Next(100000, 999999).ToString();
+        /*
+        System.Random rnd = new System.Random();
+        string code = rnd.Next(100000, 999999).ToString();
 
-        //string alhp = "abcdefghijklmnopqrstuvwxyz";
-        //string code = "";
-        //System.Random rnd = new System.Random();
-        //for (int i = 0; i < 6; i++)
-        //    code += alhp[rnd.Next(0, alhp.Length)];
+        string alhp = "abcdefghijklmnopqrstuvwxyz";
+        string code = "";
+        System.Random rnd = new System.Random();
+        for (int i = 0; i < 6; i++)
+            code += alhp[rnd.Next(0, alhp.Length)];*/
 
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 4;
-        //roomOptions.EmptyRoomTtl = 60000;
-        //roomOptions.PlayerTtl = 60000;
-        //roomOptions.IsOpen = true;
-        //roomOptions.IsVisible = true;
+        /*
+        roomOptions.EmptyRoomTtl = 60000;
+        roomOptions.PlayerTtl = 60000;
+        roomOptions.IsOpen = true;
+        roomOptions.IsVisible = true;*/
 
         lobbyName = lobbyNameTMP.text;
         lobbyPassword = lobbyPasswordTMP.text;
@@ -67,9 +69,8 @@ public class CreateLobby : MonoBehaviourPunCallbacks
     public override void OnCreatedRoom()
     {
         PhotonNetwork.LoadLevel(lobbbySceneName);
-        Debug.Log("Количество комнат: " + PhotonNetwork.CountOfRooms.ToString());
+        //Debug.Log("Количество комнат: " + PhotonNetwork.CountOfRooms.ToString());
         Debug.Log("Создана комната: " + PhotonNetwork.CurrentRoom.Name);
-        Debug.Log("Количество комнат: " + PhotonNetwork.CountOfRooms.ToString());
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -80,6 +81,8 @@ public class CreateLobby : MonoBehaviourPunCallbacks
         Debug.Log(message);
     }
 
+    
+    /*
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         Debug.Log("Попал в функцию OnRoomListUpdate");
@@ -88,6 +91,6 @@ public class CreateLobby : MonoBehaviourPunCallbacks
             Debug.Log("Сущетвует комната: " + room.Name);
         }
 
-    }
+    }*/
 
 }

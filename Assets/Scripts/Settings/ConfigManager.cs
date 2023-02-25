@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -64,6 +65,9 @@ public class ConfigManager : MonoBehaviour
     }
     private void Save()
     {
+        var data = SaveManager.Load<SaveData>(saveKey);
+        PhotonNetwork.NickName = data.nickname;
+
         SaveManager.Save(saveKey, GetSaveSnapshot());
     }
 

@@ -57,7 +57,9 @@ public class PlayerManager : MonoBehaviour
     public List<LocalColor> colors = new List<LocalColor>();
     public Sprite[] icons;
 
-    public ConfigManager configManager = new ConfigManager();
+    //public ConfigManager configManager = new ConfigManager();
+
+    private PhotonView PhotonView;
 
     void AddColors()
     {
@@ -70,12 +72,13 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
+        PhotonView = GetComponent<PhotonView>();
         AddColors();
 
         for (int i = 0; i < playerObjects.Length; i++)
             playerObjects[i].SetActive(false);
 
-        //AddPlayer(new Client(id, configManager.GetNickname()));
+        //AddPlayer(new Client(id, PhotonNetwork.NickName));
 
 
         //AddPlayer(new Client(id, "123"));

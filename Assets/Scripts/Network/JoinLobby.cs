@@ -25,13 +25,12 @@ public class JoinLobby : MonoBehaviourPunCallbacks
         }
 
         Debug.Log("Поделючение к лобби: " + lobbyCodeTMP.text);
-        PhotonNetwork.JoinRoom(lobbyCodeTMP.text/*.ToString()*/);
+        PhotonNetwork.JoinRoom(lobbyCodeTMP.text);
     }
 
     public override void OnJoinedRoom()
     {
         PhotonNetwork.LoadLevel(lobbbySceneName);
-        playerManager.AddPlayer(new Client(playerManager.id, playerManager.configManager.GetNickname()));
         Debug.Log("Вы присоеденились к комнате: " + PhotonNetwork.CurrentRoom.Name);
     }
 
