@@ -1,3 +1,4 @@
+using Mirror.Examples.MultipleMatch;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
@@ -18,6 +19,10 @@ public class JoinLobby : MonoBehaviourPunCallbacks
     public string colorsHolderTag;
     private GameObject colorsHolder;
 
+    public string playersInfoTag;
+    private GameObject playersInfo;
+    private PlayersInfo inctanceplayersInfo;
+
     public void JoinLobbyFunc()
     {
         if (!PhotonNetwork.IsConnected)
@@ -26,25 +31,39 @@ public class JoinLobby : MonoBehaviourPunCallbacks
             return;
         }
 
-        //colorsHolder = GameObject.FindGameObjectWithTag(colorsHolderTag);
-        //ColorsHolder colors = colorsHolder.GetComponent<ColorsHolder>();
-        //int randColorIdx = colors.GetRandomIdx();
-
+        playersInfo = GameObject.FindGameObjectWithTag(playersInfoTag);
+        inctanceplayersInfo = playersInfo.GetComponent<PlayersInfo>();
 
 
         Debug.Log("Подключение к лобби: " + lobbyCodeTMP.text);
         PhotonNetwork.JoinRoom(lobbyCodeTMP.text);
+    /*
         var data = SaveManager.Load<SaveData>(ConfigManager.saveKey);
         Hashtable hash = new Hashtable();
         hash.Add("nickname", PhotonNetwork.NickName);
         hash.Add("iconID", data.iconID);
         hash.Add("colorIdx", RandColorIdx());
 
-        PhotonNetwork.LocalPlayer.CustomProperties = hash;
+        PhotonNetwork.LocalPlayer.CustomProperties = hash;*/
+
     }
 
     public override void OnJoinedRoom()
     {
+        var data = SaveManager.Load<SaveData>(ConfigManager.saveKey);
+
+        colorsHolder = GameObject.FindGameObjectWithTag(colorsHolderTag);
+        ColorsHolder colors = colorsHolder.GetComponent<ColorsHolder>();
+
+        ExitGames.Client.Photon.Hashtable info = new ExitGames.Client.Photon.Hashtable
+        {
+            { "nickname", PhotonNetwork.NickName },
+            { "iconID", data.iconID },
+            { "color", colors.GetRandomIdx() }
+        };
+
+        SendCustomClassWithRPC(info);
+
         PhotonNetwork.LoadLevel(lobbbySceneName);
         Debug.Log("Вы присоеденились к комнате: " + PhotonNetwork.CurrentRoom.Name);
     }
@@ -56,18 +75,9 @@ public class JoinLobby : MonoBehaviourPunCallbacks
         Debug.Log(message);
     }
 
-    public int RandColorIdx()
+    void SendCustomClassWithRPC(ExitGames.Client.Photon.Hashtable classObj)
     {
-        var freeColorsIdxFromRoomProperties = PhotonNetwork.CurrentRoom.CustomProperties;
-        int[] freeColorsIdxListFromRoomProperties = (int[])freeColorsIdxFromRoomProperties["freeColorsIdxList"];
-
-        var rnd = new System.Random();
-        var r = rnd.Next(0, freeColorsIdxListFromRoomProperties.Length);
-
-        int randColorIdx = freeColorsIdxListFromRoomProperties[r];
-        //freeColorsIdxListFromRoomProperties.RemoveAt(r);
-
-        return randColorIdx;
+        playersInfo.GetComponent<PhotonView>().RPC("SendPlayerInfo", RpcTarget.AllBuffered, classObj);
     }
 
 }

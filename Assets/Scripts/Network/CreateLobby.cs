@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static PlayersInfo;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class CreateLobby : MonoBehaviourPunCallbacks
@@ -24,6 +25,10 @@ public class CreateLobby : MonoBehaviourPunCallbacks
     public string colorsHolderTag;
     private GameObject colorsHolder;
 
+    public string playersInfoTag;
+    private GameObject playersInfo;
+    private PlayersInfo inctanceplayersInfo;
+
     public void CreateRoom()
     {
         if (!PhotonNetwork.IsConnected)
@@ -31,6 +36,11 @@ public class CreateLobby : MonoBehaviourPunCallbacks
             Debug.Log("Вы не можете создать лобби так как не подключены к серверу");
             return;
         }
+
+        playersInfo = GameObject.FindGameObjectWithTag(playersInfoTag);
+        inctanceplayersInfo = playersInfo.GetComponent<PlayersInfo>();
+
+
 
         /*
         System.Random rnd = new System.Random();
@@ -53,18 +63,22 @@ public class CreateLobby : MonoBehaviourPunCallbacks
         lobbyName = lobbyNameTMP.text;
         lobbyPassword = lobbyPasswordTMP.text;
         lobbyIconID = iconScroller.selectedId.ToString();
-
-
+        /*
         colorsHolder = GameObject.FindGameObjectWithTag(colorsHolderTag);
         ColorsHolder inctanceColorHolder = colorsHolder.GetComponent<ColorsHolder>();
-        int[] freeColorsIdxList = inctanceColorHolder.freeColorsIdx;
+        List<int> freeColorsIdxList = inctanceColorHolder.freeColorsIdx;*/
+
+
+
+
+        //PhotonNetwork.LocalPlayer.CustomProperties = hash;
+
 
         ExitGames.Client.Photon.Hashtable setValue = new ExitGames.Client.Photon.Hashtable();
         setValue.Add("lobbyName", lobbyName);
         setValue.Add("lobbyPassword", lobbyPassword);
         setValue.Add("lobbyIconID", lobbyIconID);
         setValue.Add("lobbyCode", lobbyName);
-        setValue.Add("freeColorsIdxList", freeColorsIdxList);
 
         roomOptions.CustomRoomProperties = setValue;
 
@@ -74,12 +88,18 @@ public class CreateLobby : MonoBehaviourPunCallbacks
     public override void OnCreatedRoom()
     {
         var data = SaveManager.Load<SaveData>(ConfigManager.saveKey);
-        Hashtable hash = new Hashtable();
-        hash.Add("nickname", PhotonNetwork.NickName);
-        hash.Add("iconID", data.iconID);
-        hash.Add("colorIdx", RandColorIdx());
 
-        PhotonNetwork.LocalPlayer.CustomProperties = hash;
+        colorsHolder = GameObject.FindGameObjectWithTag(colorsHolderTag);
+        ColorsHolder colors = colorsHolder.GetComponent<ColorsHolder>();
+
+        ExitGames.Client.Photon.Hashtable info = new ExitGames.Client.Photon.Hashtable
+        {
+            { "nickname", PhotonNetwork.NickName },
+            { "iconID", data.iconID },
+            { "color", colors.GetRandomIdx() }
+        };
+
+        SendCustomClassWithRPC(info);
 
         PhotonNetwork.LoadLevel(lobbbySceneName);
         Debug.Log("Создана комната: " + PhotonNetwork.CurrentRoom.Name);
@@ -93,20 +113,22 @@ public class CreateLobby : MonoBehaviourPunCallbacks
         Debug.Log(message);
     }
 
-
-    public int RandColorIdx()
+    void SendCustomClassWithRPC(ExitGames.Client.Photon.Hashtable classObj)
     {
-        var freeColorsIdxFromRoomProperties = PhotonNetwork.CurrentRoom.CustomProperties;
-        int[] freeColorsIdxListFromRoomProperties = (int[])freeColorsIdxFromRoomProperties["freeColorsIdxList"];
-
-        var rnd = new System.Random();
-        var r = rnd.Next(0, freeColorsIdxListFromRoomProperties.Length);
-
-        int randColorIdx = freeColorsIdxListFromRoomProperties[r];
-        //freeColorsIdxListFromRoomProperties.RemoveAt(r);
-
-        return randColorIdx;
+        playersInfo.GetComponent<PhotonView>().RPC("SendPlayerInfo", RpcTarget.AllBuffered, classObj);
     }
+
+    /*
+    PlayersInfo.Info ReceiveCustomClass(object serializedClass)
+    {
+        
+        PlayersInfo.Info deserializedClass = new PlayersInfo.Info();
+        deserializedClass = (PlayersInfo.Info)serializedClass;
+        
+
+        return (PlayersInfo.Info)serializedClass;
+    }
+    */
 
 
 

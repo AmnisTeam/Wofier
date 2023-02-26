@@ -6,7 +6,7 @@ public class ColorsHolder : MonoBehaviour
 {
     public static ColorsHolder instance;
     public List<Color32> colors;
-    public int[] freeColorsIdx;
+    public List<int> freeColorsIdx;
 
     public ColorsHolder()
     {
@@ -22,53 +22,55 @@ public class ColorsHolder : MonoBehaviour
             Color.blue,
             Color.yellow,
             Color.magenta,
-            Color.cyan,
-            Color.grey
+            Color.cyan
         };
-        freeColorsIdx = new int[colors.Count];
+        
+        freeColorsIdx = new List<int>();
             
         for (int i = 0; i < colors.Count; i++)
-            freeColorsIdx[i] = i;
+            freeColorsIdx.Add(i);
+        
     }
 
-    //public Color32 GetRandomColor()
-    //{
-    //    if (colors.Count > 0)
-    //    {
-    //        var rnd = new System.Random();
-    //        var n = rnd.Next(0, colors.Count);
+    public Color32 GetRandomColor()
+    {
+        if (colors.Count > 0)
+        {
+            var rnd = new System.Random();
+            var n = rnd.Next(0, colors.Count);
 
-    //        Color32 savedColor = colors[n];
-    //        colors.RemoveAt(n);
+            Color32 savedColor = colors[n];
+            colors.RemoveAt(n);
 
-    //        return savedColor; 
-    //    }
-    //    else { return Color.white; }
-    //}
+            return savedColor;
+        }
+        else { return Color.white; }
+    }
 
-    //public void AddColor(Color32 color)
-    //{
-    //    colors.Add(color);
-    //}
+    public void AddColor(Color32 color)
+    {
+        colors.Add(color);
+    }
+
 
     public int GetRandomIdx()
     {
-        if (freeColorsIdx.Length > 0)
+        if (freeColorsIdx.Count > 0)
         {
             var rnd = new System.Random();
             var n = rnd.Next(0, colors.Count);
 
             int savedColorIdx = freeColorsIdx[n];
-            freeColorsIdx[n] = -1;
+            freeColorsIdx.RemoveAt(n);
 
             return savedColorIdx;
         }
         else { return -1; }
     }
 
-    //public void AddColor(int colorIdx)
-    //{
-    //    freeColorsIdx.Add(colorIdx);
-    //}
+    public void AddColor(int colorIdx)
+    {
+        freeColorsIdx.Add(colorIdx);
+    }
 
 }

@@ -11,6 +11,7 @@ TagManager:
   - settingsMusicVolumeTag
   - ICONS_CONTENT_TAG
   - COLORS_HOLDER_TAG
+  - PLAYERS_INFO_TAG
   layers:
   - Default
   - TransparentFX

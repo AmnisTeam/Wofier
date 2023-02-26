@@ -15406,6 +15406,7 @@ MonoBehaviour:
   lobbyCodeTMP: {fileID: 299048232}
   lobbyPasswordTMP: {fileID: 1740984887}
   colorsHolderTag: COLORS_HOLDER_TAG
+  playersInfoTag: PLAYERS_INFO_TAG
 --- !u!1 &441214977
 GameObject:
   m_ObjectHideFlags: 0
@@ -54699,7 +54700,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -454.00006, y: 38}
+  m_AnchoredPosition: {x: -454.00003, y: 38}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1140331647

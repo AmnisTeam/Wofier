@@ -44508,6 +44508,7 @@ MonoBehaviour:
   iconScroller: {fileID: 878558054}
   createLobbySaveData: {fileID: 1665670965}
   colorsHolderTag: COLORS_HOLDER_TAG
+  playersInfoTag: PLAYERS_INFO_TAG
 --- !u!4 &843593483
 Transform:
   m_ObjectHideFlags: 0
