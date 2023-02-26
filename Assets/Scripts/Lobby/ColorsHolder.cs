@@ -21,14 +21,9 @@ public class ColorsHolder : MonoBehaviour
             Color.green,
             Color.blue,
             Color.yellow,
-            Color.yellow,
-            Color.yellow,
-            Color.yellow,
-            Color.yellow,
-            Color.yellow,
-            Color.yellow,
-            Color.yellow,
-            Color.magenta
+            Color.magenta,
+            Color.cyan,
+            Color.grey
         };
         freeColorsIdx = new List<int>();
             

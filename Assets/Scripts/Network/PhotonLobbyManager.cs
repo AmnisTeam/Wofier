@@ -59,11 +59,11 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
                 (byte)player.CustomProperties["g"],
                 (byte)player.CustomProperties["b"],
                 255);*/
-            //int colorIdx = (int)player.CustomProperties["colorIdx"];
+            int colorIdx = (int)player.CustomProperties["colorIdx"];
 
             playerIcon.sprite = icons[(int)player.CustomProperties["iconID"]];  //icon
-            playerIcon.color = colors[(int)player.CustomProperties["iconID"]];                                //icon color
-            playerImg.color = colors[(int)player.CustomProperties["iconID"]];                                 //player color
+            playerIcon.color = colors[colorIdx];                                //icon color
+            playerImg.color = colors[colorIdx];                                 //player color
             tempText.text = player.NickName;                                    //player nickname
 
             spawnIndex++;
@@ -86,12 +86,12 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
             (byte)player.CustomProperties["g"],
             (byte)player.CustomProperties["b"],
             255);*/
-        //int colorIdx = (int)newPlayer.CustomProperties["colorIdx"];
+        int colorIdx = (int)newPlayer.CustomProperties["colorIdx"];
 
-        playerIcon.sprite = icons[(int)newPlayer.CustomProperties["iconID"]];  //icon
-        playerIcon.color = colors[(int)newPlayer.CustomProperties["iconID"]];                                //icon color
-        playerImg.color = colors[(int)newPlayer.CustomProperties["iconID"]];                                 //player color
-        tempText.text = newPlayer.NickName;                                    //player nickname
+        playerIcon.sprite = icons[(int)newPlayer.CustomProperties["iconID"]];   //icon
+        playerIcon.color = colors[colorIdx];                                    //icon color
+        playerImg.color = colors[colorIdx];                                     //player color
+        tempText.text = newPlayer.NickName;                                     //player nickname                                 //player nickname
 
         spawnIndex++;
     }
@@ -129,12 +129,12 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
                 (byte)player.CustomProperties["g"],
                 (byte)player.CustomProperties["b"],
                 255);*/
-            //int colorIdx = (int)player.CustomProperties["colorIdx"];
+            int colorIdx = (int)player.CustomProperties["colorIdx"];
 
             playerIcon.sprite = icons[(int)player.CustomProperties["iconID"]];  //icon
-            playerIcon.color = colors[(int)player.CustomProperties["iconID"]];                                //icon color
-            playerImg.color = colors[(int)player.CustomProperties["iconID"]];                                 //player color
-            tempText.text = player.NickName;                                    //player nickname
+            playerIcon.color = colors[colorIdx];                                //icon color
+            playerImg.color = colors[colorIdx];                                 //player color
+            tempText.text = player.NickName;                                    //player nickname                                //player nickname
 
             spawnIndex++;
         }

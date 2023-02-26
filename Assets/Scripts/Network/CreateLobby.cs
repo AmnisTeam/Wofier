@@ -59,7 +59,17 @@ public class CreateLobby : MonoBehaviourPunCallbacks
         { { "lobbyName", lobbyName }, { "lobbyPassword", lobbyPassword }, 
           {"lobbyIconID", lobbyIconID }, {"lobbyCode", lobbyName} };
 
+        colorsHolder = GameObject.FindGameObjectWithTag(colorsHolderTag);
+        ColorsHolder colors = colorsHolder.GetComponent<ColorsHolder>();
+        int randColorIdx = colors.GetRandomIdx();
 
+        var data = SaveManager.Load<SaveData>(ConfigManager.saveKey);
+        Hashtable hash = new Hashtable();
+        hash.Add("nickname", PhotonNetwork.NickName);
+        hash.Add("iconID", data.iconID);
+        hash.Add("colorIdx", randColorIdx);
+
+        PhotonNetwork.LocalPlayer.CustomProperties = hash;
 
         PhotonNetwork.CreateRoom(lobbyName, roomOptions, TypedLobby.Default);
         
@@ -70,25 +80,16 @@ public class CreateLobby : MonoBehaviourPunCallbacks
 
     public override void OnCreatedRoom()
     {
-        var data = SaveManager.Load<SaveData>(ConfigManager.saveKey);
 
         //colorsHolder = GameObject.FindGameObjectWithTag(colorsHolderTag);
         //ColorsHolder colors = colorsHolder.GetComponent<ColorsHolder>();
         //Color32 randColor = colors.GetRandomColor();
         
-        colorsHolder = GameObject.FindGameObjectWithTag(colorsHolderTag);
-        ColorsHolder colors = colorsHolder.GetComponent<ColorsHolder>();
-        int randColorIdx = colors.GetRandomIdx();
 
-        Hashtable hash = new Hashtable();
-        hash.Add("nickname", PhotonNetwork.NickName);
-        hash.Add("iconID", data.iconID);
-        hash.Add("colorIdx", randColorIdx);
         //hash.Add("r", Convert.ToByte(randColor.r));
         //hash.Add("g", Convert.ToByte(randColor.g));
         //hash.Add("b", Convert.ToByte(randColor.b));
 
-        PhotonNetwork.LocalPlayer.CustomProperties = hash;
 
         PhotonNetwork.LoadLevel(lobbbySceneName);
         Debug.Log("Создана комната: " + PhotonNetwork.CurrentRoom.Name);
