@@ -12,6 +12,7 @@ TagManager:
   - ICONS_CONTENT_TAG
   - COLORS_HOLDER_TAG
   - PLAYERS_INFO_TAG
+  - SPAWN_1_TAG
   layers:
   - Default
   - TransparentFX

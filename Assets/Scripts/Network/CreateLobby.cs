@@ -116,6 +116,7 @@ public class CreateLobby : MonoBehaviourPunCallbacks
     void SendCustomClassWithRPC(ExitGames.Client.Photon.Hashtable classObj)
     {
         playersInfo.GetComponent<PhotonView>().RPC("SendPlayerInfo", RpcTarget.AllBuffered, classObj);
+        //playersInfo.GetComponent<PhotonView>().RPC("AddPlayer", RpcTarget.AllBuffered);
     }
 
     /*

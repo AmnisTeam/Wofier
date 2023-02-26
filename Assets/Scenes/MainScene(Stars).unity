@@ -78920,6 +78920,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playersInfo: []
+  playerPrefab: {fileID: 1089952454414005330, guid: ff549d6d0a12b574d88ec602521aaba9, type: 3}
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  avatarSpritesTag: ICONS_CONTENT_TAG
+  colorsHolderTag: COLORS_HOLDER_TAG
 --- !u!114 &1854628246
 MonoBehaviour:
   m_ObjectHideFlags: 0

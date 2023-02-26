@@ -55,8 +55,9 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
 
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
-            //GameObject tempListing = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoints[spawnIndex].position, Quaternion.identity);
-/*            GameObject tempListing = Instantiate(playerPrefab, spawnPoints[spawnIndex]);
+            //GameObject tempListing = Instantiate(playerPrefab, spawnPoints[spawnIndex]);
+            GameObject tempListing = PhotonNetwork.Instantiate("Player", new Vector3(0,0,0), Quaternion.identity);
+            tempListing.transform.SetParent(spawnPoints[spawnIndex].transform, false);
 
             Image playerIcon = tempListing.transform.GetChild(1).GetComponent<Image>();
             TextMeshProUGUI tempText = tempListing.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
@@ -67,7 +68,7 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
             playerImg.color = colors[pInfo[spawnIndex].color];                          //player color
             tempText.text = player.NickName;                                            //player nickname
 
-            spawnIndex++;*/
+            spawnIndex++;
         }
     }
 
@@ -75,7 +76,9 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("»грок " + newPlayer.NickName + " зашЄл");
 
-/*        GameObject tempListing = Instantiate(playerPrefab, spawnPoints[spawnIndex]);
+        //GameObject tempListing = Instantiate(playerPrefab, spawnPoints[spawnIndex]);
+        GameObject tempListing = PhotonNetwork.Instantiate("Player", new Vector3(0, 0, 0), Quaternion.identity);
+        tempListing.transform.SetParent(spawnPoints[spawnIndex].transform, false);
 
         Image playerIcon = tempListing.transform.GetChild(1).GetComponent<Image>();
         TextMeshProUGUI tempText = tempListing.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
@@ -86,7 +89,7 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
         playerImg.color = colors[pInfo[spawnIndex].color];                          //player color
         tempText.text = newPlayer.NickName;                                         //player nickname
 
-        spawnIndex++;*/
+        spawnIndex++;
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
@@ -99,7 +102,7 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
 
         //colors.AddColor(oldColor);
 
-/*        foreach (Transform spawn in spawnPoints)
+        foreach (Transform spawn in spawnPoints)
         {
             for (var i = spawn.childCount - 1; i >= 0; i--)
             {
@@ -110,7 +113,9 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
 
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
-            GameObject tempListing = Instantiate(playerPrefab, spawnPoints[spawnIndex]);
+            //GameObject tempListing = Instantiate(playerPrefab, spawnPoints[spawnIndex]);
+            GameObject tempListing = PhotonNetwork.Instantiate("Player", new Vector3(0, 0, 0), Quaternion.identity);
+            tempListing.transform.SetParent(spawnPoints[spawnIndex].transform, false);
 
             Image playerIcon = tempListing.transform.GetChild(1).GetComponent<Image>();
             TextMeshProUGUI tempText = tempListing.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
@@ -122,7 +127,7 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
             tempText.text = player.NickName;                                            //player nickname
 
             spawnIndex++;
-        }*/
+        }
     }
 
     public override void OnLeftRoom()
