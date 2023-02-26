@@ -54,42 +54,32 @@ public class CreateLobby : MonoBehaviourPunCallbacks
         lobbyPassword = lobbyPasswordTMP.text;
         lobbyIconID = iconScroller.selectedId.ToString();
 
-        roomOptions.CustomRoomPropertiesForLobby = new string[] { "lobbyName", "lobbyPassword", "lobbyIconID", "lobbyCode" };
-        roomOptions.CustomRoomProperties = new Hashtable
-        { { "lobbyName", lobbyName }, { "lobbyPassword", lobbyPassword }, 
-          {"lobbyIconID", lobbyIconID }, {"lobbyCode", lobbyName} };
 
         colorsHolder = GameObject.FindGameObjectWithTag(colorsHolderTag);
-        ColorsHolder colors = colorsHolder.GetComponent<ColorsHolder>();
-        int randColorIdx = colors.GetRandomIdx();
+        ColorsHolder inctanceColorHolder = colorsHolder.GetComponent<ColorsHolder>();
+        int[] freeColorsIdxList = inctanceColorHolder.freeColorsIdx;
 
-        var data = SaveManager.Load<SaveData>(ConfigManager.saveKey);
-        Hashtable hash = new Hashtable();
-        hash.Add("nickname", PhotonNetwork.NickName);
-        hash.Add("iconID", data.iconID);
-        hash.Add("colorIdx", randColorIdx);
+        ExitGames.Client.Photon.Hashtable setValue = new ExitGames.Client.Photon.Hashtable();
+        setValue.Add("lobbyName", lobbyName);
+        setValue.Add("lobbyPassword", lobbyPassword);
+        setValue.Add("lobbyIconID", lobbyIconID);
+        setValue.Add("lobbyCode", lobbyName);
+        setValue.Add("freeColorsIdxList", freeColorsIdxList);
 
-        PhotonNetwork.LocalPlayer.CustomProperties = hash;
+        roomOptions.CustomRoomProperties = setValue;
 
         PhotonNetwork.CreateRoom(lobbyName, roomOptions, TypedLobby.Default);
-        
-
-        //Debug.Log(code);
-
     }
 
     public override void OnCreatedRoom()
     {
+        var data = SaveManager.Load<SaveData>(ConfigManager.saveKey);
+        Hashtable hash = new Hashtable();
+        hash.Add("nickname", PhotonNetwork.NickName);
+        hash.Add("iconID", data.iconID);
+        hash.Add("colorIdx", RandColorIdx());
 
-        //colorsHolder = GameObject.FindGameObjectWithTag(colorsHolderTag);
-        //ColorsHolder colors = colorsHolder.GetComponent<ColorsHolder>();
-        //Color32 randColor = colors.GetRandomColor();
-        
-
-        //hash.Add("r", Convert.ToByte(randColor.r));
-        //hash.Add("g", Convert.ToByte(randColor.g));
-        //hash.Add("b", Convert.ToByte(randColor.b));
-
+        PhotonNetwork.LocalPlayer.CustomProperties = hash;
 
         PhotonNetwork.LoadLevel(lobbbySceneName);
         Debug.Log("Создана комната: " + PhotonNetwork.CurrentRoom.Name);
@@ -103,7 +93,23 @@ public class CreateLobby : MonoBehaviourPunCallbacks
         Debug.Log(message);
     }
 
-    
+
+    public int RandColorIdx()
+    {
+        var freeColorsIdxFromRoomProperties = PhotonNetwork.CurrentRoom.CustomProperties;
+        int[] freeColorsIdxListFromRoomProperties = (int[])freeColorsIdxFromRoomProperties["freeColorsIdxList"];
+
+        var rnd = new System.Random();
+        var r = rnd.Next(0, freeColorsIdxListFromRoomProperties.Length);
+
+        int randColorIdx = freeColorsIdxListFromRoomProperties[r];
+        //freeColorsIdxListFromRoomProperties.RemoveAt(r);
+
+        return randColorIdx;
+    }
+
+
+
     /*
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
@@ -114,5 +120,4 @@ public class CreateLobby : MonoBehaviourPunCallbacks
         }
 
     }*/
-
 }

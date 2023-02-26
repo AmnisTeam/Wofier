@@ -53,12 +53,6 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
             TextMeshProUGUI tempText = tempListing.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
             Image playerImg = tempListing.transform.GetChild(3).GetComponent<Image>();
 
-            /*
-            Color32 color = new Color32(
-                (byte)player.CustomProperties["r"],
-                (byte)player.CustomProperties["g"],
-                (byte)player.CustomProperties["b"],
-                255);*/
             int colorIdx = (int)player.CustomProperties["colorIdx"];
 
             playerIcon.sprite = icons[(int)player.CustomProperties["iconID"]];  //icon
@@ -80,12 +74,6 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
         TextMeshProUGUI tempText = tempListing.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         Image playerImg = tempListing.transform.GetChild(3).GetComponent<Image>();
 
-        /*
-        Color32 color = new Color32(
-            (byte)player.CustomProperties["r"],
-            (byte)player.CustomProperties["g"],
-            (byte)player.CustomProperties["b"],
-            255);*/
         int colorIdx = (int)newPlayer.CustomProperties["colorIdx"];
 
         playerIcon.sprite = icons[(int)newPlayer.CustomProperties["iconID"]];   //icon
@@ -123,12 +111,6 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
             TextMeshProUGUI tempText = tempListing.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
             Image playerImg = tempListing.transform.GetChild(3).GetComponent<Image>();
 
-            /*
-            Color32 color = new Color32(
-                (byte)player.CustomProperties["r"],
-                (byte)player.CustomProperties["g"],
-                (byte)player.CustomProperties["b"],
-                255);*/
             int colorIdx = (int)player.CustomProperties["colorIdx"];
 
             playerIcon.sprite = icons[(int)player.CustomProperties["iconID"]];  //icon
@@ -150,6 +132,19 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
     }
 
+    //public int RandColorIdx()
+    //{
+    //    RoomOptions roomOptions = new RoomOptions();
+    //    var freeColorsIdxFromRoomProperties = roomOptions.CustomRoomProperties;
+    //    List<int> freeColorsIdxListFromRoomProperties = (List<int>)freeColorsIdxFromRoomProperties["freeColorsIdx"];
 
+    //    var rnd = new System.Random();
+    //    var r = rnd.Next(0, freeColorsIdxListFromRoomProperties.Count);
+
+    //    int randColorIdx = freeColorsIdxListFromRoomProperties[r];
+    //    freeColorsIdxListFromRoomProperties.RemoveAt(r);
+
+    //    return randColorIdx;
+    //}
 
 }
