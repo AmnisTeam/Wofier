@@ -31,6 +31,7 @@ public class LetterTile : Tile
     {
         isHaveLetter = false;
         person = null;
+        inventory.gamePlayManager.TryFindWord();
     }
 
     public override void OnSetItem(Item item, Person person)
@@ -41,6 +42,41 @@ public class LetterTile : Tile
         {
             letter = letterItem.letter;
             isHaveLetter = true;
+            inventory.gamePlayManager.TryFindWord();
+        }
+    }
+
+    public int GetLetterPrice()
+    {
+        switch(letter)
+        {
+            case 'A': return 1;
+            case 'B': return 3;
+            case 'C': return 3;
+            case 'D': return 2;
+            case 'E': return 1;
+            case 'F': return 4;
+            case 'G': return 2;
+            case 'H': return 4;
+            case 'I': return 1;
+            case 'J': return 7;
+            case 'K': return 5;
+            case 'L': return 4;
+            case 'M': return 3;
+            case 'N': return 1;
+            case 'O': return 1;
+            case 'P': return 3;
+            case 'Q': return 8;
+            case 'R': return 1;
+            case 'S': return 2;
+            case 'T': return 2;
+            case 'U': return 5;
+            case 'V': return 4;
+            case 'W': return 4;
+            case 'X': return 7;
+            case 'Y': return 2;
+            case 'Z': return 10;
+            default:  return 1;
         }
     }
 
