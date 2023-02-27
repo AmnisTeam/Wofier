@@ -14,6 +14,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.ConnectUsingSettings();
         PhotonNetwork.ConnectToRegion(region);
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     public override void OnConnectedToMaster()
@@ -33,11 +34,11 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
         Debug.Log("Вы отключены от сервера");
         Debug.Log(cause);
     }
-
-    //public override void OnJoinedLobby()
-    //{
-    //    RoomOptions roomOptions = new RoomOptions();
-    //    roomOptions.MaxPlayers = 4;
-    //    PhotonNetwork.CreateRoom("qwe", roomOptions, TypedLobby.Default);
-    //}
+    /*
+    public override void OnJoinedLobby()
+    {
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.MaxPlayers = 4;
+        PhotonNetwork.CreateRoom("qwe", roomOptions, TypedLobby.Default);
+    }*/
 }

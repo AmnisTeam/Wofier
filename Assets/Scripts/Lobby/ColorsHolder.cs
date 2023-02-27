@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ColorsHolder : MonoBehaviour
@@ -31,7 +32,7 @@ public class ColorsHolder : MonoBehaviour
             freeColorsIdx.Add(i);
         
     }
-
+    /*
     public Color32 GetRandomColor()
     {
         if (colors.Count > 0)
@@ -44,15 +45,15 @@ public class ColorsHolder : MonoBehaviour
 
             return savedColor;
         }
-        else { return Color.white; }
+        else { return Color.black; }
     }
 
     public void AddColor(Color32 color)
     {
         colors.Add(color);
-    }
+    }*/
 
-
+    /*
     public int GetRandomIdx()
     {
         if (freeColorsIdx.Count > 0)
@@ -71,6 +72,24 @@ public class ColorsHolder : MonoBehaviour
     public void AddColor(int colorIdx)
     {
         freeColorsIdx.Add(colorIdx);
+    }*/
+
+    public int getRandomIndex()
+    {
+        System.Random rnd = new System.Random();
+        int index = rnd.Next(0, freeColorsIdx.Count);
+
+        return index;
+    }
+
+    public void refillFreeIndicies()
+    {
+        freeColorsIdx = new List<int>(Enumerable.Range(0, colors.Count).ToArray());
+    }
+
+    public void putColorBack(Color32 color)
+    {
+        colors.Add(color);
     }
 
 }

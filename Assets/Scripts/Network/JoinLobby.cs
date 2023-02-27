@@ -18,10 +18,10 @@ public class JoinLobby : MonoBehaviourPunCallbacks
 
     public string colorsHolderTag;
     private GameObject colorsHolder;
-
+    /*
     public string playersInfoTag;
     private GameObject playersInfo;
-    private PlayersInfo inctanceplayersInfo;
+    private PlayersInfo inctanceplayersInfo;*/
 
     public void JoinLobbyFunc()
     {
@@ -31,13 +31,14 @@ public class JoinLobby : MonoBehaviourPunCallbacks
             return;
         }
 
+        /*
         playersInfo = GameObject.FindGameObjectWithTag(playersInfoTag);
-        inctanceplayersInfo = playersInfo.GetComponent<PlayersInfo>();
+        inctanceplayersInfo = playersInfo.GetComponent<PlayersInfo>();*/
 
 
         Debug.Log("Подключение к лобби: " + lobbyCodeTMP.text);
         PhotonNetwork.JoinRoom(lobbyCodeTMP.text);
-    /*
+        /*
         var data = SaveManager.Load<SaveData>(ConfigManager.saveKey);
         Hashtable hash = new Hashtable();
         hash.Add("nickname", PhotonNetwork.NickName);
@@ -49,7 +50,8 @@ public class JoinLobby : MonoBehaviourPunCallbacks
     }
 
     public override void OnJoinedRoom()
-    {
+    {   
+        /*
         var data = SaveManager.Load<SaveData>(ConfigManager.saveKey);
 
         colorsHolder = GameObject.FindGameObjectWithTag(colorsHolderTag);
@@ -62,7 +64,7 @@ public class JoinLobby : MonoBehaviourPunCallbacks
             { "color", colors.GetRandomIdx() }
         };
 
-        SendCustomClassWithRPC(info);
+        SendCustomClassWithRPC(info);*/
 
         PhotonNetwork.LoadLevel(lobbbySceneName);
         Debug.Log("Вы присоеденились к комнате: " + PhotonNetwork.CurrentRoom.Name);
@@ -74,10 +76,11 @@ public class JoinLobby : MonoBehaviourPunCallbacks
         Debug.Log(returnCode);
         Debug.Log(message);
     }
-
+    
+    /*
     void SendCustomClassWithRPC(ExitGames.Client.Photon.Hashtable classObj)
     {
         playersInfo.GetComponent<PhotonView>().RPC("SendPlayerInfo", RpcTarget.AllBuffered, classObj);
-    }
+    }*/
 
 }

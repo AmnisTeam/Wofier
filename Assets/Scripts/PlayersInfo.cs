@@ -25,12 +25,7 @@ public class PlayersInfo : MonoBehaviour
             this.avatarID = avatarID;
             this.color = color;
         }
-        public Info()
-        {
-            //this.nickname = nickname;
-            //this.avatarID = avatarID;
-            //this.color = color;
-        }
+        public Info(){}
     }
 
     public List<Info> playersInfo;
@@ -92,7 +87,8 @@ public class PlayersInfo : MonoBehaviour
         //spawnPoints[spawnIndex] = GameObject.FindGameObjectWithTag("SPAWN_1_TAG");
         //Scene scene = SceneManager.GetActiveScene();
         //Debug.Log(scene.name);
-        GameObject tempListing = Instantiate(playerPrefab*//*, spawnPoints[spawnIndex].transform*//*);
+        GameObject tempListing = Instantiate(playerPrefab*/
+/*, spawnPoints[spawnIndex].transform*//*);
 
         Image playerIcon = tempListing.transform.GetChild(1).GetComponent<Image>();
         TextMeshProUGUI tempText = tempListing.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
