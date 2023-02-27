@@ -1,4 +1,6 @@
+using ExitGames.Client.Photon;
 using Photon.Pun;
+using Photon.Realtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -42,7 +44,7 @@ public class PlayerAnswerData : BaseRaw
     public int answerId;
     public float timeToAnswer;
 }
-public class PlayersManager : MonoBehaviourPunCallbacks
+public class PlayersManager : MonoBehaviour
 {
     public int MAX_COUNT_PLAYERS = 4;
     public BaseTable<Player> players = new BaseTable<Player>();
@@ -121,6 +123,23 @@ public class PlayersManager : MonoBehaviourPunCallbacks
     {
 
     }
+    /*
+    private void OnEnable()
+    {
+        PhotonNetwork.NetworkingClient.OpResponseReceived += NetworkingClientOnOpResponseReceived;
+    }
 
+    private void OnDisable()
+    {
+        PhotonNetwork.NetworkingClient.OpResponseReceived -= NetworkingClientOnOpResponseReceived;
+    }
 
+    private void NetworkingClientOnOpResponseReceived(OperationResponse opResponse)
+    {
+        if (opResponse.OperationCode == OperationCode.SetProperties &&
+            opResponse.ReturnCode == ErrorCode.InvalidOperation)
+        {
+            // CAS failure
+        }
+    }*/
 }

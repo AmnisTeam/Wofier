@@ -1,4 +1,7 @@
+using ExitGames.Client.Photon;
 using Photon.Pun;
+using Photon.Pun.UtilityScripts;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -245,4 +248,24 @@ public class GamePlayManager : MonoBehaviour
 
         time.text = minutes.ToString("00") + ":" + secundes.ToString("00");
     }
+    /*
+    private void OnEnable()
+    {
+        PhotonNetwork.NetworkingClient.OpResponseReceived += NetworkingClientOnOpResponseReceived;
+    }
+
+    private void OnDisable()
+    {
+        PhotonNetwork.NetworkingClient.OpResponseReceived -= NetworkingClientOnOpResponseReceived;
+    }
+
+    private void NetworkingClientOnOpResponseReceived(OperationResponse opResponse)
+    {
+        if (opResponse.OperationCode == OperationCode.SetProperties &&
+            opResponse.ReturnCode == ErrorCode.InvalidOperation)
+        {
+            // CAS failure
+        }
+    }*/
+
 }
