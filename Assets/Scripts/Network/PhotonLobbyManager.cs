@@ -11,8 +11,8 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class PhotonLobbyManager : MonoBehaviourPunCallbacks
 {
     public string mainSceneName;
-    public GameObject playerCointainer;
     public GameObject playerPrefab;
+    public GameObject startButtonGameObject;
 
     public Transform[] spawnPoints;
     private int spawnIndex = 0;
@@ -25,6 +25,7 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
     public string colorsHolderTag;
     private GameObject colorsHolder;
     private ColorsHolder instanceColorHolder;
+
 
     /*
     public string playersInfoTag;
@@ -69,6 +70,11 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
                     {"playerIconId", data.iconID}
                 });
             }
+        }
+
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            startButtonGameObject.gameObject.SetActive(false);
         }
     }
 
@@ -125,9 +131,18 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
             remotePlayerIcon.sprite = icons[(int)player.CustomProperties["playerIconId"]];
             remotePlayerIcon.color = instanceColorHolder.colors[(int)player.CustomProperties["playerColorIndex"]];
 
+            remotePlayerButton.onClick.AddListener(() => {
+                PhotonNetwork.CloseConnection(player);
+            });
+
             if (!PhotonNetwork.IsMasterClient || (PhotonNetwork.IsMasterClient && player.IsLocal))
             {
                 remotePlayerButton.gameObject.SetActive(false);
+            }
+
+            if (PhotonNetwork.IsMasterClient)
+            {
+                startButtonGameObject.gameObject.SetActive(true);
             }
 
             spawnIndex++;

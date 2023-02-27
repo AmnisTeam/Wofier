@@ -14749,6 +14749,7 @@ MonoBehaviour:
   mainSceneName: MainScene(Stars)
   playerCointainer: {fileID: 1113540922}
   playerPrefab: {fileID: 1089952454414005330, guid: ff549d6d0a12b574d88ec602521aaba9, type: 3}
+  startButtonGameObject: {fileID: 1317621489}
   spawnPoints:
   - {fileID: 2058911058}
   - {fileID: 1700339362}
@@ -14756,7 +14757,6 @@ MonoBehaviour:
   - {fileID: 730465454}
   avatarSpritesTag: ICONS_CONTENT_TAG
   colorsHolderTag: COLORS_HOLDER_TAG
-  playersInfoTag: PLAYERS_INFO_TAG
 --- !u!1 &352122396
 GameObject:
   m_ObjectHideFlags: 0
@@ -70041,6 +70041,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b7948a1d231adc4bb6f6f915385c641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1317621489 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 596018239454886810, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
+  m_PrefabInstance: {fileID: 1317621486}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1368420071
 GameObject:
   m_ObjectHideFlags: 0

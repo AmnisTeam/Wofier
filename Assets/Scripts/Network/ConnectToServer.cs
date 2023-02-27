@@ -15,6 +15,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();
         PhotonNetwork.ConnectToRegion(region);
         PhotonNetwork.AutomaticallySyncScene = true;
+        PhotonNetwork.EnableCloseConnection = true;
     }
 
     public override void OnConnectedToMaster()
