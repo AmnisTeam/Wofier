@@ -125,15 +125,7 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
             remotePlayerIcon.sprite = icons[(int)player.CustomProperties["playerIconId"]];
             remotePlayerIcon.color = instanceColorHolder.colors[(int)player.CustomProperties["playerColorIndex"]];
 
-            if (player.IsMasterClient && player.IsLocal)
-            {
-                remotePlayerButton.gameObject.SetActive(false);
-            }
-            else if (player.IsMasterClient && !player.IsLocal)
-            {
-                remotePlayerButton.gameObject.SetActive(false);
-            }
-            else if (player.IsLocal)
+            if (!PhotonNetwork.IsMasterClient || (PhotonNetwork.IsMasterClient && player.IsLocal))
             {
                 remotePlayerButton.gameObject.SetActive(false);
             }
