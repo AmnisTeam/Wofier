@@ -24,8 +24,7 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
 
     public string colorsHolderTag;
     private GameObject colorsHolder;
-    private ColorsHolder inctanceColorHolder;
-    List <Color32> colors;
+    private ColorsHolder instanceColorHolder;
 
     /*
     public string playersInfoTag;
@@ -45,20 +44,25 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
         iconsContent = avatarSprites.GetComponent<IconsContent>();
         icons = iconsContent.icons;
 
-        ColorsHolder.instance.refillFreeIndicies();
+        colorsHolder = GameObject.FindGameObjectWithTag(colorsHolderTag);
+        instanceColorHolder = colorsHolder.GetComponent<ColorsHolder>();
+
+        instanceColorHolder.refillFreeIndicies();
+
+        //ColorsHolder.instance.refillFreeIndicies();
 
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
             if (!player.IsLocal)
             {
-                ColorsHolder.instance.freeColorsIdx.Remove((int)player.CustomProperties["playerColorIndex"]);
+                instanceColorHolder.freeColorsIdx.Remove((int)player.CustomProperties["playerColorIndex"]);
             }
             else
             {
                 var data = SaveManager.Load<SaveData>(ConfigManager.saveKey);
-                var colorIndex = ColorsHolder.instance.getRandomIndex();
-                var color = ColorsHolder.instance.freeColorsIdx[colorIndex];
-                ColorsHolder.instance.freeColorsIdx.Remove(color);
+                var colorIndex = instanceColorHolder.getRandomIndex();
+                var color = instanceColorHolder.freeColorsIdx[colorIndex];
+                instanceColorHolder.freeColorsIdx.Remove(color);
 
                 player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable{
                     {"playerColorIndex", color},
@@ -117,9 +121,9 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
             Button remotePlayerButton = remotePlayerObject.transform.GetChild(4).GetComponent<Button>();
 
             remoteTempText.text = player.NickName;
-            remotePlayerColor.color = ColorsHolder.instance.colors[(int)player.CustomProperties["playerColorIndex"]];
+            remotePlayerColor.color = instanceColorHolder.colors[(int)player.CustomProperties["playerColorIndex"]];
             remotePlayerIcon.sprite = icons[(int)player.CustomProperties["playerIconId"]];
-            remotePlayerIcon.color = ColorsHolder.instance.colors[(int)player.CustomProperties["playerColorIndex"]];
+            remotePlayerIcon.color = instanceColorHolder.colors[(int)player.CustomProperties["playerColorIndex"]];
 
             if (player.IsMasterClient && player.IsLocal)
             {
