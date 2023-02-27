@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,12 +17,18 @@ public class Player : BaseRaw
 
     }
 
-    public Player(int id, int iconId, UnityEngine.Color color, string nickname)
+    public Player(int id, string nickname, UnityEngine.Color color, int iconId)
+    //public Player(int id, int iconId, UnityEngine.Color color, string nickname)
     {
+        /*
         this.id = id;
         this.iconId = iconId;
         this.color = color;
+        this.nickname = nickname;*/
+        this.id = id;
         this.nickname = nickname;
+        this.color = color;
+        this.iconId = iconId;
     }
 
     public void ClaimRegion(Region region)
@@ -35,7 +42,7 @@ public class PlayerAnswerData : BaseRaw
     public int answerId;
     public float timeToAnswer;
 }
-public class PlayersManager : MonoBehaviour
+public class PlayersManager : MonoBehaviourPunCallbacks
 {
     public int MAX_COUNT_PLAYERS = 4;
     public BaseTable<Player> players = new BaseTable<Player>();
@@ -43,7 +50,16 @@ public class PlayersManager : MonoBehaviour
     public ConfigTemp config;
     private TabMenuManager tabMenuManager;
     public ToastShower toastShower;
-    
+
+    public string avatarSpritesTag;
+    GameObject avatarSprites;
+    IconsContent iconsContent;
+    //Sprite[] icons;
+
+    public string colorsHolderTag;
+    private GameObject colorsHolder;
+    private ColorsHolder instanceColorHolder;
+
     public void connected(Player player)
     {
         players.add(player);
@@ -78,14 +94,33 @@ public class PlayersManager : MonoBehaviour
         tabMenuManager = GetComponent<TabMenuManager>();
         playerAnswerData = new BaseTable<PlayerAnswerData>();
 
-        connected(new Player(0, 0, new UnityEngine.Color(255, 0, 0), "SpectreSpect"));
-        connected(new Player(1, 1, new UnityEngine.Color(0, 255, 0), "DotaKot"));
-        connected(new Player(2, 2, new UnityEngine.Color(0, 0, 255), "ThEnd"));
-        connected(config.me);
+        avatarSprites = GameObject.FindGameObjectWithTag(avatarSpritesTag);
+        iconsContent = avatarSprites.GetComponent<IconsContent>();
+        //icons = iconsContent.icons;
+
+        colorsHolder = GameObject.FindGameObjectWithTag(colorsHolderTag);
+        instanceColorHolder = colorsHolder.GetComponent<ColorsHolder>();
+        /*
+        connected(new Player(0, "SpectreSpect",  new UnityEngine.Color(255, 0, 0), 0));
+        connected(new Player(1, "DotaKot", new UnityEngine.Color(0, 255, 0), 1));
+        connected(new Player(2, "ThEnd", new UnityEngine.Color(0, 0, 255), 2));
+        connected(config.me);*/
+        foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
+        {
+            connected(new Player(
+                player.ActorNumber - 1,
+                player.NickName,
+                instanceColorHolder.colors[(int)player.CustomProperties["playerColorIndex"]],
+                (int)player.CustomProperties["playerIconId"]));
+        }
     }
+
+    //public override void 
 
     void Update()
     {
 
     }
+
+
 }

@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -74,12 +75,14 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         MouseObject.isDrag = false;
         GetComponent<CanvasGroup>().blocksRaycasts = true;
         GetComponent<Image>().raycastTarget = true;
-        if (inventory.gamePlayManager.me.id == inventory.gamePlayManager.personManager.persons[inventory.gamePlayManager.idPlayingPerson].id)
+        if (inventory.gamePlayManager.personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1].id == inventory.gamePlayManager.personManager.persons[inventory.gamePlayManager.idPlayingPerson].id)
+        //if (inventory.gamePlayManager.personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1].id == inventory.gamePlayManager.personManager.persons[inventory.gamePlayManager.idPlayingPerson].id)
         {
             GameObject tile = GetTile();
             if (tile && tile.GetComponent<Tile>().isCanSetItem)
             {
-                tile.GetComponent<Tile>().OnSetItem(this, inventory.gamePlayManager.me);
+                tile.GetComponent<Tile>().OnSetItem(this, inventory.gamePlayManager.personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1]);
+                //tile.GetComponent<Tile>().OnSetItem(this, inventory.gamePlayManager.me);
                 if(idInInventory >= 0)
                     inventory.items[idInInventory] = null;
                 Destroy(gameObject);

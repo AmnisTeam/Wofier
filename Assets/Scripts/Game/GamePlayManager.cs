@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,7 @@ public class TileWord
 
 public class GamePlayManager : MonoBehaviour
 {
-    public Person me;
+    //public Person me;
     public PersonsManager personManager;
     public ScoreTableManager scoreTableManager;
     public MapGenerator mapGenerator;
@@ -44,6 +45,15 @@ public class GamePlayManager : MonoBehaviour
     private float findingMenuShowingTimer = float.NaN;
 
     public float timeToAppearanceAcceptWordButton;
+
+    public string avatarSpritesTag;
+    GameObject avatarSprites;
+    IconsContent iconsContent;
+    //Sprite[] icons;
+
+    public string colorsHolderTag;
+    private GameObject colorsHolder;
+    private ColorsHolder instanceColorHolder;
 
     public void SelectNextPersonToPlay()
     {
@@ -154,8 +164,9 @@ public class GamePlayManager : MonoBehaviour
 
     public void TryFindWord()
     {
-        if(personManager.persons[idPlayingPerson].id == me.id)
-        {
+        if (personManager.persons[idPlayingPerson].id == PhotonNetwork.LocalPlayer.ActorNumber)
+        //if(personManager.persons[idPlayingPerson].id == me.id)
+            {
             List<TileWord> words = CheckWords(out addedScore);
             wordIsFind = words != null;
 
@@ -180,12 +191,31 @@ public class GamePlayManager : MonoBehaviour
 
     void Awake()
     {
-        personManager.connectPerson(me);
+        avatarSprites = GameObject.FindGameObjectWithTag(avatarSpritesTag);
+        iconsContent = avatarSprites.GetComponent<IconsContent>();
+        //icons = iconsContent.icons;
+
+        colorsHolder = GameObject.FindGameObjectWithTag(colorsHolderTag);
+        instanceColorHolder = colorsHolder.GetComponent<ColorsHolder>();
+
+        //personManager.connectPerson(me);
+        /*
         personManager.connectPerson(new Person(1, "ThEnd", new Color(1, 0.6f, 0.6f, 1), 1));
         personManager.connectPerson(new Person(2, "DotaKot", new Color(0.6f, 1, 0.6f, 1), 2));
         personManager.connectPerson(new Person(3, "SpectreSpect", new Color(0.6f, 0.6f, 1, 1), 3));
-        personManager.connectPerson(new Person(4, "Hexumee", new Color(1, 0.6f, 1, 1), 4));
-        personManager.persons[1].score = 200;
+        personManager.connectPerson(new Person(4, "Hexumee", new Color(1, 0.6f, 1, 1), 4));*/
+        foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
+        {
+            personManager.connectPerson(new Person(
+                player.ActorNumber - 1, 
+                player.NickName,
+                instanceColorHolder.colors[(int)player.CustomProperties["playerColorIndex"]],
+                (int)player.CustomProperties["playerIconId"]));
+        }
+
+
+
+        //personManager.persons[1].score = 200;
 
         wordDictionary = new NetSpellDictionary();
     }

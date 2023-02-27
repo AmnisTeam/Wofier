@@ -26,6 +26,8 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
     private GameObject colorsHolder;
     private ColorsHolder instanceColorHolder;
 
+    public string gameScneneName;
+
 
     /*
     public string playersInfoTag;
@@ -95,6 +97,10 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
         UpdateList();
     }
 
+    public void StartGame()
+    {
+        PhotonNetwork.LoadLevel(gameScneneName);
+    }
 
     public void LeaveLobbyFunc()
     {
@@ -102,7 +108,7 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
     }
     public override void OnLeftRoom()
     {
-        PhotonNetwork.LoadLevel("ConnectToServer");
+        PhotonNetwork.LoadLevel(0);
     }
 
     public void UpdateList()

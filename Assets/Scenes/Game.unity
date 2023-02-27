@@ -4631,12 +4631,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010da9cc8a7b32d49b6bc1cf01879407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  me:
-    id: 0
-    nickname: NeBot
-    color: {r: 0.5896226, g: 0.80034935, b: 1, a: 1}
-    iconId: 0
-    score: 100
   personManager: {fileID: 1994361587}
   scoreTableManager: {fileID: 1814574797}
   mapGenerator: {fileID: 1994361585}
@@ -4650,10 +4644,12 @@ MonoBehaviour:
   wordIsFind: 0
   addedScore: 0
   idPlayingPerson: -1
-  timeToPlayingOnePerson: 60
+  timeToPlayingOnePerson: 10
   timeToAppearanceFindingMenu: 1
   findingMenuShowingTime: 3
   timeToAppearanceAcceptWordButton: 0.2
+  avatarSpritesTag: ICONS_CONTENT_TAG
+  colorsHolderTag: COLORS_HOLDER_TAG
 --- !u!1 &1995823606
 GameObject:
   m_ObjectHideFlags: 0

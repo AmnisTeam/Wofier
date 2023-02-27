@@ -14747,7 +14747,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainSceneName: MainScene(Stars)
-  playerCointainer: {fileID: 1113540922}
   playerPrefab: {fileID: 1089952454414005330, guid: ff549d6d0a12b574d88ec602521aaba9, type: 3}
   startButtonGameObject: {fileID: 1317621489}
   spawnPoints:
@@ -14757,6 +14756,7 @@ MonoBehaviour:
   - {fileID: 730465454}
   avatarSpritesTag: ICONS_CONTENT_TAG
   colorsHolderTag: COLORS_HOLDER_TAG
+  gameScneneName: Game
 --- !u!1 &352122396
 GameObject:
   m_ObjectHideFlags: 0
@@ -69890,18 +69890,18 @@ PrefabInstance:
     - target: {fileID: 596018239386280912, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1317621488}
+      objectReference: {fileID: 254502516}
     - target: {fileID: 596018239386280912, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 596018239386280912, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: changeScene
+      value: StartGame
       objectReference: {fileID: 0}
     - target: {fileID: 596018239386280912, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TransitionToLevel, Assembly-CSharp
+      value: PhotonLobbyManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 596018239386280912, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -70030,17 +70030,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 596018239454886811, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
   m_PrefabInstance: {fileID: 1317621486}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1317621488 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5072586178644101813, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
-  m_PrefabInstance: {fileID: 1317621486}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b7948a1d231adc4bb6f6f915385c641, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1317621489 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 596018239454886810, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
