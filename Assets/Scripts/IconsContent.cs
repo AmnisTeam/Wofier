@@ -5,5 +5,11 @@ using UnityEngine.UI;
 
 public class IconsContent : MonoBehaviour
 {
-    public Image[] icons;
+    public static IconsContent instance;
+    public Sprite[] icons;
+
+    public IconsContent()
+    {
+        instance = this;
+    }
 }

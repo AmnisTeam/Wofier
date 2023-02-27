@@ -4,8 +4,9 @@ using UnityEngine;
 
 public static class CreateLobbyDataHolder
 {
-    public static string lobbyName;
-    public static string lobbyPassword;
-    public static int lobbyIconID;
-    public static Sprite[] icons;
+    //public static string lobbyName;
+    //public static string lobbyPassword;
+    //public static string lobbyCode;
+    //public static int lobbyIconID;
+    //public static Sprite[] icons;
 }

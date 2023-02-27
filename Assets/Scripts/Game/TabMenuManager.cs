@@ -59,7 +59,7 @@ public class TabMenuManager : MonoBehaviour
 
         for (int x = 0; x < playersManager.players.count; x++)
         {
-            icons[x].sprite = iconsContent.icons[playersManager.players.get(x).iconId].sprite;
+            icons[x].sprite = iconsContent.icons[playersManager.players.get(x).iconId];
             icons[x].color = playersManager.players.get(x).color;
             nicknameText[x].text = playersManager.players.get(x).nickname;
         }
