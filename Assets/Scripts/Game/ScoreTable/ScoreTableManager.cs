@@ -66,7 +66,7 @@ public class ScoreTableManager : MonoBehaviour
 
         showScoreTableButton.transform.localPosition = new Vector3(
 personRowPrifab.GetComponent<RectTransform>().rect.width / 2 - showScoreTableButton.GetComponent<RectTransform>().rect.width / 2,
--(personRowPrifab.GetComponent<RectTransform>().rect.height + offset) * countShow);
+-(personRowPrifab.GetComponent<RectTransform>().rect.height + offset) * Mathf.Min(countShow, personRows.Count));
     }
 
     public void updateTable()
@@ -108,7 +108,7 @@ personRowPrifab.GetComponent<RectTransform>().rect.width / 2 - showScoreTableBut
 
             showScoreTableButton.transform.localPosition = new Vector3(
                 personRowPrifab.GetComponent<RectTransform>().rect.width / 2 - showScoreTableButton.GetComponent<RectTransform>().rect.width / 2,
-                -(personRowPrifab.GetComponent<RectTransform>().rect.height + offset) * countShow);
+                -(personRowPrifab.GetComponent<RectTransform>().rect.height + offset) * Mathf.Min(countShow, personRows.Count));
 
             hiddenScoreTableButton.transform.localPosition = new Vector3(
                 personRowPrifab.GetComponent<RectTransform>().rect.width / 2 - hiddenScoreTableButton.GetComponent<RectTransform>().rect.width / 2,

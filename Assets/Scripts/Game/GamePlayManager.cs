@@ -167,7 +167,7 @@ public class GamePlayManager : MonoBehaviour
 
     public void TryFindWord()
     {
-        if (personManager.persons[idPlayingPerson].id == PhotonNetwork.LocalPlayer.ActorNumber)
+        if (personManager.persons[idPlayingPerson].id == PhotonNetwork.LocalPlayer.ActorNumber - 1)
         //if(personManager.persons[idPlayingPerson].id == me.id)
             {
             List<TileWord> words = CheckWords(out addedScore);

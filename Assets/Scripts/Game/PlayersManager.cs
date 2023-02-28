@@ -44,7 +44,7 @@ public class PlayerAnswerData : BaseRaw
     public int answerId;
     public float timeToAnswer;
 }
-public class PlayersManager : MonoBehaviour
+public class PlayersManager : MonoBehaviourPunCallbacks
 {
     public int MAX_COUNT_PLAYERS = 4;
     public BaseTable<Player> players = new BaseTable<Player>();
@@ -90,6 +90,17 @@ public class PlayersManager : MonoBehaviour
         players.list.RemoveAt(id);
         tabMenuManager.disconnectPlayer(id);
     }
+
+    /*
+    public override void OnLeftRoom()
+    {
+        disconnect(PhotonNetwork.LocalPlayer.ActorNumber - 1);
+    }
+
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    {
+        disconnect(otherPlayer.ActorNumber - 1);
+    }*/
 
     void Start()
     {
