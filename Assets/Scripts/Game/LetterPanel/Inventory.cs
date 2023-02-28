@@ -16,7 +16,7 @@ public class Inventory : MonoBehaviour
     public bool isDrag = false;
     public int dragSlotId = -1;
 
-    private string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    //private string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     public int GetLastFreeSlotId()
     {

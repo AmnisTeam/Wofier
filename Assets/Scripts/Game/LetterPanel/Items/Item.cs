@@ -83,7 +83,7 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             {
                 tile.GetComponent<Tile>().OnSetItem(this, inventory.gamePlayManager.personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1]);
                 //tile.GetComponent<Tile>().OnSetItem(this, inventory.gamePlayManager.me);
-                if(idInInventory >= 0)
+                if (idInInventory >= 0)
                     inventory.items[idInInventory] = null;
                 Destroy(gameObject);
             }

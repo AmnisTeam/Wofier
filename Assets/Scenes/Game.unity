@@ -4566,6 +4566,7 @@ GameObject:
   - component: {fileID: 1994361585}
   - component: {fileID: 1994361588}
   - component: {fileID: 1994361587}
+  - component: {fileID: 1994361589}
   m_Layer: 0
   m_Name: ManagersObject
   m_TagString: Untagged
@@ -4588,6 +4589,7 @@ MonoBehaviour:
   mapCenter: {fileID: 170427670}
   tilePrifab: {fileID: 1952440079704378671, guid: 629c39ea211a1ca48aa118a4b32732c0, type: 3}
   inventory: {fileID: 300185217}
+  PV: {fileID: 0}
   mapSizeX: 100
   mapSizeY: 100
   offset: 0.2
@@ -4648,8 +4650,31 @@ MonoBehaviour:
   timeToAppearanceFindingMenu: 1
   findingMenuShowingTime: 3
   timeToAppearanceAcceptWordButton: 0.2
+  PV: {fileID: 1994361589}
   avatarSpritesTag: ICONS_CONTENT_TAG
   colorsHolderTag: COLORS_HOLDER_TAG
+--- !u!114 &1994361589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994361584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1995823606
 GameObject:
   m_ObjectHideFlags: 0

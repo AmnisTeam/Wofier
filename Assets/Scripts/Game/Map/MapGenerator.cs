@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class MapGenerator : MonoBehaviour
     public Transform mapCenter;
     public GameObject tilePrifab;
     public Inventory inventory;
+    public PhotonView PV;
 
     public int mapSizeX;
     public int mapSizeY;
@@ -44,6 +46,26 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
+    [PunRPC]
+    public void UpdateTileOnEdit(int x, int y, bool isEdit, int personId)
+    {
+        LetterTile letterTile = map[x][y].GetComponent<LetterTile>();
+        if (letterTile != null)
+        {
+            Person person = null;
+            if (personId != -1) 
+            { 
+                for (int i = 0; i < inventory.gamePlayManager.personManager.persons.Count; i++)
+                    if (inventory.gamePlayManager.personManager.persons[i].id == personId)
+                        person = inventory.gamePlayManager.personManager.persons[i];
+            }
+            if (isEdit)
+                letterTile.SetLetter(' ', person);
+            else
+                letterTile.UnsetLetter();
+        }
+    }
+
     void Awake()
     {
         GenerateMap();
@@ -51,7 +73,7 @@ public class MapGenerator : MonoBehaviour
 
     void Start()
     {
-        
+        PV = GetComponent<PhotonView>();
     }
 
     void Update()

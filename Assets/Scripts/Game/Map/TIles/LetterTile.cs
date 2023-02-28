@@ -15,9 +15,13 @@ public class LetterTile : Tile
     private bool isHaveLetterOld = false;
 
     public bool inWord = false;
+    //public bool isEdit = false;
+    //public bool oldIsEdit = false;
 
     public Color colorWithoutLetter;
     public Color colorWithLetter;
+
+    public PhotonView PV;
 
     private int _isDrag = 0;
 
@@ -41,9 +45,9 @@ public class LetterTile : Tile
         LetterItem letterItem = item as LetterItem;
         if(letterItem)
         {
-            letter = letterItem.letter;
-            isHaveLetter = true;
+            SetLetter(letterItem.letter, person);
             inventory.gamePlayManager.TryFindWord();
+            RPC_Request(true, person);
         }
     }
 
@@ -98,6 +102,7 @@ public class LetterTile : Tile
         if (oldLetter != letter)
         {
             letterText.text = letter.ToString();
+
             oldLetter = letter;
         }
 
@@ -132,6 +137,7 @@ public class LetterTile : Tile
                             letterItem.GetComponent<LetterItem>().letter = letter;
                             letterItem.GetComponent<LetterItem>().ConstructorItem(inventory, slotId);
                             inventory.items[slotId] = letterItem;
+                            RPC_Request(false, person);
                         }
 
                         person = null;
@@ -160,6 +166,7 @@ public class LetterTile : Tile
             MouseObject.Drag(item);
             _isDrag = 1;
             UnsetLetter();
+            RPC_Request(false, person);
         }
     }
 
@@ -178,4 +185,16 @@ public class LetterTile : Tile
             _isDrag = 2;
         }
     }
+
+    private void RPC_Request(bool isSet, Person person)
+    {
+        Vector2 sizeTile = inventory.mapGenerator.GetSizeTile();
+        Vector2 mapPos = inventory.mapGenerator.GetLeftTopMap();
+        Vector2 tilePos = (transform.position.ToXY() + sizeTile / 2 - mapPos) / sizeTile;
+        if (person == null)
+            inventory.mapGenerator.PV.RPC("UpdateTileOnEdit", RpcTarget.Others, (int)tilePos.x, (int)tilePos.y, isSet, -1);
+        else
+            inventory.mapGenerator.PV.RPC("UpdateTileOnEdit", RpcTarget.Others, (int)tilePos.x, (int)tilePos.y, isSet, person.id);
+    }
+
 }
