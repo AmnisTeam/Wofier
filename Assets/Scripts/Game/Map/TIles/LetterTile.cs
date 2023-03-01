@@ -36,7 +36,7 @@ public class LetterTile : Tile
     {
         isHaveLetter = false;
         person = null;
-        inventory.gamePlayManager.TryFindWord();
+        inventory.gamePlayManager.wordChecker.TryFindWord();
     }
 
     public override void OnSetItem(Item item, Person person)
@@ -46,7 +46,7 @@ public class LetterTile : Tile
         if(letterItem)
         {
             SetLetter(letterItem.letter, person);
-            inventory.gamePlayManager.TryFindWord();
+            inventory.gamePlayManager.wordChecker.TryFindWord();
             RPC_Request(true, person);
         }
     }
