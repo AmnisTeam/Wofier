@@ -85,14 +85,6 @@ public class GamePlayManager : MonoBehaviour
         return tile != null && tile.isHaveLetter && tile.person.id == personManager.persons[idPlayingPerson].id;
     }
 
-    public string VectorsToString(Vector2Int[] vectors)
-    {
-        string str = "";
-        for(int x = 0; x < vectors.Length; x++)
-            str += vectors[x].x.ToString() + ";" + vectors[x].y.ToString();
-        return str;
-    }
-
     public List<TileWord> CheckWords(out int addedScores)
     {
         List<TileWord> words = new List<TileWord>();
@@ -147,10 +139,10 @@ public class GamePlayManager : MonoBehaviour
                         pointerY++;
                     }
 
-                    if (!isCheckWord.ContainsKey(keyHorizontalWord))
+                    if (!isCheckWord.ContainsKey(keyHorizontalWord) && horizontalWord.Length > 1)
                         countScore += horizontalScore;
 
-                    if (!isCheckWord.ContainsKey(keyVerticalWord))
+                    if (!isCheckWord.ContainsKey(keyVerticalWord) && verticalWord.Length > 1)
                         countScore += verticalScore;
 
                     if (!(wordDictionary.checkWord(horizontalWord) && wordDictionary.checkWord(verticalWord) && (horizontalWord.Length > 1 || verticalWord.Length > 1)))

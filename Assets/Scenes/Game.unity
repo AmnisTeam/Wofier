@@ -545,7 +545,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -92.3}
+  m_AnchoredPosition: {x: 0, y: -92.29999}
   m_SizeDelta: {x: 429.73, y: 156.01}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &164669844
@@ -2963,7 +2963,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1333779874
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4650,7 +4650,6 @@ MonoBehaviour:
   timeToAppearanceFindingMenu: 1
   findingMenuShowingTime: 3
   timeToAppearanceAcceptWordButton: 0.2
-  PV: {fileID: 1994361589}
   avatarSpritesTag: ICONS_CONTENT_TAG
   colorsHolderTag: COLORS_HOLDER_TAG
 --- !u!114 &1994361589
