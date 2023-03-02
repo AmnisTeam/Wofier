@@ -273,11 +273,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5c0e78f243dfe448ed0f0e25d68080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory: {fileID: 0}
+  person:
+    id: 0
+    nickname: 
+    color: {r: 0, g: 0, b: 0, a: 0}
+    iconId: 0
+    score: 0
+  isCanSetItem: 1
   letterText: {fileID: 1786622048}
   letter: 65
   isHaveLetter: 0
+  inWord: 0
   colorWithoutLetter: {r: 1, g: 1, b: 1, a: 1}
   colorWithLetter: {r: 1, g: 0.84705883, b: 0.84705883, a: 1}
+  colorInWord: {r: 0.8501246, g: 0.8800285, b: 0.9056604, a: 1}
+  PV: {fileID: 0}
 --- !u!50 &5862275652679631625
 Rigidbody2D:
   serializedVersion: 4

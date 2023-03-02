@@ -791,7 +791,7 @@ MonoBehaviour:
   gamePlayManager: {fileID: 1994361588}
   cam: {fileID: 1874191511}
   letterPrifab: {fileID: 5577972740821309584, guid: 08660104990e51e4fb096ff085308e7f, type: 3}
-  countStartLetters: 5
+  countStartLetters: 10
   isDrag: 0
   dragSlotId: 0
 --- !u!114 &300185218
@@ -4001,7 +4001,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1804068460}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1994361588}
+        m_TargetAssemblyTypeName: GamePlayManager, Assembly-CSharp
+        m_MethodName: AcceptWord
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1804068460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4636,6 +4648,7 @@ MonoBehaviour:
   personManager: {fileID: 1994361587}
   scoreTableManager: {fileID: 1814574797}
   mapGenerator: {fileID: 1994361585}
+  inventory: {fileID: 300185217}
   findingMenu: {fileID: 114015920}
   findingMenuNickname: {fileID: 1660992241}
   timeNickname: {fileID: 20431598}
@@ -4646,6 +4659,7 @@ MonoBehaviour:
   wordIsFind: 0
   addedScore: 0
   idPlayingPerson: -1
+  numberOfStep: 0
   timeToPlayingOnePerson: 10
   timeToAppearanceFindingMenu: 1
   findingMenuShowingTime: 3

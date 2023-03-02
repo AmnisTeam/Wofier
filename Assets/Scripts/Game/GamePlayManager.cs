@@ -2,6 +2,7 @@ using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,7 @@ public class GamePlayManager : MonoBehaviour
     public PersonsManager personManager;
     public ScoreTableManager scoreTableManager;
     public MapGenerator mapGenerator;
+    public Inventory inventory;
 
     public WordDictionary wordDictionary;
 
@@ -37,8 +39,10 @@ public class GamePlayManager : MonoBehaviour
 
     public bool wordIsFind = false;
     public int addedScore = 0;
+    public List<TileWord> findWords;
 
     public int idPlayingPerson = -1;
+    public int numberOfStep = -1;
 
     public float timeToPlayingOnePerson;
     private float timerToPlayerOnePerson = float.NaN;
@@ -57,6 +61,7 @@ public class GamePlayManager : MonoBehaviour
     public string colorsHolderTag;
     private GameObject colorsHolder;
     private ColorsHolder instanceColorHolder;
+    public WordChecker wordChecker;
 
     public void SelectNextPersonToPlay()
     {
@@ -80,112 +85,37 @@ public class GamePlayManager : MonoBehaviour
         (gameObject as GameObject).SetActive(false);
     }
 
-    public bool IsTileRaw(LetterTile tile)
+    public void AcceptWord()
     {
-        return tile != null && tile.isHaveLetter && tile.person.id == personManager.persons[idPlayingPerson].id;
-    }
-
-    public List<TileWord> CheckWords(out int addedScores)
-    {
-        List<TileWord> words = new List<TileWord>();
-        Dictionary<string, bool> isCheckWord = new Dictionary<string, bool>();
-
-        int countScore = 0;
-
-        for(int x = 0; x < mapGenerator.mapSizeX; x++)
-            for(int y = 0; y < mapGenerator.mapSizeY; y++)
+        if(wordIsFind)
+        {
+            int countTiles = 0;
+            for(int x = 0; x < findWords.Count; x++)
             {
-                LetterTile tile = mapGenerator.map[x][y].GetComponent<LetterTile>();
-
-                if(IsTileRaw(tile)) //Значит что сырая клетка
+                for(int y = 0; y < findWords[x].tiles.Count; y++)
                 {
-                    string horizontalWord = "";
-                    string verticalWord = "";
-
-                    string keyHorizontalWord = "";
-                    string keyVerticalWord = "";
-
-                    int horizontalScore = 0;
-                    int verticalScore = 0;
-
-                    TileWord horizonralTileWord = new TileWord();
-                    TileWord verticalTileWord = new TileWord();
-
-                    int pointerX = x - 1;
-                    while (pointerX >= 0 && IsTileRaw(mapGenerator.map[pointerX][y].GetComponent<LetterTile>()))
-                        pointerX--;
-                    pointerX++;
-              
-                    while (pointerX < mapGenerator.mapSizeX && IsTileRaw(mapGenerator.map[pointerX][y].GetComponent<LetterTile>()))
+                    LetterTile tile = mapGenerator.map[findWords[x].tiles[y].x][findWords[x].tiles[y].y].GetComponent<LetterTile>();
+                    if (tile)
                     {
-                        horizontalWord += mapGenerator.map[pointerX][y].GetComponent<LetterTile>().letter;
-                        horizontalScore += mapGenerator.map[pointerX][y].GetComponent<LetterTile>().GetLetterPrice();
-                        keyHorizontalWord += pointerX.ToString() + ";" + y.ToString();
-                        horizonralTileWord.tiles.Add(new Vector2Int(pointerX, y));
-                        pointerX++;
-                    }
-
-                    int pointerY = y - 1;
-                    while (pointerY >= 0 && IsTileRaw(mapGenerator.map[x][pointerY].GetComponent<LetterTile>()))
-                        pointerY--;
-                    pointerY++;
-
-                    while (pointerY < mapGenerator.mapSizeY && IsTileRaw(mapGenerator.map[x][pointerY].GetComponent<LetterTile>()))
-                    {
-                        verticalWord += mapGenerator.map[x][pointerY].GetComponent<LetterTile>().letter;
-                        verticalScore += mapGenerator.map[x][pointerY].GetComponent<LetterTile>().GetLetterPrice();
-                        keyVerticalWord += x.ToString() + ";" + pointerY.ToString();
-                        verticalTileWord.tiles.Add(new Vector2Int(x, pointerY));
-                        pointerY++;
-                    }
-
-                    if (!isCheckWord.ContainsKey(keyHorizontalWord) && horizontalWord.Length > 1)
-                        countScore += horizontalScore;
-
-                    if (!isCheckWord.ContainsKey(keyVerticalWord) && verticalWord.Length > 1)
-                        countScore += verticalScore;
-
-                    if (!(wordDictionary.checkWord(horizontalWord) && wordDictionary.checkWord(verticalWord) && (horizontalWord.Length > 1 || verticalWord.Length > 1)))
-                    {
-                        addedScores = 0;
-                        return null;
+                        tile.inWord = true;
+                        countTiles++;
                     }
                 }
+
             }
 
-        addedScores = countScore;
-        return words;
-    }
+            numberOfStep++;
+            inventory.AddRandomLetters(countTiles);
 
-    public void TryFindWord()
-    {
-        if (personManager.persons[idPlayingPerson].id == PhotonNetwork.LocalPlayer.ActorNumber - 1)
-        //if(personManager.persons[idPlayingPerson].id == me.id)
-            {
-            List<TileWord> words = CheckWords(out addedScore);
-            wordIsFind = words != null;
-
-            if(wordIsFind)
-            {
-                if (addedScore == 1)
-                    scoresText.text = "(" + addedScore.ToString() + " очко)";
-                else if(addedScore >=2 && addedScore <= 4)
-                    scoresText.text = "(" + addedScore.ToString() + " очка)";
-                else
-                    scoresText.text = "(" + addedScore.ToString() + " очков)";
-
-                acceptWordButton.SetActive(true);
-                acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(1, timeToAppearanceAcceptWordButton);
-            }
-            else
-            {
-                acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(0, timeToAppearanceAcceptWordButton).setOnComplete(OnCompleteAnitaion, acceptWordButton);
-            }
+            acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(0, timeToAppearanceAcceptWordButton).setOnComplete(OnCompleteAnitaion, acceptWordButton);
+            SelectNextPersonToPlay();
         }
     }
 
+
     void Awake()
     {
+        wordChecker = new WordChecker(this);
         avatarSprites = GameObject.FindGameObjectWithTag(avatarSpritesTag);
         iconsContent = avatarSprites.GetComponent<IconsContent>();
         //icons = iconsContent.icons;

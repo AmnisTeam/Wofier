@@ -15,11 +15,11 @@ public class LetterTile : Tile
     private bool isHaveLetterOld = false;
 
     public bool inWord = false;
-    //public bool isEdit = false;
-    //public bool oldIsEdit = false;
+    private bool oldInWord;
 
     public Color colorWithoutLetter;
     public Color colorWithLetter;
+    public Color colorInWord;
 
     public PhotonView PV;
 
@@ -36,7 +36,7 @@ public class LetterTile : Tile
     {
         isHaveLetter = false;
         person = null;
-        inventory.gamePlayManager.TryFindWord();
+        inventory.gamePlayManager.wordChecker.TryFindWord();
     }
 
     public override void OnSetItem(Item item, Person person)
@@ -46,7 +46,7 @@ public class LetterTile : Tile
         if(letterItem)
         {
             SetLetter(letterItem.letter, person);
-            inventory.gamePlayManager.TryFindWord();
+            inventory.gamePlayManager.wordChecker.TryFindWord();
             RPC_Request(true, person);
         }
     }
@@ -106,14 +106,15 @@ public class LetterTile : Tile
             oldLetter = letter;
         }
 
-        if (isHaveLetterOld != isHaveLetter)
+        if (isHaveLetterOld != isHaveLetter || oldInWord != inWord)
         {
             isHaveLetterOld = isHaveLetter;
             isCanSetItem = !isHaveLetter;
+            oldInWord = inWord;
             if (isHaveLetter)
             {
                 letterText.gameObject.SetActive(true);
-                GetComponent<SpriteRenderer>().color = colorWithLetter;
+                GetComponent<SpriteRenderer>().color = inWord ? colorInWord : colorWithLetter;
             }
             else
             {
@@ -125,9 +126,7 @@ public class LetterTile : Tile
         if (!inWord)
             if (isHaveLetter)
                 if (person == inventory.gamePlayManager.personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1])
-                //if (person == inventory.gamePlayManager.me)
                     if (inventory.gamePlayManager.personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1].id != inventory.gamePlayManager.personManager.persons[inventory.gamePlayManager.idPlayingPerson].id)
-                    //if (inventory.gamePlayManager.me.id != inventory.gamePlayManager.personManager.persons[inventory.gamePlayManager.idPlayingPerson].id)
                     {
                         int slotId = inventory.GetLastFreeSlotId();
                         if (slotId != -1)
@@ -155,19 +154,19 @@ public class LetterTile : Tile
 
     void OnMouseDown()
     {
-        if (isHaveLetter && person.id == inventory.gamePlayManager.personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1].id)
-        //if (isHaveLetter && person.id == inventory.gamePlayManager.me.id) 
-        {
-            GameObject item = Instantiate(GameObject.Find("RegisterItems").GetComponent<RegisterGameObjects>().gameObjects[0], inventory.transform);
-            item.GetComponent<LetterItem>().ConstructorItem(inventory, -1);
-            item.GetComponent<LetterItem>().letter = letter;
-            item.transform.position = transform.position;
-            item.GetComponent<LetterItem>().OnBeginDrag(null);
-            MouseObject.Drag(item);
-            _isDrag = 1;
-            UnsetLetter();
-            RPC_Request(false, person);
-        }
+        if (!inWord)
+            if (isHaveLetter && person.id == inventory.gamePlayManager.personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1].id)
+            {
+                GameObject item = Instantiate(GameObject.Find("RegisterItems").GetComponent<RegisterGameObjects>().gameObjects[0], inventory.transform);
+                item.GetComponent<LetterItem>().ConstructorItem(inventory, -1);
+                item.GetComponent<LetterItem>().letter = letter;
+                item.transform.position = transform.position;
+                item.GetComponent<LetterItem>().OnBeginDrag(null);
+                MouseObject.Drag(item);
+                _isDrag = 1;
+                UnsetLetter();
+                RPC_Request(false, person);
+            }
     }
 
     void OnMouseDrag()
