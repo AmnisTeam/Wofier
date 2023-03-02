@@ -125,8 +125,8 @@ public class LetterTile : Tile
 
         if (!inWord)
             if (isHaveLetter)
-                if (person == inventory.gamePlayManager.personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1])
-                    if (inventory.gamePlayManager.personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1].id != inventory.gamePlayManager.personManager.persons[inventory.gamePlayManager.idPlayingPerson].id)
+                if (person == inventory.gamePlayManager.me)
+                    if (inventory.gamePlayManager.me.id != inventory.gamePlayManager.personManager.persons[inventory.gamePlayManager.idPlayingPerson].id)
                     {
                         int slotId = inventory.GetLastFreeSlotId();
                         if (slotId != -1)
@@ -155,7 +155,7 @@ public class LetterTile : Tile
     void OnMouseDown()
     {
         if (!inWord)
-            if (isHaveLetter && person.id == inventory.gamePlayManager.personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1].id)
+            if (isHaveLetter && person.id == inventory.gamePlayManager.me.id)
             {
                 GameObject item = Instantiate(GameObject.Find("RegisterItems").GetComponent<RegisterGameObjects>().gameObjects[0], inventory.transform);
                 item.GetComponent<LetterItem>().ConstructorItem(inventory, -1);

@@ -128,8 +128,6 @@ public class PlayersManager : MonoBehaviourPunCallbacks
         }
     }
 
-    //public override void 
-
     void Update()
     {
 
