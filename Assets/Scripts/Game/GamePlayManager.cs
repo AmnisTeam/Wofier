@@ -23,6 +23,7 @@ public class GamePlayManager : MonoBehaviour
     public PersonsManager personManager;
     public ScoreTableManager scoreTableManager;
     public MapGenerator mapGenerator;
+    public Inventory inventory;
 
     public WordDictionary wordDictionary;
 
@@ -38,6 +39,7 @@ public class GamePlayManager : MonoBehaviour
 
     public bool wordIsFind = false;
     public int addedScore = 0;
+    public List<TileWord> findWords;
 
     public int idPlayingPerson = -1;
     public int numberOfStep = -1;
@@ -64,7 +66,6 @@ public class GamePlayManager : MonoBehaviour
     public void SelectNextPersonToPlay()
     {
         idPlayingPerson = (idPlayingPerson + 1) % personManager.persons.Count;
-        numberOfStep++;
         timerToPlayerOnePerson = timeToPlayingOnePerson;
 
         findingMenuNickname.text = personManager.persons[idPlayingPerson].nickname;
@@ -82,6 +83,33 @@ public class GamePlayManager : MonoBehaviour
     public void OnCompleteAnitaion(object gameObject)
     {
         (gameObject as GameObject).SetActive(false);
+    }
+
+    public void AcceptWord()
+    {
+        if(wordIsFind)
+        {
+            int countTiles = 0;
+            for(int x = 0; x < findWords.Count; x++)
+            {
+                for(int y = 0; y < findWords[x].tiles.Count; y++)
+                {
+                    LetterTile tile = mapGenerator.map[findWords[x].tiles[y].x][findWords[x].tiles[y].y].GetComponent<LetterTile>();
+                    if (tile)
+                    {
+                        tile.inWord = true;
+                        countTiles++;
+                    }
+                }
+
+            }
+
+            numberOfStep++;
+            inventory.AddRandomLetters(countTiles);
+
+            acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(0, timeToAppearanceAcceptWordButton).setOnComplete(OnCompleteAnitaion, acceptWordButton);
+            SelectNextPersonToPlay();
+        }
     }
 
 

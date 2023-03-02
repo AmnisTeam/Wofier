@@ -16,7 +16,12 @@ public class WordChecker
 
     public bool IsTileRaw(LetterTile tile)
     {
-        return tile != null && tile.isHaveLetter && tile.person.id == gamePlayManager.personManager.persons[gamePlayManager.idPlayingPerson].id;
+        return tile != null && tile.isHaveLetter && !tile.inWord && tile.person.id == gamePlayManager.personManager.persons[gamePlayManager.idPlayingPerson].id;
+    }
+
+    public bool IsLetterTileWithLetter(LetterTile tile)
+    {
+        return tile != null && tile.isHaveLetter;
     }
 
     public List<TileWord> CheckWords(out int addedScores)
@@ -49,11 +54,11 @@ public class WordChecker
                     TileWord verticalTileWord = new TileWord();
 
                     int pointerX = x - 1;
-                    while (pointerX >= 0 && IsTileRaw(gamePlayManager.mapGenerator.map[pointerX][y].GetComponent<LetterTile>()))
+                    while (pointerX >= 0 && IsLetterTileWithLetter(gamePlayManager.mapGenerator.map[pointerX][y].GetComponent<LetterTile>()))
                         pointerX--;
                     pointerX++;
 
-                    while (pointerX < gamePlayManager.mapGenerator.mapSizeX && IsTileRaw(gamePlayManager.mapGenerator.map[pointerX][y].GetComponent<LetterTile>()))
+                    while (pointerX < gamePlayManager.mapGenerator.mapSizeX && IsLetterTileWithLetter(gamePlayManager.mapGenerator.map[pointerX][y].GetComponent<LetterTile>()))
                     {
                         horizontalWord += gamePlayManager.mapGenerator.map[pointerX][y].GetComponent<LetterTile>().letter;
                         horizontalScore += gamePlayManager.mapGenerator.map[pointerX][y].GetComponent<LetterTile>().GetLetterPrice();
@@ -65,11 +70,11 @@ public class WordChecker
                     }
 
                     int pointerY = y - 1;
-                    while (pointerY >= 0 && IsTileRaw(gamePlayManager.mapGenerator.map[x][pointerY].GetComponent<LetterTile>()))
+                    while (pointerY >= 0 && IsLetterTileWithLetter(gamePlayManager.mapGenerator.map[x][pointerY].GetComponent<LetterTile>()))
                         pointerY--;
                     pointerY++;
 
-                    while (pointerY < gamePlayManager.mapGenerator.mapSizeY && IsTileRaw(gamePlayManager.mapGenerator.map[x][pointerY].GetComponent<LetterTile>()))
+                    while (pointerY < gamePlayManager.mapGenerator.mapSizeY && IsLetterTileWithLetter(gamePlayManager.mapGenerator.map[x][pointerY].GetComponent<LetterTile>()))
                     {
                         verticalWord += gamePlayManager.mapGenerator.map[x][pointerY].GetComponent<LetterTile>().letter;
                         verticalScore += gamePlayManager.mapGenerator.map[x][pointerY].GetComponent<LetterTile>().GetLetterPrice();
@@ -88,12 +93,14 @@ public class WordChecker
                     {
                         countScore += horizontalScore;
                         isCheckWord.Add(keyHorizontalWord, true);
+                        words.Add(horizonralTileWord);
                     }
 
                     if (!isCheckWord.ContainsKey(keyVerticalWord) && verticalWord.Length > 1 && gamePlayManager.wordDictionary.checkWord(verticalWord))
                     {
                         countScore += verticalScore;
                         isCheckWord.Add(keyVerticalWord, true);
+                        words.Add(verticalTileWord);
                     }
 
                     //Если ставится первое слово
@@ -126,6 +133,8 @@ public class WordChecker
         {
             List<TileWord> words = CheckWords(out addedScore);
             bool wordIsFind = words != null;
+            gamePlayManager.wordIsFind = wordIsFind;
+            gamePlayManager.findWords = words;
 
             if (wordIsFind)
             {
