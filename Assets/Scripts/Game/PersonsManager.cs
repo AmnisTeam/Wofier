@@ -65,14 +65,4 @@ public class PersonsManager : MonoBehaviourPunCallbacks
     {
         persons = new List<Person>();
     }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 }

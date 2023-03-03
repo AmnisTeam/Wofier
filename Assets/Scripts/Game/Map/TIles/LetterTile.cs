@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static Photon.Pun.Demo.Shared.DocLinks;
 
 public class LetterTile : Tile
 {
@@ -90,6 +91,20 @@ public class LetterTile : Tile
         }
     }
 
+    public bool isPlayerInGame(int playerID)
+    {
+        bool isHave = false;
+        for (int i = 0; i < inventory.gamePlayManager.personManager.persons.Count; i++)
+        {
+            if (playerID == inventory.gamePlayManager.personManager.persons[i].id)
+            {
+                isHave = true;
+                break;
+            }
+        }
+        return isHave;
+    }
+
     public virtual void OnHaveLetter(bool isHaveLetter)
     {
         if(isHaveLetter)
@@ -154,6 +169,15 @@ public class LetterTile : Tile
                         person = null;
                         isHaveLetter = false;
                     }
+        if (person != null)
+        {
+            if (!isPlayerInGame(person.id) && !inWord)
+            {
+                person = null;
+                isHaveLetter = false;
+                RPC_Request(false, person);
+            }
+        }
 
         if(_isDrag == 2)
         {

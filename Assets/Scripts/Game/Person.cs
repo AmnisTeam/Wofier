@@ -10,7 +10,7 @@ public class Person
     public string nickname;
     public Color color;
     public int iconId;
-    public int score;
+    public float score;
 
     public Person(int id, string nickname, Color color, int iconId)
     {

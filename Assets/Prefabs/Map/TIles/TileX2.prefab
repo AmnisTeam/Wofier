@@ -465,7 +465,7 @@ MonoBehaviour:
   colorWithoutLetter: {r: 0.5254902, g: 1, b: 0.5686275, a: 1}
   colorWithLetter: {r: 0.3443396, g: 1, b: 0.40394503, a: 1}
   colorInWord: {r: 0.34509805, g: 1, b: 0.40392157, a: 1}
-  priceFactor: 1
+  priceFactor: 2
   PV: {fileID: 0}
   powerText: {fileID: 660743278237292579}
 --- !u!50 &3125034195827381052
