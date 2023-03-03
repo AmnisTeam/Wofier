@@ -41,15 +41,12 @@ public class PersonsManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
-
-
         bool isKicked = otherPlayer.ActorNumber - 1 == persons[gamePlayManager.idPlayingPerson].id;
 
         disconnectPerson(otherPlayer.ActorNumber - 1);
         if (isKicked)
         {
             gamePlayManager.SelectNextPersonToPlay();
-            //gamePlayManager.PV.RPC("SelectNextPersonToPlayOnButtonClick", RpcTarget.Others);
         }
     }
 
