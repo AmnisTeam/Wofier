@@ -7,6 +7,7 @@ public abstract class Tile : MonoBehaviour
     public Inventory inventory;
     public Person person = null;
     public bool isCanSetItem = true;
+    public float probability = 1;
 
     void Start()
     {

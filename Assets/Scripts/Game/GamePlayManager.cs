@@ -19,7 +19,7 @@ public class TileWord
 
 public class GamePlayManager : MonoBehaviour
 {
-    //public Person me;
+    public Person me;
     public PersonsManager personManager;
     public ScoreTableManager scoreTableManager;
     public MapGenerator mapGenerator;
@@ -147,6 +147,7 @@ public class GamePlayManager : MonoBehaviour
 
     void Start()
     {
+        me = personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1];
         SelectNextPersonToPlay();
     }
 

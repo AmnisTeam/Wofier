@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class WordChecker
 {
-    int addedScore;
+    float addedScore;
     public GamePlayManager gamePlayManager;
 
     public WordChecker(GamePlayManager gamePlayManager)
@@ -24,12 +24,12 @@ public class WordChecker
         return tile != null && tile.isHaveLetter;
     }
 
-    public List<TileWord> CheckWords(out int addedScores)
+    public List<TileWord> CheckWords(out float addedScores)
     {
         List<TileWord> words = new List<TileWord>();
         Dictionary<string, bool> isCheckWord = new Dictionary<string, bool>();
 
-        int countScore = 0;
+        float countScore = 0;
 
         for (int x = 0; x < gamePlayManager.mapGenerator.mapSizeX; x++)
             for (int y = 0; y < gamePlayManager.mapGenerator.mapSizeY; y++)
@@ -44,8 +44,8 @@ public class WordChecker
                     string keyHorizontalWord = "";
                     string keyVerticalWord = "";
 
-                    int horizontalScore = 0;
-                    int verticalScore = 0;
+                    float horizontalScore = 0;
+                    float verticalScore = 0;
 
                     bool isInWordHorizontal = false;
                     bool isInWordVertical = false;

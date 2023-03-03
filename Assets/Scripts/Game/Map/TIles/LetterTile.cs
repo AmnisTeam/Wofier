@@ -7,7 +7,10 @@ using UnityEngine.EventSystems;
 
 public class LetterTile : Tile
 {
+    public GameObject letterObject;
     public TMPro.TMP_Text letterText;
+    public TMPro.TMP_Text priceLeftDown;
+    public TMPro.TMP_Text priceRightTop;
     public char letter;
     private char oldLetter;
 
@@ -20,6 +23,8 @@ public class LetterTile : Tile
     public Color colorWithoutLetter;
     public Color colorWithLetter;
     public Color colorInWord;
+
+    public float priceFactor = 1;
 
     public PhotonView PV;
 
@@ -51,37 +56,53 @@ public class LetterTile : Tile
         }
     }
 
-    public int GetLetterPrice()
+    public float GetLetterPrice()
     {
         switch(letter)
         {
-            case 'A': return 1;
-            case 'B': return 3;
-            case 'C': return 3;
-            case 'D': return 2;
-            case 'E': return 1;
-            case 'F': return 4;
-            case 'G': return 2;
-            case 'H': return 4;
-            case 'I': return 1;
-            case 'J': return 7;
-            case 'K': return 5;
-            case 'L': return 4;
-            case 'M': return 3;
-            case 'N': return 1;
-            case 'O': return 1;
-            case 'P': return 3;
-            case 'Q': return 8;
-            case 'R': return 1;
-            case 'S': return 2;
-            case 'T': return 2;
-            case 'U': return 5;
-            case 'V': return 4;
-            case 'W': return 4;
-            case 'X': return 7;
-            case 'Y': return 2;
-            case 'Z': return 10;
-            default:  return 1;
+            case 'A': return 1 * priceFactor;
+            case 'B': return 3 * priceFactor;
+            case 'C': return 3 * priceFactor;
+            case 'D': return 2 * priceFactor;
+            case 'E': return 1 * priceFactor;
+            case 'F': return 4 * priceFactor;
+            case 'G': return 2 * priceFactor;
+            case 'H': return 4 * priceFactor;
+            case 'I': return 1 * priceFactor;
+            case 'J': return 7 * priceFactor;
+            case 'K': return 5 * priceFactor;
+            case 'L': return 4 * priceFactor;
+            case 'M': return 3 * priceFactor;
+            case 'N': return 1 * priceFactor;
+            case 'O': return 1 * priceFactor;
+            case 'P': return 3 * priceFactor;
+            case 'Q': return 8 * priceFactor;
+            case 'R': return 1 * priceFactor;
+            case 'S': return 2 * priceFactor;
+            case 'T': return 2 * priceFactor;
+            case 'U': return 5 * priceFactor;
+            case 'V': return 4 * priceFactor;
+            case 'W': return 4 * priceFactor;
+            case 'X': return 7 * priceFactor;
+            case 'Y': return 2 * priceFactor;
+            case 'Z': return 10 * priceFactor;
+            default:  return 1 * priceFactor;
+        }
+    }
+
+    public virtual void OnHaveLetter(bool isHaveLetter)
+    {
+        if(isHaveLetter)
+        {
+            letterObject.gameObject.SetActive(true);
+            GetComponent<SpriteRenderer>().color = inWord ? colorInWord : colorWithLetter;
+            priceLeftDown.text = GetLetterPrice().ToString();
+            priceRightTop.text = GetLetterPrice().ToString();
+        }
+        else
+        {
+            letterObject.gameObject.SetActive(false);
+            GetComponent<SpriteRenderer>().color = colorWithoutLetter;
         }
     }
 
@@ -111,22 +132,13 @@ public class LetterTile : Tile
             isHaveLetterOld = isHaveLetter;
             isCanSetItem = !isHaveLetter;
             oldInWord = inWord;
-            if (isHaveLetter)
-            {
-                letterText.gameObject.SetActive(true);
-                GetComponent<SpriteRenderer>().color = inWord ? colorInWord : colorWithLetter;
-            }
-            else
-            {
-                letterText.gameObject.SetActive(false);
-                GetComponent<SpriteRenderer>().color = colorWithoutLetter;
-            }
+            OnHaveLetter(isHaveLetter);
         }
 
         if (!inWord)
             if (isHaveLetter)
-                if (person == inventory.gamePlayManager.personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1])
-                    if (inventory.gamePlayManager.personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1].id != inventory.gamePlayManager.personManager.persons[inventory.gamePlayManager.idPlayingPerson].id)
+                if (person.id == inventory.gamePlayManager.me.id)
+                    if (inventory.gamePlayManager.me.id != inventory.gamePlayManager.personManager.persons[inventory.gamePlayManager.idPlayingPerson].id)
                     {
                         int slotId = inventory.GetLastFreeSlotId();
                         if (slotId != -1)
@@ -155,7 +167,7 @@ public class LetterTile : Tile
     void OnMouseDown()
     {
         if (!inWord)
-            if (isHaveLetter && person.id == inventory.gamePlayManager.personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1].id)
+            if (isHaveLetter && person.id == inventory.gamePlayManager.me.id)
             {
                 GameObject item = Instantiate(GameObject.Find("RegisterItems").GetComponent<RegisterGameObjects>().gameObjects[0], inventory.transform);
                 item.GetComponent<LetterItem>().ConstructorItem(inventory, -1);

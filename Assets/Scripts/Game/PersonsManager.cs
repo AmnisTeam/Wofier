@@ -16,6 +16,7 @@ public class PersonsManager : MonoBehaviour
     {
         Debug.Log("Игрок " + person.nickname + " отключился от игры");
         persons.Remove(person);
+
     }
 
     void Awake()

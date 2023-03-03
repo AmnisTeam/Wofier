@@ -304,6 +304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjects:
   - {fileID: 1952440079704378671, guid: 629c39ea211a1ca48aa118a4b32732c0, type: 3}
+  - {fileID: 6997700219841977626, guid: 875db639c6e68434cae06853e28eba46, type: 3}
 --- !u!1 &43139687
 GameObject:
   m_ObjectHideFlags: 0
@@ -4231,6 +4232,7 @@ GameObject:
   - component: {fileID: 1874191512}
   - component: {fileID: 1874191511}
   - component: {fileID: 1874191510}
+  - component: {fileID: 1874191514}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4305,6 +4307,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1874191514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1874191509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0549df6991256d4b84a7a543148517b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  scalingSpeed: 1
+  minScale: 1
+  maxScale: 20
+  canvas: {fileID: 43139690}
+  isDrag: 0
 --- !u!1 &1938241068
 GameObject:
   m_ObjectHideFlags: 0
@@ -4645,6 +4665,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010da9cc8a7b32d49b6bc1cf01879407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  me:
+    id: 0
+    nickname: 
+    color: {r: 0, g: 0, b: 0, a: 0}
+    iconId: 0
+    score: 0
   personManager: {fileID: 1994361587}
   scoreTableManager: {fileID: 1814574797}
   mapGenerator: {fileID: 1994361585}

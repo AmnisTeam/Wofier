@@ -59,6 +59,7 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         MouseObject.draggedObject = gameObject;
         MouseObject.isDrag = true;
+        Camera.main.GetComponent<MoveOnMapCamera>().workDetector.AddLoker("drag_item");
         GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
@@ -73,15 +74,16 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         MouseObject.draggedObject = null;
         MouseObject.isDrag = false;
+        Camera.main.GetComponent<MoveOnMapCamera>().workDetector.RemoveLocker("drag_item");
         GetComponent<CanvasGroup>().blocksRaycasts = true;
         GetComponent<Image>().raycastTarget = true;
-        if (inventory.gamePlayManager.personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1].id == inventory.gamePlayManager.personManager.persons[inventory.gamePlayManager.idPlayingPerson].id)
+        if (inventory.gamePlayManager.me.id == inventory.gamePlayManager.personManager.persons[inventory.gamePlayManager.idPlayingPerson].id)
         //if (inventory.gamePlayManager.personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1].id == inventory.gamePlayManager.personManager.persons[inventory.gamePlayManager.idPlayingPerson].id)
         {
             GameObject tile = GetTile();
             if (tile && tile.GetComponent<Tile>().isCanSetItem)
             {
-                tile.GetComponent<Tile>().OnSetItem(this, inventory.gamePlayManager.personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1]);
+                tile.GetComponent<Tile>().OnSetItem(this, inventory.gamePlayManager.me);
                 //tile.GetComponent<Tile>().OnSetItem(this, inventory.gamePlayManager.me);
                 if (idInInventory >= 0)
                     inventory.items[idInInventory] = null;
