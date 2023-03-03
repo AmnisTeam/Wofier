@@ -123,11 +123,12 @@ public class GamePlayManager : MonoBehaviour
             me.score += addedScore;
             PV.RPC("UpdateScore", RpcTarget.All, me.id, me.score);
 
-
             if (coordX[0] != null)
                 inventory.mapGenerator.PV.RPC("UpdateWordOnAccept", RpcTarget.Others, coordX, coordY, chars, personsID);
 
             numberOfStep++;
+            PV.RPC("UpdateStep", RpcTarget.All, numberOfStep);
+
             inventory.AddRandomLetters(countTiles);
 
             acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(0, timeToAppearanceAcceptWordButton).setOnComplete(OnCompleteAnitaion, acceptWordButton);
@@ -139,6 +140,12 @@ public class GamePlayManager : MonoBehaviour
     public void SelectNextPersonToPlayOnButtonClick()
     {
         SelectNextPersonToPlay();
+    }
+
+    [PunRPC]
+    public void UpdateStep(int step)
+    {
+        numberOfStep = step;
     }
 
     [PunRPC]
