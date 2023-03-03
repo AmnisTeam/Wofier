@@ -27,13 +27,17 @@ public class PersonsManager : MonoBehaviourPunCallbacks
                 break;
             }
         }
-        Debug.Log("Игрок " + person.nickname + " отключился от игры");
-/*        if (gamePlayManager.idPlayingPerson >= personID)
-        {
-            gamePlayManager.idPlayingPerson--;
-        }*/
-        persons.Remove(person);
-        scoreTableManager.updateTable();
+        Debug.Log(person.nickname);
+        //if (person == null)
+        //{
+            Debug.Log("Игрок " + person.nickname + " отключился от игры");
+            /*        if (gamePlayManager.idPlayingPerson >= personID)
+                    {
+                        gamePlayManager.idPlayingPerson--;
+                    }*/
+            persons.Remove(person);
+            scoreTableManager.updateTable();
+        //}
     }
 
 
