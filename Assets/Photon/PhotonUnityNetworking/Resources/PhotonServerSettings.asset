@@ -45,6 +45,8 @@ MonoBehaviour:
   - AddPlayer
   - Awake
   - UpdateTileOnEdit
+  - UpdateWordOnAccept
+  - SelectNextPersonToPlayOnButtonClick
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

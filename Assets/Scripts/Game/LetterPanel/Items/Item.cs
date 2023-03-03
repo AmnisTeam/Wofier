@@ -77,6 +77,7 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         Camera.main.GetComponent<MoveOnMapCamera>().workDetector.RemoveLocker("drag_item");
         GetComponent<CanvasGroup>().blocksRaycasts = true;
         GetComponent<Image>().raycastTarget = true;
+        Debug.Log(inventory.gamePlayManager.me.nickname);
         if (inventory.gamePlayManager.me.id == inventory.gamePlayManager.personManager.persons[inventory.gamePlayManager.idPlayingPerson].id)
         //if (inventory.gamePlayManager.personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1].id == inventory.gamePlayManager.personManager.persons[inventory.gamePlayManager.idPlayingPerson].id)
         {

@@ -24,6 +24,7 @@ public class GamePlayManager : MonoBehaviour
     public ScoreTableManager scoreTableManager;
     public MapGenerator mapGenerator;
     public Inventory inventory;
+    public PhotonView PV;
 
     public WordDictionary wordDictionary;
 
@@ -89,9 +90,19 @@ public class GamePlayManager : MonoBehaviour
     {
         if(wordIsFind)
         {
+            int[][] chars = new int[findWords.Count][];
+            int[][] coordX = new int[findWords.Count][];
+            int[][] coordY = new int[findWords.Count][];
+            int[][] personsID = new int[findWords.Count][];
+
             int countTiles = 0;
             for(int x = 0; x < findWords.Count; x++)
             {
+                chars[x] = new int[findWords[x].tiles.Count];
+                coordX[x] = new int[findWords[x].tiles.Count];
+                coordY[x] = new int[findWords[x].tiles.Count];
+                personsID[x] = new int[findWords[x].tiles.Count];
+
                 for(int y = 0; y < findWords[x].tiles.Count; y++)
                 {
                     LetterTile tile = mapGenerator.map[findWords[x].tiles[y].x][findWords[x].tiles[y].y].GetComponent<LetterTile>();
@@ -99,19 +110,31 @@ public class GamePlayManager : MonoBehaviour
                     {
                         tile.inWord = true;
                         countTiles++;
+                        
+                        coordX[x][y] = findWords[x].tiles[y].x;
+                        coordY[x][y] = findWords[x].tiles[y].y;
+                        chars[x][y] = tile.letter;
+                        personsID[x][y] = tile.person.id;
                     }
                 }
 
             }
+            if (coordX[0] != null)
+                inventory.mapGenerator.PV.RPC("UpdateWordOnAccept", RpcTarget.Others, coordX, coordY, chars, personsID);
 
             numberOfStep++;
             inventory.AddRandomLetters(countTiles);
 
             acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(0, timeToAppearanceAcceptWordButton).setOnComplete(OnCompleteAnitaion, acceptWordButton);
-            SelectNextPersonToPlay();
+            PV.RPC("SelectNextPersonToPlayOnButtonClick", RpcTarget.All);
         }
     }
 
+    [PunRPC]
+    public void SelectNextPersonToPlayOnButtonClick()
+    {
+        SelectNextPersonToPlay();
+    }
 
     void Awake()
     {
@@ -149,6 +172,8 @@ public class GamePlayManager : MonoBehaviour
     {
         me = personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1];
         SelectNextPersonToPlay();
+        PV = GetComponent<PhotonView>();
+        me = personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1];
     }
 
     void Update()

@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -56,7 +57,7 @@ public class MapGenerator : MonoBehaviour
             points[x] = new Vector2(F, posX);
         }
 
-        float randomValue = Random.Range(0, 0.9999f);
+        float randomValue = UnityEngine.Random.Range(0, 0.9999f);
         int id = 0;
         for(int x = 0; x < probabilities.Length; x++)
         {
@@ -104,6 +105,25 @@ public class MapGenerator : MonoBehaviour
                 letterTile.SetLetter(' ', person);
             else
                 letterTile.UnsetLetter();
+        }
+    }
+
+    [PunRPC]
+    public void UpdateWordOnAccept(int[][] coordX, int[][] coordY, int[][] chars, int[][] personID)
+    {
+        for (int i = 0; i < coordX.Length;i++)
+        {
+            for (int j = 0; j < coordX[i].Length; j++)
+            {
+                LetterTile letterTile = map[coordX[i][j]][coordY[i][j]].GetComponent<LetterTile>();
+
+                Person person = null;
+                for (int z = 0; z < inventory.gamePlayManager.personManager.persons.Count; z++)
+                    if (inventory.gamePlayManager.personManager.persons[z].id == personID[i][j])
+                        person = inventory.gamePlayManager.personManager.persons[z];
+                letterTile.SetLetter((char)chars[i][j], person);
+                letterTile.inWord = true;
+            }
         }
     }
 
