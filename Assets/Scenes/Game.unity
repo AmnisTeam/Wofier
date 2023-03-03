@@ -4959,7 +4959,7 @@ MonoBehaviour:
   addedScore: 0
   idPlayingPerson: -1
   numberOfStep: 0
-  timeToPlayingOnePerson: 10
+  timeToPlayingOnePerson: 20
   timeToAppearanceFindingMenu: 1
   findingMenuShowingTime: 3
   timeToAppearanceAcceptWordButton: 0.2

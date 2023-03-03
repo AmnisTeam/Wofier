@@ -78,6 +78,7 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         GetComponent<CanvasGroup>().blocksRaycasts = true;
         GetComponent<Image>().raycastTarget = true;
         Debug.Log(inventory.gamePlayManager.me.nickname);
+        Debug.Log(inventory.gamePlayManager.idPlayingPerson);
         if (inventory.gamePlayManager.me.id == inventory.gamePlayManager.personManager.persons[inventory.gamePlayManager.idPlayingPerson].id)
         //if (inventory.gamePlayManager.personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1].id == inventory.gamePlayManager.personManager.persons[inventory.gamePlayManager.idPlayingPerson].id)
         {

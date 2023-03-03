@@ -135,6 +135,7 @@ public class WordChecker
             bool wordIsFind = words != null;
             gamePlayManager.wordIsFind = wordIsFind;
             gamePlayManager.findWords = words;
+            gamePlayManager.addedScore = addedScore;
 
             if (wordIsFind)
             {

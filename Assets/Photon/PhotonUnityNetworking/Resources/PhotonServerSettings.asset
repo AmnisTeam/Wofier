@@ -47,6 +47,8 @@ MonoBehaviour:
   - UpdateTileOnEdit
   - UpdateWordOnAccept
   - SelectNextPersonToPlayOnButtonClick
+  - UpdateScore
+  - UpdateStep
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

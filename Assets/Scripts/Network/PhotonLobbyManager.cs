@@ -100,6 +100,7 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
+        PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.LoadLevel(gameScneneName);
     }
 

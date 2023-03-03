@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Photon.Pun.Demo.Shared.DocLinks;
 
 public class TileWord
 {
@@ -39,7 +40,7 @@ public class GamePlayManager : MonoBehaviour
     public TMPro.TMP_Text scoresText;
 
     public bool wordIsFind = false;
-    public int addedScore = 0;
+    public float addedScore = 0;
     public List<TileWord> findWords;
 
     public int idPlayingPerson = -1;
@@ -119,10 +120,15 @@ public class GamePlayManager : MonoBehaviour
                 }
 
             }
+            me.score += addedScore;
+            PV.RPC("UpdateScore", RpcTarget.All, me.id, me.score);
+
             if (coordX[0] != null)
                 inventory.mapGenerator.PV.RPC("UpdateWordOnAccept", RpcTarget.Others, coordX, coordY, chars, personsID);
 
             numberOfStep++;
+            PV.RPC("UpdateStep", RpcTarget.All, numberOfStep);
+
             inventory.AddRandomLetters(countTiles);
 
             acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(0, timeToAppearanceAcceptWordButton).setOnComplete(OnCompleteAnitaion, acceptWordButton);
@@ -134,6 +140,31 @@ public class GamePlayManager : MonoBehaviour
     public void SelectNextPersonToPlayOnButtonClick()
     {
         SelectNextPersonToPlay();
+    }
+
+    [PunRPC]
+    public void UpdateStep(int step)
+    {
+        numberOfStep = step;
+    }
+
+    [PunRPC]
+    public void UpdateScore(int playerID, float score)
+    {
+        Person person = null;
+        for (int i = 0; i < personManager.persons.Count; i++)
+        {
+            if (playerID == personManager.persons[i].id)
+            {
+                person = personManager.persons[i];
+                break;
+            }
+        }
+        if (person != null)
+        {
+            person.score = score;
+            scoreTableManager.updateTable();
+        }
     }
 
     void Awake()
