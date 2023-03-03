@@ -5,13 +5,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IIdexable
 {
     public GameObject draggedObjectPrifab;
     public bool canDragging = true;
     public Color colorOnDrag;
     public float sizeOnDrag = 0.8f;
     public int idInInventory;
+    public int type_id;
 
     public Inventory inventory;
 
@@ -100,5 +101,15 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         {
             MoveItemToSlot(idInInventory);
         }
+    }
+
+    public int GetId()
+    {
+        return type_id;
+    }
+
+    public void SetId(int id)
+    {
+        type_id = id;
     }
 }

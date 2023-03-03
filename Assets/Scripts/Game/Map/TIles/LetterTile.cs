@@ -231,5 +231,4 @@ public class LetterTile : Tile
         else
             inventory.mapGenerator.PV.RPC("UpdateTileOnEdit", RpcTarget.Others, (int)tilePos.x, (int)tilePos.y, isSet, person.id);
     }
-
 }
