@@ -20,7 +20,7 @@ public class ConfigManager : MonoBehaviour
 
 
     // Start is called before the first frame update
-    private void Start()
+    private void Awake()
     {
         Load();
     }
@@ -42,15 +42,9 @@ public class ConfigManager : MonoBehaviour
 
     public void SaveSettings()
     {
-        /*
-         
-        string s = nicknameTextField.GetComponent<TMP_InputField>().text;
-        s += generalVolume.GetComponent<Slider>().value;
-        s += soundVolume.GetComponent<Slider>().value;
-        s += musicVolume.GetComponent<Slider>().value;
-        Debug.Log(s);
-        
-         */
+
+        Debug.Log(this.iconScroller.selectedId);
+
         Save();
     }
 
@@ -64,14 +58,17 @@ public class ConfigManager : MonoBehaviour
 
         this.playerUuid.GetComponent<TMP_InputField>().text = (data.playerUuid);
         this.nicknameTextField.GetComponent<TMP_InputField>().text = (data.nickname);
-        this.iconScroller.selectedId = (data.iconID);
+        this.iconScroller.value = (this.iconScroller.sprites.Length * 1000) + (data.iconID - 1);
     }
+
     private void Save()
     {
+        SaveManager.Save(saveKey, GetSaveSnapshot());
+
         var data = SaveManager.Load<SaveData>(saveKey);
         PhotonNetwork.NickName = data.nickname;
 
-        SaveManager.Save(saveKey, GetSaveSnapshot());
+        Debug.Log(this.iconScroller.selectedId);
     }
 
     public string GetNickname()
