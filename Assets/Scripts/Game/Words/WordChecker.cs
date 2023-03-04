@@ -104,7 +104,7 @@ public class WordChecker
                     }
 
                     //≈сли ставитс€ первое слово
-                    bool isFistWord = gamePlayManager.numberOfStep == 0 && gamePlayManager.personManager.persons[gamePlayManager.idPlayingPerson].id == gamePlayManager.me.id;
+                    bool isFistWord = gamePlayManager.numberOfPlayerStep == 0 && gamePlayManager.personManager.persons[gamePlayManager.idPlayingPerson].id == gamePlayManager.me.id;
                     //“олько горизонтальное слово (вертикальное = 1)
                     bool haveHorizontalWord = verticalWord.Length == 1 && horizontalWord.Length > 1 && gamePlayManager.wordDictionary.checkWord(horizontalWord) && (isInWordHorizontal || isFistWord);
                     //“олько вертикальное слово (горизонтальное = 1)

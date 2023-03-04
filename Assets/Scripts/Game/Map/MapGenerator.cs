@@ -30,7 +30,7 @@ public class MapGenerator : MonoBehaviour
     public Vector3 GetLeftTopMap()
     {
         Vector2 sizeTile = GetSizeTile();
-        return mapCenter.position + new Vector3(-mapSizeX / 2 * sizeTile.x, mapSizeY / 2 * sizeTile.y);
+        return mapCenter.position + new Vector3(-mapSizeX / 2 * sizeTile.x, -mapSizeY / 2 * sizeTile.y);
     }
 
     public GameObject getRandomTilePrifab()

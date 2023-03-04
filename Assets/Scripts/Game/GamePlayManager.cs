@@ -39,12 +39,16 @@ public class GamePlayManager : MonoBehaviour
     public GameObject acceptText;
     public TMPro.TMP_Text scoresText;
 
+    public TMPro.TMP_Text stepsText;
+
     public bool wordIsFind = false;
     public float addedScore = 0;
     public List<TileWord> findWords;
 
     public int idPlayingPerson = -1;
-    public int numberOfStep = -1;
+    public int numberOfPlayerStep;
+    public int gameSteps = 0;
+    public int countStepsToEndGame = 40;
 
     public float timeToPlayingOnePerson;
     private float timerToPlayerOnePerson = float.NaN;
@@ -68,6 +72,8 @@ public class GamePlayManager : MonoBehaviour
     public void SelectNextPersonToPlay()
     {
         idPlayingPerson = (idPlayingPerson + 1) % personManager.persons.Count;
+        gameSteps++;
+        stepsText.text = gameSteps + "/" + countStepsToEndGame;
         timerToPlayerOnePerson = timeToPlayingOnePerson;
 
         findingMenuNickname.text = personManager.persons[idPlayingPerson].nickname;
@@ -138,8 +144,8 @@ public class GamePlayManager : MonoBehaviour
             if (coordX[0] != null)
                 inventory.mapGenerator.PV.RPC("UpdateWordOnAccept", RpcTarget.Others, coordX, coordY, chars, personsID);
 
-            numberOfStep++;
-            PV.RPC("UpdateStep", RpcTarget.All, numberOfStep);
+            numberOfPlayerStep++;
+            PV.RPC("UpdateStep", RpcTarget.All, numberOfPlayerStep);
 
             inventory.AddRandomLetters(countTiles);
 
@@ -157,7 +163,7 @@ public class GamePlayManager : MonoBehaviour
     [PunRPC]
     public void UpdateStep(int step)
     {
-        numberOfStep = step;
+        numberOfPlayerStep = step;
     }
 
     [PunRPC]
@@ -181,6 +187,7 @@ public class GamePlayManager : MonoBehaviour
 
     void Awake()
     {
+        stepsText.text = gameSteps + "/" + countStepsToEndGame;
         wordChecker = new WordChecker(this);
         avatarSprites = GameObject.FindGameObjectWithTag(avatarSpritesTag);
         iconsContent = avatarSprites.GetComponent<IconsContent>();
