@@ -103,21 +103,33 @@ public class GamePlayManager : MonoBehaviour
                 coordX[x] = new int[findWords[x].tiles.Count];
                 coordY[x] = new int[findWords[x].tiles.Count];
                 personsID[x] = new int[findWords[x].tiles.Count];
+                LetterTile completeWordTile = mapGenerator.map[findWords[x].tiles[0].x][findWords[x].tiles[0].y].GetComponent<LetterTile>();
 
-                for(int y = 0; y < findWords[x].tiles.Count; y++)
+                for (int y = 0; y < findWords[x].tiles.Count; y++)
                 {
                     LetterTile tile = mapGenerator.map[findWords[x].tiles[y].x][findWords[x].tiles[y].y].GetComponent<LetterTile>();
                     if (tile)
                     {
+                        if (completeWordTile != null)
+                        {
+                            if (tile.completeWordOrder > completeWordTile.completeWordOrder)
+                                completeWordTile = tile;
+                        }
+                        else
+                        {
+                            completeWordTile = tile;
+                        }
                         tile.inWord = true;
                         countTiles++;
-                        
+
                         coordX[x][y] = findWords[x].tiles[y].x;
                         coordY[x][y] = findWords[x].tiles[y].y;
                         chars[x][y] = tile.letter;
                         personsID[x][y] = tile.person.id;
                     }
                 }
+
+                completeWordTile.CompleteWord(findWords[x]);
 
             }
             me.score += addedScore;

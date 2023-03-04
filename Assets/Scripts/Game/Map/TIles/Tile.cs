@@ -9,6 +9,8 @@ public abstract class Tile : MonoBehaviour, IIdexable
     public bool isCanSetItem = true;
     public float probability = 1;
     public int type_id;
+    public int completeWordOrder = 0;
+
     void Start()
     {
         
@@ -27,6 +29,11 @@ public abstract class Tile : MonoBehaviour, IIdexable
     public virtual void OnSetItem(Item item, Person person)
     {
         this.person = person;
+    }
+
+    public virtual void CompleteWord(TileWord word)
+    {
+
     }
 
     public int GetId()

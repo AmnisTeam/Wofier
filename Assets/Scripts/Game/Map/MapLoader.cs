@@ -8,9 +8,10 @@ public class MapLoader
     
     public static void LoadMap(string path, out GameObject[][] map, MapGenerator mapGenerator)
     {
-        StreamReader reader = new StreamReader(File.Open(path, FileMode.Open));
-        int sizeX = reader.Read();
-        int sizeY = reader.Read();
+        StreamReader reader = new StreamReader(path);
+        string[] size = reader.ReadLine().Split();
+        int sizeX = int.Parse(size[0]);
+        int sizeY = int.Parse(size[0]);
 
         RegisterGameObjects registerTiles = GameObject.Find("RegisterTiles").GetComponent<RegisterGameObjects>();
 
@@ -25,7 +26,7 @@ public class MapLoader
             for (int x = 0; x < sizeX; x++)
             {
                 int id = str[x] - 48;
-                map[x][y] = MapGenerator.Instantiate(registerTiles.gameObjects[id], mapGenerator.GetLeftTopMap() + new Vector3(x * sizeTile.x, y * sizeTile.y),
+                map[x][y] = MapGenerator.Instantiate(registerTiles.gameObjects[id], mapGenerator.GetLeftTopMap() + new Vector3(x * sizeTile.x, -y * sizeTile.y),
     Quaternion.identity);
                 map[x][y].GetComponent<Tile>().ConstructorTile(mapGenerator.inventory);
             }
@@ -44,7 +45,7 @@ public class MapLoader
         {
             for (int x = 0; x < sizeX; x++)
             {
-                writer.Write(map[x][y].GetComponent<IIdexable>().GetId() + 48);
+                writer.Write(map[x][y].GetComponent<IIdexable>().GetId());
             }
             writer.Write('\n');
         }

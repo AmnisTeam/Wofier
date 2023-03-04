@@ -18,6 +18,8 @@ public class MapGenerator : MonoBehaviour
 
     public GameObject[][] map;
 
+    public bool saveMap = true;
+
     public Vector2 GetSizeTile()
     {
         float sizeTileX = tilePrifab.GetComponent<SpriteRenderer>().sprite.rect.width / 100f * tilePrifab.transform.localScale.x + offset;
@@ -28,48 +30,17 @@ public class MapGenerator : MonoBehaviour
     public Vector3 GetLeftTopMap()
     {
         Vector2 sizeTile = GetSizeTile();
-        return mapCenter.position + new Vector3(-mapSizeX / 2 * sizeTile.x, -mapSizeY / 2 * sizeTile.y);
+        return mapCenter.position + new Vector3(-mapSizeX / 2 * sizeTile.x, mapSizeY / 2 * sizeTile.y);
     }
 
     public GameObject getRandomTilePrifab()
     {
         RegisterGameObjects registerTiles = GameObject.Find("RegisterTiles").GetComponent<RegisterGameObjects>();
-        Tile[] tiles = new Tile[registerTiles.gameObjects.Length];
+        float[] probabilities = new float[registerTiles.gameObjects.Length];
         for (int x = 0; x < registerTiles.gameObjects.Length; x++)
-            tiles[x] = registerTiles.gameObjects[x].GetComponent<Tile>();
+            probabilities[x] = registerTiles.gameObjects[x].GetComponent<Tile>().probability;
 
-        float m = 0;
-        for (int x = 0; x < tiles.Length; x++)
-            m += tiles[x].probability;
-
-        float[] probabilities = new float[tiles.Length];
-        for (int x = 0; x < tiles.Length; x++)
-            probabilities[x] = tiles[x].probability / m;
-
-        Vector2[] points = new Vector2[probabilities.Length];
-
-        float F = 0;
-        for(int x = 0; x < probabilities.Length; x++)
-        {
-            F += probabilities[x];
-            float posX = x;
-
-            points[x] = new Vector2(F, posX);
-        }
-
-        float randomValue = UnityEngine.Random.Range(0, 0.9999f);
-        int id = 0;
-        for(int x = 0; x < probabilities.Length; x++)
-        {
-            float leftPoint = x > 0 ? points[x - 1].x : 0;
-            if(randomValue >= leftPoint && randomValue < points[x].x)
-            {
-                id = (int)(points[x].y);
-                break;
-            }
-        }
-
-        return registerTiles.gameObjects[id];
+        return registerTiles.gameObjects[MyMath.SelectRandomElement(probabilities)];
     }
 
     public void GenerateMap()
@@ -129,7 +100,15 @@ public class MapGenerator : MonoBehaviour
 
     void Awake()
     {
-        GenerateMap();
+        if (saveMap)
+        {
+            GenerateMap();
+            MapLoader.SaveMap("default_map.txt", ref map);
+        }
+        else
+        {
+            MapLoader.LoadMap("default_map.txt", out map, this);
+        }
     }
 
     void Start()

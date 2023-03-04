@@ -305,6 +305,9 @@ MonoBehaviour:
   gameObjects:
   - {fileID: 1952440079704378671, guid: 629c39ea211a1ca48aa118a4b32732c0, type: 3}
   - {fileID: 6997700219841977626, guid: 875db639c6e68434cae06853e28eba46, type: 3}
+  - {fileID: 6274641104268039503, guid: 2f4cba6f435806b41befc519dee6f749, type: 3}
+  - {fileID: 6066624944100050407, guid: a6d1506302b6a654885eb4b5d947bd8c, type: 3}
+  - {fileID: 2014831026991643710, guid: 741b23a728e28cc44803f96c13a403ea, type: 3}
 --- !u!1 &43139687
 GameObject:
   m_ObjectHideFlags: 0
@@ -4892,9 +4895,10 @@ MonoBehaviour:
   tilePrifab: {fileID: 1952440079704378671, guid: 629c39ea211a1ca48aa118a4b32732c0, type: 3}
   inventory: {fileID: 300185217}
   PV: {fileID: 0}
-  mapSizeX: 100
-  mapSizeY: 100
+  mapSizeX: 30
+  mapSizeY: 30
   offset: 0.2
+  saveMap: 1
 --- !u!4 &1994361586
 Transform:
   m_ObjectHideFlags: 0
