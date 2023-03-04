@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public class BackgroundTask : MonoBehaviour {
-    private const string saveKey = "mainSave";
+    /*private const string saveKey = "mainSave";
 
     // Start is called before the first frame update
     void Start() {
@@ -27,5 +27,5 @@ public class BackgroundTask : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         
-    }
+    }*/
 }

@@ -23,7 +23,6 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
         Debug.Log("Вы подключилиь к: " + PhotonNetwork.CloudRegion);
         var data = SaveManager.Load<SaveData>(ConfigManager.saveKey);
         PhotonNetwork.NickName = data.nickname;
-        //PhotonNetwork.JoinLobby();
 
         SceneManager.LoadScene(mainSceneName);
 
@@ -31,7 +30,6 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 
     public override void OnDisconnected(DisconnectCause cause)
     {
-        //base.OnDisconnected(cause);
         Debug.Log("Вы отключены от сервера");
         Debug.Log(cause);
     }

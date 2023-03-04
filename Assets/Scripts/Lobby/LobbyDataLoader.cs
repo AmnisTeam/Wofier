@@ -27,6 +27,7 @@ public class LobbyDataLoader : MonoBehaviour
 
         lobbyCode.text = "#" + PhotonNetwork.CurrentRoom.CustomProperties["lobbyCode"].ToString();
         lobbyIcon.sprite = icons[Convert.ToInt32(PhotonNetwork.CurrentRoom.CustomProperties["lobbyIconID"])];
+        lobbyIcon.color = new UnityEngine.Color(0.5f, 0.5f, 0.5f);
         lobbyName.text = PhotonNetwork.CurrentRoom.CustomProperties["lobbyName"].ToString();
         lobbyPassword.text = PhotonNetwork.CurrentRoom.CustomProperties["lobbyPassword"].ToString();
     }

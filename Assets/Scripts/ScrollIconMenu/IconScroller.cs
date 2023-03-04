@@ -66,14 +66,17 @@ public class IconScroller : MonoBehaviour
         setIconGravity();
     }
 
+    private void Awake()
+    {
+        for (int i = 0; i < icons.Length; i++)
+        {
+            icons[i].color = new UnityEngine.Color(0.5f, 0.5f, 0.5f);
+        }
+    }
+
     void Start()
     {
         oldMousePos = Input.mousePosition;
-        value = sprites.Length * 1000;
-        //for (int i = 0; i < icons.Length; i++)
-        //{
-        //    icons[i].color = new UnityEngine.Color(167, 167, 185);
-        //}
     }
 
     void Update()
