@@ -151,11 +151,13 @@ public class WordChecker
             }
             else
             {
-                gamePlayManager.acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(0, gamePlayManager.timeToAppearanceAcceptWordButton).setOnComplete(gamePlayManager.OnCompleteAnitaion, gamePlayManager.acceptWordButton);
+                //gamePlayManager.acceptWordButton.SetActive(false);
+                gamePlayManager.acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(0, gamePlayManager.timeToAppearanceAcceptWordButton);
             }
             if (addedScore == 0)
             {
-                gamePlayManager.acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(0, gamePlayManager.timeToAppearanceAcceptWordButton).setOnComplete(gamePlayManager.OnCompleteAnitaion, gamePlayManager.acceptWordButton);
+                //gamePlayManager.acceptWordButton.SetActive(false);
+                gamePlayManager.acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(0, gamePlayManager.timeToAppearanceAcceptWordButton);
             }
         }
     }

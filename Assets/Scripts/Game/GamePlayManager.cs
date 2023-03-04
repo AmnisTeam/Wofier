@@ -149,7 +149,7 @@ public class GamePlayManager : MonoBehaviour
 
             inventory.AddRandomLetters(countTiles);
 
-            acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(0, timeToAppearanceAcceptWordButton).setOnComplete(OnCompleteAnitaion, acceptWordButton);
+            acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(1, timeToAppearanceAcceptWordButton);
             PV.RPC("SelectNextPersonToPlayOnButtonClick", RpcTarget.All);
         }
     }
@@ -238,6 +238,8 @@ public class GamePlayManager : MonoBehaviour
         timerToPlayerOnePerson -= Time.deltaTime;
         if(timerToPlayerOnePerson < 0)
         {
+            //acceptWordButton.SetActive(false);
+            acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(0, timeToAppearanceAcceptWordButton);
             SelectNextPersonToPlay();
         }
 
