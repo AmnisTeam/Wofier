@@ -80,6 +80,17 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
             startButtonGameObject.gameObject.SetActive(false);
         }
     }
+    public override void OnJoinedRoom()
+    {
+        var s = PhotonNetwork.CurrentRoom.CustomProperties;
+
+        //if (s["lobbyPassword"].ToString().Equals("qwes"))
+        if (true)
+        {
+            Debug.Log("эта хрень работает");
+            PhotonNetwork.LeaveRoom();
+        }
+    }
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {

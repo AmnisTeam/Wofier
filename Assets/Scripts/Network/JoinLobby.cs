@@ -16,13 +16,6 @@ public class JoinLobby : MonoBehaviourPunCallbacks
     public TextMeshProUGUI lobbyCodeTMP;
     public TextMeshProUGUI lobbyPasswordTMP;
 
-    public string colorsHolderTag;
-    private GameObject colorsHolder;
-    /*
-    public string playersInfoTag;
-    private GameObject playersInfo;
-    private PlayersInfo inctanceplayersInfo;*/
-
     public void JoinLobbyFunc()
     {
         if (!PhotonNetwork.IsConnected)
@@ -35,39 +28,15 @@ public class JoinLobby : MonoBehaviourPunCallbacks
         playersInfo = GameObject.FindGameObjectWithTag(playersInfoTag);
         inctanceplayersInfo = playersInfo.GetComponent<PlayersInfo>();*/
 
-
         Debug.Log("Подключение к лобби: " + lobbyCodeTMP.text);
         PhotonNetwork.JoinRoom(lobbyCodeTMP.text);
-        /*
-        var data = SaveManager.Load<SaveData>(ConfigManager.saveKey);
-        Hashtable hash = new Hashtable();
-        hash.Add("nickname", PhotonNetwork.NickName);
-        hash.Add("iconID", data.iconID);
-        hash.Add("colorIdx", RandColorIdx());
-
-        PhotonNetwork.LocalPlayer.CustomProperties = hash;*/
-
     }
 
     public override void OnJoinedRoom()
-    {   
-        /*
-        var data = SaveManager.Load<SaveData>(ConfigManager.saveKey);
-
-        colorsHolder = GameObject.FindGameObjectWithTag(colorsHolderTag);
-        ColorsHolder colors = colorsHolder.GetComponent<ColorsHolder>();
-
-        ExitGames.Client.Photon.Hashtable info = new ExitGames.Client.Photon.Hashtable
-        {
-            { "nickname", PhotonNetwork.NickName },
-            { "iconID", data.iconID },
-            { "color", colors.GetRandomIdx() }
-        };
-
-        SendCustomClassWithRPC(info);*/
-
+    {
         PhotonNetwork.LoadLevel(lobbbySceneName);
         Debug.Log("Вы присоеденились к комнате: " + PhotonNetwork.CurrentRoom.Name);
+
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
