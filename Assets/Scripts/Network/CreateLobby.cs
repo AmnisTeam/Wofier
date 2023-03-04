@@ -55,7 +55,7 @@ public class CreateLobby : MonoBehaviourPunCallbacks
 
         roomOptions.CustomRoomProperties = setValue;
 
-        PhotonNetwork.CreateRoom(lobbyName, roomOptions, TypedLobby.Default);
+        PhotonNetwork.CreateRoom(lobbyPassword, roomOptions, TypedLobby.Default);
     }
 
     public override void OnCreatedRoom()

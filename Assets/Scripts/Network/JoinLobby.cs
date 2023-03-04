@@ -13,7 +13,7 @@ public class JoinLobby : MonoBehaviourPunCallbacks
 {
     public string lobbbySceneName;
 
-    public TextMeshProUGUI lobbyCodeTMP;
+    public TextMeshProUGUI lobbyNameTMP;
     public TextMeshProUGUI lobbyPasswordTMP;
 
     public void JoinLobbyFunc()
@@ -28,8 +28,8 @@ public class JoinLobby : MonoBehaviourPunCallbacks
         playersInfo = GameObject.FindGameObjectWithTag(playersInfoTag);
         inctanceplayersInfo = playersInfo.GetComponent<PlayersInfo>();*/
 
-        Debug.Log("Подключение к лобби: " + lobbyCodeTMP.text);
-        PhotonNetwork.JoinRoom(lobbyCodeTMP.text);
+        Debug.Log("Подключение к лобби: " + lobbyPasswordTMP.text);
+        PhotonNetwork.JoinRoom(lobbyPasswordTMP.text);
     }
 
     public override void OnJoinedRoom()
