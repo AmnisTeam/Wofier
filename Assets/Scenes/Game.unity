@@ -5284,7 +5284,7 @@ MonoBehaviour:
   mapSizeX: 30
   mapSizeY: 30
   offset: 0.2
-  saveMap: 1
+  saveMap: 0
 --- !u!4 &1994361586
 Transform:
   m_ObjectHideFlags: 0
@@ -5349,7 +5349,8 @@ MonoBehaviour:
   wordIsFind: 0
   addedScore: 0
   idPlayingPerson: -1
-  numberOfStep: 0
+  numberOfPlayerStep: 0
+  gameSteps: 0
   countStepsToEndGame: 40
   timeToPlayingOnePerson: 20
   timeToAppearanceFindingMenu: 1
