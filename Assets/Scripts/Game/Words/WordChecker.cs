@@ -153,6 +153,10 @@ public class WordChecker
             {
                 gamePlayManager.acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(0, gamePlayManager.timeToAppearanceAcceptWordButton).setOnComplete(gamePlayManager.OnCompleteAnitaion, gamePlayManager.acceptWordButton);
             }
+            if (addedScore == 0)
+            {
+                gamePlayManager.acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(0, gamePlayManager.timeToAppearanceAcceptWordButton).setOnComplete(gamePlayManager.OnCompleteAnitaion, gamePlayManager.acceptWordButton);
+            }
         }
     }
 }
