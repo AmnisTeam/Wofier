@@ -39,6 +39,7 @@ public class CreateLobby : MonoBehaviourPunCallbacks
 
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 4;
+        roomOptions.IsVisible = true;
 
         lobbyName = lobbyNameTMP.text;
         lobbyPassword = lobbyPasswordTMP.text;
