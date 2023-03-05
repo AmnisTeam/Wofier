@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -56,7 +57,6 @@ public class Inventory : MonoBehaviour
     {
         isSwap = true;
         gamePlayManager.PV.RPC("SelectNextPersonToPlayOnButtonClick", RpcTarget.All);
-        //gamePlayManager.SetTimerToPlayerOnePerson(0f);
         for (int i = 0; i < items.Length; i++)
         {
             if (items[i] != null)
@@ -65,6 +65,36 @@ public class Inventory : MonoBehaviour
         }
 
         AddRandomLetters(countStartLetters);
+    }
+
+    public void ShuffleLetters()
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            int rand1 = new System.Random().Next(0, items.Length);
+            int rand2 = new System.Random().Next(0, items.Length);
+            if (items[rand1] != null && items[rand2] != null && rand1 != rand2)
+            {
+                GameObject temp1 = items[rand1];
+                GameObject temp2 = items[rand2];
+
+                Destroy(items[rand1]);
+                Destroy(items[rand2]);
+                items[rand1] = null;
+                items[rand2] = null;
+
+                SetLetter(temp1, rand2);
+                SetLetter(temp2, rand1);
+            }
+        }
+    }
+
+    private void SetLetter(GameObject letter, int pos)
+    {
+        GameObject go = Instantiate(letterPrifab, slots[pos].transform);
+        go.GetComponent<LetterItem>().letter = letter.GetComponent<LetterItem>().letter;
+        go.GetComponent<LetterItem>().ConstructorItem(this, pos);
+        items[pos] = go;
     }
 
     void Awake()
