@@ -134,8 +134,8 @@ public class LetterTile : Tile
                             letterItem.GetComponent<LetterItem>().letter = letter;
                             letterItem.GetComponent<LetterItem>().ConstructorItem(inventory, slotId);
                             inventory.items[slotId] = letterItem;
-                            RPC_Request(false, person);
                         }
+                        RPC_Request(false, person);
 
                         person = null;
                         isHaveLetter = false;

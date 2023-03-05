@@ -154,6 +154,11 @@ public class GamePlayManager : MonoBehaviour
             PV.RPC("SelectNextPersonToPlayOnButtonClick", RpcTarget.All);
         }
     }
+/*
+    public void SetTimerToPlayerOnePerson(float f)
+    {
+        this.timerToPlayerOnePerson = f;
+    }*/
 
     [PunRPC]
     public void SelectNextPersonToPlayOnButtonClick()
