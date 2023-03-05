@@ -26,7 +26,7 @@ public class MapLoader
             for (int x = 0; x < sizeX; x++)
             {
                 int id = str[x] - 48;
-                map[x][y] = MapGenerator.Instantiate(registerTiles.gameObjects[id], mapGenerator.GetLeftTopMap() + new Vector3(x * sizeTile.x, -y * sizeTile.y),
+                map[x][y] = MapGenerator.Instantiate(registerTiles.gameObjects[id], mapGenerator.GetLeftTopMap() + new Vector3(x * sizeTile.x, y * sizeTile.y),
     Quaternion.identity);
                 map[x][y].GetComponent<Tile>().ConstructorTile(mapGenerator.inventory);
             }
