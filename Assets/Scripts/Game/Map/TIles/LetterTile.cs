@@ -82,8 +82,17 @@ public class LetterTile : Tile
         {
             letterObject.gameObject.SetActive(true);
             GetComponent<SpriteRenderer>().color = inWord ? colorInWord : colorWithLetter;
-            priceLeftDown.text = GetLetterPrice().ToString();
-            priceRightTop.text = GetLetterPrice().ToString();
+
+            if (GetLetterPrice() != 0)
+            {
+                priceLeftDown.text = GetLetterPrice().ToString();
+                priceRightTop.text = GetLetterPrice().ToString();
+            }
+            else
+            {
+                priceLeftDown.text = "";
+                priceRightTop.text = "";
+            }
         }
         else
         {

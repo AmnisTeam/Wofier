@@ -73,7 +73,10 @@ public class MapGenerator : MonoBehaviour
                         person = inventory.gamePlayManager.personManager.persons[i];
             }
             if (isEdit)
+            {
                 letterTile.SetLetter(' ', person);
+                letterTile.priceFactor = 0;
+            }
             else
                 letterTile.UnsetLetter();
         }
