@@ -75,7 +75,6 @@ public class MapGenerator : MonoBehaviour
             if (isEdit)
             {
                 letterTile.SetLetter(' ', person);
-                letterTile.priceFactor = 0;
             }
             else
                 letterTile.UnsetLetter();

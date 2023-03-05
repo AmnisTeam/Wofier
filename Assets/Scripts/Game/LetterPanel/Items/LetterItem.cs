@@ -40,6 +40,7 @@ public class LetterItem : Item
             case 'Y': return 2 * priceFactor;
             case 'Z': return 10 * priceFactor;
             default: return 0;
+            //default: return 1 * priceFactor;
         }
     }
 

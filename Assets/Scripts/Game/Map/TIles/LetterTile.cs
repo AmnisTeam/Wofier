@@ -93,7 +93,7 @@ public class LetterTile : Tile
                 priceLeftDown.text = "";
                 priceRightTop.text = "";
             }
-        }
+    }
         else
         {
             letterObject.gameObject.SetActive(false);
