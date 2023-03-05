@@ -151,12 +151,12 @@ public class WordChecker
             }
             else
             {
-                //gamePlayManager.acceptWordButton.SetActive(false);
+                gamePlayManager.acceptWordButton.SetActive(false);
                 gamePlayManager.acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(0, gamePlayManager.timeToAppearanceAcceptWordButton);
             }
             if (addedScore == 0)
             {
-                //gamePlayManager.acceptWordButton.SetActive(false);
+                gamePlayManager.acceptWordButton.SetActive(false);
                 gamePlayManager.acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(0, gamePlayManager.timeToAppearanceAcceptWordButton);
             }
         }
