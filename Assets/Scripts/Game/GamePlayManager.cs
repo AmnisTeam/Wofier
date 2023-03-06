@@ -151,7 +151,9 @@ public class GamePlayManager : MonoBehaviour
 
             acceptWordButton.SetActive(false);
             acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(0, timeToAppearanceAcceptWordButton);
-            PV.RPC("SelectNextPersonToPlayOnButtonClick", RpcTarget.All);
+            PV.RPC("SelectNextPersonToPlayRPC", RpcTarget.All);
+            PV.RPC("UpdateIdPlayingPerson", RpcTarget.Others, idPlayingPerson);
+            PV.RPC("UpdateSteps", RpcTarget.Others, numberOfPlayerStep);
         }
     }
 /*
@@ -161,9 +163,20 @@ public class GamePlayManager : MonoBehaviour
     }*/
 
     [PunRPC]
-    public void SelectNextPersonToPlayOnButtonClick()
+    public void SelectNextPersonToPlayRPC()
     {
         SelectNextPersonToPlay();
+    }
+
+    [PunRPC]
+    public void UpdateIdPlayingPerson(int id)
+    {
+        idPlayingPerson = id;
+    }
+    [PunRPC]
+    public void UpdateSteps(int step)
+    {
+        numberOfPlayerStep = step;
     }
 
     [PunRPC]

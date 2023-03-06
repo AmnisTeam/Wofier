@@ -56,7 +56,9 @@ public class Inventory : MonoBehaviour
     public void ResetLetters()
     {
         isSwap = true;
-        gamePlayManager.PV.RPC("SelectNextPersonToPlayOnButtonClick", RpcTarget.All);
+        gamePlayManager.PV.RPC("SelectNextPersonToPlayRPC", RpcTarget.All);
+        gamePlayManager.PV.RPC("UpdateIdPlayingPerson", RpcTarget.Others, gamePlayManager.idPlayingPerson);
+        gamePlayManager.PV.RPC("UpdateSteps", RpcTarget.Others, gamePlayManager.numberOfPlayerStep);
         for (int i = 0; i < items.Length; i++)
         {
             if (items[i] != null)
