@@ -85,7 +85,7 @@ public class MapGenerator : MonoBehaviour
     }
 
     [PunRPC]
-    public void UpdateWordOnAccept(int[][] coordX, int[][] coordY, int[][] chars, int[][] personID)
+    public void UpdateWordOnAccept(int[][] coordX, int[][] coordY, int[][] chars, float[] colorInWordArr, float[] letterTextArr, int[][] personID)
     {
         for (int i = 0; i < coordX.Length; i++)
         {
@@ -97,8 +97,24 @@ public class MapGenerator : MonoBehaviour
                 for (int z = 0; z < inventory.gamePlayManager.personManager.persons.Count; z++)
                     if (inventory.gamePlayManager.personManager.persons[z].id == personID[i][j])
                         person = inventory.gamePlayManager.personManager.persons[z];
+
+                Color colorInWord = new UnityEngine.Color(colorInWordArr[0], colorInWordArr[1], colorInWordArr[2]);
+                Color letterText = new UnityEngine.Color(letterTextArr[0], letterTextArr[1], letterTextArr[2]);
+
+                letterTile.colorInWord = colorInWord;
+                letterTile.letterText.color = letterText;
+                letterTile.GetComponent<SpriteRenderer>().color = colorInWord;
+
+                /*
+                letterTile.colorInWord = new UnityEngine.Color(0.1f, 0.1f, 0.9f);
+                letterTile.letterText.color = new UnityEngine.Color(0.1f, 0.9f, 0.1f);
+                letterTile.GetComponent<SpriteRenderer>().color = new UnityEngine.Color(0.9f, 0.1f, 0.1f);*/
+
+
                 letterTile.SetLetter((char)chars[i][j], person);
                 letterTile.inWord = true;
+
+
             }
         }
     }

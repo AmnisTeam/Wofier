@@ -102,6 +102,9 @@ public class GamePlayManager : MonoBehaviour
             int[][] coordY = new int[findWords.Count][];
             int[][] personsID = new int[findWords.Count][];
 
+            float[] colorInWord = new float[3];
+            float[] letterText = new float[3];
+
             int countTiles = 0;
             for(int x = 0; x < findWords.Count; x++)
             {
@@ -137,12 +140,20 @@ public class GamePlayManager : MonoBehaviour
 
                 completeWordTile.CompleteWord(findWords[x]);
 
+                colorInWord[0] = completeWordTile.colorInWord.r; //переделать
+                colorInWord[1] = completeWordTile.colorInWord.g;
+                colorInWord[2] = completeWordTile.colorInWord.b;
+
+                letterText[0] = completeWordTile.letterText.color.r;
+                letterText[1] = completeWordTile.letterText.color.g;
+                letterText[2] = completeWordTile.letterText.color.b;
+
             }
             me.score += addedScore;
             PV.RPC("UpdateScore", RpcTarget.All, me.id, me.score);
 
             if (coordX[0] != null)
-                inventory.mapGenerator.PV.RPC("UpdateWordOnAccept", RpcTarget.Others, coordX, coordY, chars, personsID);
+                inventory.mapGenerator.PV.RPC("UpdateWordOnAccept", RpcTarget.Others, coordX, coordY, chars, colorInWord, letterText, personsID);
 
             numberOfPlayerStep++;
             PV.RPC("UpdateStep", RpcTarget.All, numberOfPlayerStep);
