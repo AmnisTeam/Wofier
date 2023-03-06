@@ -102,14 +102,15 @@ public class MapGenerator : MonoBehaviour
 
     void Awake()
     {
+
         if (saveMap)
         {
             GenerateMap();
-            MapLoader.SaveMap("default_map.txt", ref map);
+            MapLoader.SaveMap(Application.streamingAssetsPath + "/default_map.txt", ref map);
         }
         else
         {
-            MapLoader.LoadMap("default_map.txt", out map, this);
+            MapLoader.LoadMap(Application.streamingAssetsPath + "/default_map.txt", out map, this);
         }
     }
 

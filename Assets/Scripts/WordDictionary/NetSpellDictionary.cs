@@ -14,8 +14,14 @@ public class NetSpellDictionary : WordDictionary
     {
         oDict = new NetSpell.SpellChecker.Dictionary.WordDictionary();
         oSpell = new NetSpell.SpellChecker.Spelling();
+        /*for (int i = 0; i < 1000; i++)
+        {
+            Debug.Log(Application.dataPath + "/en-US.dic");
+            Console.Write(Application.dataPath + "/en-US.dic" + "\n");
+        }*/
 
-        oDict.DictionaryFile = "en-US.dic";
+        Debug.Log(Application.streamingAssetsPath);
+        oDict.DictionaryFile = Application.streamingAssetsPath + "/en-US.dic";
         oDict.Initialize();
 
         oSpell.Dictionary = oDict;
