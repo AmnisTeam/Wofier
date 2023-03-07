@@ -126,7 +126,7 @@ public class MapGenerator : MonoBehaviour
         for (int x = 0; x < completeWordTileX.Length; x++)
         {
             TileWord tileWord = new TileWord();
-            for (int y = 0; y < completeWordTileY.Length; y++)
+            for (int y = 0; y < findWordX[x].Length; y++)
             {
                 tileWord.tiles.Add(new Vector2Int(findWordX[x][y], findWordY[x][y]));
             }

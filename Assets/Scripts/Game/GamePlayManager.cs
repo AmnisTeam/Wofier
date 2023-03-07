@@ -121,7 +121,7 @@ public class GamePlayManager : MonoBehaviour
                 findWordX[x] = new int[findWords[x].tiles.Count];
                 findWordY[x] = new int[findWords[x].tiles.Count];
 
-                LetterTile completeWordTile = mapGenerator.map[findWords[x].tiles[0].x][findWords[x].tiles[0].y].GetComponent<LetterTile>();
+                LetterTile completeWordTile = null;
 
                 for (int y = 0; y < findWords[x].tiles.Count; y++)
                 {
@@ -139,14 +139,14 @@ public class GamePlayManager : MonoBehaviour
                             {
                                 completeWordTile = tile;
                                 completeWordTileX[x] = findWords[x].tiles[y].x;
-                                completeWordTileY[x] = findWords[x].tiles[y].x;
+                                completeWordTileY[x] = findWords[x].tiles[y].y;
                             }
                         }
                         else
                         {
                             completeWordTile = tile;
                             completeWordTileX[x] = findWords[x].tiles[y].x;
-                            completeWordTileY[x] = findWords[x].tiles[y].x;
+                            completeWordTileY[x] = findWords[x].tiles[y].y;
                         }
                         tile.inWord = true;
                         countTiles++;
@@ -166,7 +166,7 @@ public class GamePlayManager : MonoBehaviour
             me.score += addedScore;
             PV.RPC("UpdateScore", RpcTarget.All, me.id, me.score);
 
-            if (coordX[0] != null)
+            if (findWords.Count > 0)
             {
                 inventory.mapGenerator.PV.RPC("UpdateWordOnAccept", RpcTarget.Others, coordX, coordY, 
                                               chars, personsID);
