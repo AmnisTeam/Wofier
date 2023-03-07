@@ -102,8 +102,13 @@ public class GamePlayManager : MonoBehaviour
             int[][] coordY = new int[findWords.Count][];
             int[][] personsID = new int[findWords.Count][];
 
-            float[] colorInWord = new float[3];
-            float[] letterText = new float[3];
+
+            int[] completeWordTileX = new int[findWords.Count];
+            int[] completeWordTileY = new int[findWords.Count];
+            int[][] findWordX = new int[findWords.Count][];
+            int[][] findWordY = new int[findWords.Count][];
+
+
 
             int countTiles = 0;
             for(int x = 0; x < findWords.Count; x++)
@@ -112,21 +117,36 @@ public class GamePlayManager : MonoBehaviour
                 coordX[x] = new int[findWords[x].tiles.Count];
                 coordY[x] = new int[findWords[x].tiles.Count];
                 personsID[x] = new int[findWords[x].tiles.Count];
+
+                findWordX[x] = new int[findWords[x].tiles.Count];
+                findWordY[x] = new int[findWords[x].tiles.Count];
+
                 LetterTile completeWordTile = mapGenerator.map[findWords[x].tiles[0].x][findWords[x].tiles[0].y].GetComponent<LetterTile>();
 
                 for (int y = 0; y < findWords[x].tiles.Count; y++)
                 {
                     LetterTile tile = mapGenerator.map[findWords[x].tiles[y].x][findWords[x].tiles[y].y].GetComponent<LetterTile>();
+
+                    findWordX[x][y] = findWords[x].tiles[y].x;
+                    findWordY[x][y] = findWords[x].tiles[y].y;
+
+
                     if (tile)
                     {
                         if (completeWordTile != null)
                         {
                             if (tile.completeWordOrder > completeWordTile.completeWordOrder)
+                            {
                                 completeWordTile = tile;
+                                completeWordTileX[x] = findWords[x].tiles[y].x;
+                                completeWordTileY[x] = findWords[x].tiles[y].x;
+                            }
                         }
                         else
                         {
                             completeWordTile = tile;
+                            completeWordTileX[x] = findWords[x].tiles[y].x;
+                            completeWordTileY[x] = findWords[x].tiles[y].x;
                         }
                         tile.inWord = true;
                         countTiles++;
@@ -140,20 +160,19 @@ public class GamePlayManager : MonoBehaviour
 
                 completeWordTile.CompleteWord(findWords[x]);
 
-                colorInWord[0] = completeWordTile.colorInWord.r; //переделать
-                colorInWord[1] = completeWordTile.colorInWord.g;
-                colorInWord[2] = completeWordTile.colorInWord.b;
 
-                letterText[0] = completeWordTile.letterText.color.r;
-                letterText[1] = completeWordTile.letterText.color.g;
-                letterText[2] = completeWordTile.letterText.color.b;
-
+                
             }
             me.score += addedScore;
             PV.RPC("UpdateScore", RpcTarget.All, me.id, me.score);
 
             if (coordX[0] != null)
-                inventory.mapGenerator.PV.RPC("UpdateWordOnAccept", RpcTarget.Others, coordX, coordY, chars, colorInWord, letterText, personsID);
+            {
+                inventory.mapGenerator.PV.RPC("UpdateWordOnAccept", RpcTarget.Others, coordX, coordY, 
+                                              chars, personsID);
+                inventory.mapGenerator.PV.RPC("UpdateCompletedWord", RpcTarget.Others, completeWordTileX, 
+                                              completeWordTileY, findWordX, findWordY);
+            }
 
             numberOfPlayerStep++;
             PV.RPC("UpdateStep", RpcTarget.All, numberOfPlayerStep);

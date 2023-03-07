@@ -85,7 +85,7 @@ public class MapGenerator : MonoBehaviour
     }
 
     [PunRPC]
-    public void UpdateWordOnAccept(int[][] coordX, int[][] coordY, int[][] chars, float[] colorInWordArr, float[] letterTextArr, int[][] personID)
+    public void UpdateWordOnAccept(int[][] coordX, int[][] coordY, int[][] chars, int[][] personID)
     {
         for (int i = 0; i < coordX.Length; i++)
         {
@@ -98,14 +98,14 @@ public class MapGenerator : MonoBehaviour
                     if (inventory.gamePlayManager.personManager.persons[z].id == personID[i][j])
                         person = inventory.gamePlayManager.personManager.persons[z];
 
-                Color colorInWord = new UnityEngine.Color(colorInWordArr[0], colorInWordArr[1], colorInWordArr[2]);
+                /*Color colorInWord = new UnityEngine.Color(colorInWordArr[0], colorInWordArr[1], colorInWordArr[2]);
                 Color letterText = new UnityEngine.Color(letterTextArr[0], letterTextArr[1], letterTextArr[2]);
 
                 letterTile.colorInWord = colorInWord;
                 letterTile.letterText.color = letterText;
                 letterTile.GetComponent<SpriteRenderer>().color = colorInWord;
 
-                /*
+                
                 letterTile.colorInWord = new UnityEngine.Color(0.1f, 0.1f, 0.9f);
                 letterTile.letterText.color = new UnityEngine.Color(0.1f, 0.9f, 0.1f);
                 letterTile.GetComponent<SpriteRenderer>().color = new UnityEngine.Color(0.9f, 0.1f, 0.1f);*/
@@ -116,6 +116,21 @@ public class MapGenerator : MonoBehaviour
 
 
             }
+        }
+    }
+
+    [PunRPC]
+    public void UpdateCompletedWord(int[] completeWordTileX, int[] completeWordTileY, 
+                                    int[][] findWordX, int[][] findWordY)
+    {
+        for (int x = 0; x < completeWordTileX.Length; x++)
+        {
+            TileWord tileWord = new TileWord();
+            for (int y = 0; y < completeWordTileY.Length; y++)
+            {
+                tileWord.tiles.Add(new Vector2Int(findWordX[x][y], findWordY[x][y]));
+            }
+            map[completeWordTileX[x]][completeWordTileY[x]].GetComponent<Tile>().CompleteWord(tileWord);
         }
     }
 
@@ -143,8 +158,6 @@ public class MapGenerator : MonoBehaviour
             MapPath = Application.streamingAssetsPath + "/default_map.txt";
         }
 
-        for (int i = 0; i < 1000; i++)
-            Debug.Log(MapPath);
 
         if (saveMap)
         {
