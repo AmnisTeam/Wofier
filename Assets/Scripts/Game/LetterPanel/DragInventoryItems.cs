@@ -30,7 +30,7 @@ public class DragInventoryItems : MonoBehaviour, IDropHandler, IPointerEnterHand
 
     public void OnPointerOver()
     {
-        if(MouseObject.isDrag && !Input.GetMouseButton(0))
+        if(MouseObject.isDrag && !Input.GetMouseButton(0)) /*|| Input.GetTouch(0).phase != TouchPhase.Stationary)*/
         {
             Item item = MouseObject.draggedObject.GetComponent<Item>();
             item.GetComponent<CanvasGroup>().blocksRaycasts = true;

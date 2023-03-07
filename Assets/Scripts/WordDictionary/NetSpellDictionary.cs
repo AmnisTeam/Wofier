@@ -3,6 +3,8 @@ using NetSpell.SpellChecker.Dictionary;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml;
 using UnityEngine;
 
 public class NetSpellDictionary : WordDictionary
@@ -10,30 +12,52 @@ public class NetSpellDictionary : WordDictionary
     NetSpell.SpellChecker.Spelling oSpell;
     NetSpell.SpellChecker.Dictionary.WordDictionary oDict;
 
+    string result = "";
+
     public NetSpellDictionary()
     {
         oDict = new NetSpell.SpellChecker.Dictionary.WordDictionary();
         oSpell = new NetSpell.SpellChecker.Spelling();
-        /*for (int i = 0; i < 1000; i++)
-        {
-            Debug.Log(Application.dataPath + "/en-US.dic");
-            Console.Write(Application.dataPath + "/en-US.dic" + "\n");
-        }*/
 
-        Debug.Log(Application.streamingAssetsPath);
-        oDict.DictionaryFile = Application.streamingAssetsPath + "/en-US.dic";
+
+        string DicPath = "";
+
+        if (Application.platform == RuntimePlatform.WindowsPlayer)
+        {
+            DicPath = Application.streamingAssetsPath + "/en-US.dic";
+        }
+        else if (Application.platform == RuntimePlatform.Android)
+        {
+            //DicPath = "jar:file://" + Application.dataPath + "!/assets/en-US.dic";
+
+            string path = "jar:file://" + Application.dataPath + "!/assets/en-US.dic";
+            WWW wwwfile = new WWW(path);
+            while(!wwwfile.isDone) { }
+            var filepath = string.Format("{0}/{1}", Application.persistentDataPath, "en-US.dic");
+            File.WriteAllBytes(filepath, wwwfile.bytes);
+
+            DicPath = filepath;
+
+        }
+        else
+        {
+            DicPath = Application.streamingAssetsPath + "/en-US.dic";
+        }
+
+        oDict.DictionaryFile = DicPath;
+
+/*
+        for (int i = 0; i < 1000; i++)
+            Debug.Log(DicPath);*/
+
         oDict.Initialize();
 
         oSpell.Dictionary = oDict;
-
-        //if (oSpell.TestWord("Letters"))
-        //    Debug.Log("Yes");
-        //else
-        //    Debug.Log("No");
     }
 
     public bool checkWord(string word)
     {
         return oSpell.TestWord(word);
     }
+
 }

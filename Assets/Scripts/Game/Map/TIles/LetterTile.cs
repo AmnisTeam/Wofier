@@ -115,6 +115,28 @@ public class LetterTile : Tile
 
     void Update()
     {
+/*#if UNITY_ANDROID
+        if (Input.touchCount == 1)
+        {
+
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                OnTouchDown();
+            }
+
+            if (Input.GetTouch(0).phase == TouchPhase.Canceled)
+            {
+                OnTouchUp();
+            }
+
+            if (Input.GetTouch(0).phase == TouchPhase.Moved)
+                MouseObject.isDrag = true;
+            else
+                MouseObject.isDrag = false;
+        }
+#endif*/
+
+
         if (oldLetter != letter)
         {
             letterText.text = letter.ToString();
@@ -168,6 +190,48 @@ public class LetterTile : Tile
         }
     }
 
+
+
+
+
+
+
+
+/*    void OnTouchDown()
+    {
+        if (!inWord)
+            if (isHaveLetter && person.id == inventory.gamePlayManager.me.id)
+            {
+                GameObject item = Instantiate(GameObject.Find("RegisterItems").GetComponent<RegisterGameObjects>().gameObjects[0], inventory.transform);
+                item.GetComponent<LetterItem>().ConstructorItem(inventory, -1);
+                item.GetComponent<LetterItem>().letter = letter;
+                item.transform.position = transform.position;
+                item.GetComponent<LetterItem>().OnBeginDrag(null);
+                MouseObject.Drag(item);
+                _isDrag = 1;
+                UnsetLetter();
+                RPC_Request(false, person);
+            }
+    }
+    void OnDrag()
+    {
+        if (MouseObject.isDrag)
+        {
+            MouseObject.draggedObject.GetComponent<LetterItem>().OnDrag(null);
+        }
+    }
+
+    void OnTouchUp()
+    {
+        if (MouseObject.isDrag)
+        {
+            _isDrag = 2;
+        }
+    }*/
+
+
+
+//#if !UNITY_ANDROID
     void OnMouseDown()
     {
         if (!inWord)
@@ -200,6 +264,16 @@ public class LetterTile : Tile
             _isDrag = 2;
         }
     }
+//#endif
+
+
+
+
+
+
+
+
+
 
     private void RPC_Request(bool isSet, Person person)
     {
