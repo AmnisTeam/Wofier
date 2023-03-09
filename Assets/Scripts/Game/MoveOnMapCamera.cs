@@ -107,7 +107,7 @@ public class MoveOnMapCamera : MonoBehaviour
     {
         if (workDetector.getPass())
             cameraMovementByMouse();
-        //cameraScalingByMouse();
+        cameraScalingByMouse();
     }
 
     public void UpdateIsWork()

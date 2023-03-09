@@ -51,6 +51,7 @@ public class LetterItem : Item
 
     void Start()
     {
+        ItemStart();
         price.text = GetLetterPrice(letter, 1).ToString();
     }
 
