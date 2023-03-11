@@ -8851,7 +8851,7 @@ MonoBehaviour:
   mapSizeY: 30
   offset: 0.2
   idToRandSpawn: 0000000001000000020000000300000004000000
-  saveMap: 1
+  saveMap: 0
 --- !u!4 &1994361586
 Transform:
   m_ObjectHideFlags: 0

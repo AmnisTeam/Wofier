@@ -2,6 +2,7 @@ using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -96,7 +97,7 @@ public class WordChecker
                     Array.Reverse(reverseWord);
                     verticalWord = new string(reverseWord);
 
-                    for(int i = 0; i < horizonralTileWord.tiles.Count; i++)
+                    for (int i = 0; i < horizonralTileWord.tiles.Count; i++)
                     {
                         LetterTile horizontalTile = gamePlayManager.mapGenerator.map[horizonralTileWord.tiles[i].x][horizonralTileWord.tiles[i].y].GetComponent<LetterTile>();
                         horizontalWordAcceptScore += horizontalTile.CanCompleteWord(horizonralTileWord);

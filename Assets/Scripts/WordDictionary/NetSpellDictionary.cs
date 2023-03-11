@@ -4,19 +4,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml;
 using UnityEngine;
-
 public class NetSpellDictionary : WordDictionary
 {
-    NetSpell.SpellChecker.Spelling oSpell;
-    NetSpell.SpellChecker.Dictionary.WordDictionary oDict;
+    //Dictionary<string, bool> stroka;
+    HashSet<string> stroka;
 
     string result = "";
 
     public NetSpellDictionary()
     {
-        oDict = new NetSpell.SpellChecker.Dictionary.WordDictionary();
+        /*oDict = new NetSpell.SpellChecker.Dictionary.WordDictionary();
         oSpell = new NetSpell.SpellChecker.Spelling();
 
 
@@ -29,15 +27,13 @@ public class NetSpellDictionary : WordDictionary
         else if (Application.platform == RuntimePlatform.Android)
         {
             //DicPath = "jar:file://" + Application.dataPath + "!/assets/en-US.dic";
-
             string path = "jar:file://" + Application.dataPath + "!/assets/en-US.dic";
             WWW wwwfile = new WWW(path);
-            while(!wwwfile.isDone) { }
+            while (!wwwfile.isDone) { }
             var filepath = string.Format("{0}/{1}", Application.persistentDataPath, "en-US.dic");
             File.WriteAllBytes(filepath, wwwfile.bytes);
 
             DicPath = filepath;
-
         }
         else
         {
@@ -46,18 +42,53 @@ public class NetSpellDictionary : WordDictionary
 
         oDict.DictionaryFile = DicPath;
 
-/*
-        for (int i = 0; i < 1000; i++)
-            Debug.Log(DicPath);*/
-
         oDict.Initialize();
 
-        oSpell.Dictionary = oDict;
+        oSpell.Dictionary = oDict;*/
+        string DicPath = "";
+
+        if (Application.platform == RuntimePlatform.WindowsPlayer)
+        {
+            DicPath = Application.streamingAssetsPath + "/en-US.txt";
+        }
+        else if (Application.platform == RuntimePlatform.Android)
+        {
+            //DicPath = "jar:file://" + Application.dataPath + "!/assets/en-US.dic";
+            string path = "jar:file://" + Application.dataPath + "!/assets/en-US.txt";
+            WWW wwwfile = new WWW(path);
+            while (!wwwfile.isDone) { }
+            var filepath = string.Format("{0}/{1}", Application.persistentDataPath, "en-US.txt");
+            File.WriteAllBytes(filepath, wwwfile.bytes);
+
+            DicPath = filepath;
+        }
+        else
+        {
+            DicPath = Application.streamingAssetsPath + "/en-US.txt";
+        }
+
+        stroka = new HashSet<string>();
+
+        var array = File.ReadAllLines(DicPath);
+        for (var i = 0; i < array.Length; i++)
+        {
+            if (array[i] != null)
+            {
+                stroka.Add(array[i]);
+            }
+        }
     }
 
     public bool checkWord(string word)
     {
-        return oSpell.TestWord(word);
+        return stroka.Contains(word.ToLower());
     }
+
+    /*public bool checkWord2(string word)
+    {
+        return oSpell.TestWord(word);
+    }*/
+
+
 
 }
