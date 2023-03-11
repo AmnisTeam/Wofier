@@ -16,15 +16,16 @@ public class ColorsHolder : MonoBehaviour
 
     void Start()
     {
-        colors = new List<Color32>
+        /*colors = new List<Color32>
         {
-            Color.red,
-            Color.green,
-            Color.blue,
-            Color.yellow,
-            Color.magenta,
-            Color.cyan
-        };
+            new Color32(200, 0,   0,   1),
+            new Color32(0,   200, 0,   1),
+            new Color32(0,   0,   200, 1),
+
+            new Color32(180, 180, 0,   1),
+            new Color32(0,   180, 180, 1),
+            new Color32(180, 0,   180, 1),
+        };*/
         
         freeColorsIdx = new List<int>();
             

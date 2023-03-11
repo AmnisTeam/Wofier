@@ -134,10 +134,12 @@ public class PhotonLobbyManager : MonoBehaviourPunCallbacks
             Image remotePlayerIcon = remotePlayerObject.transform.GetChild(1).GetComponent<Image>();
             Button remotePlayerButton = remotePlayerObject.transform.GetChild(4).GetComponent<Button>();
 
+            Color32 color = instanceColorHolder.colors[(int)player.CustomProperties["playerColorIndex"]];
+
             remoteTempText.text = player.NickName;
-            remotePlayerColor.color = instanceColorHolder.colors[(int)player.CustomProperties["playerColorIndex"]];
+            remotePlayerColor.color = color;
             remotePlayerIcon.sprite = icons[(int)player.CustomProperties["playerIconId"]];
-            remotePlayerIcon.color = instanceColorHolder.colors[(int)player.CustomProperties["playerColorIndex"]];
+            remotePlayerIcon.color = color;
 
             remotePlayerButton.onClick.AddListener(() => {
                 PhotonNetwork.CloseConnection(player);

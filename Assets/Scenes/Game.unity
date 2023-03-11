@@ -8847,7 +8847,7 @@ MonoBehaviour:
   tilePrifab: {fileID: 1952440079704378671, guid: 629c39ea211a1ca48aa118a4b32732c0, type: 3}
   inventory: {fileID: 300185217}
   PV: {fileID: 0}
-  gamePlayManager: {fileID: 0}
+  gamePlayManager: {fileID: 1994361588}
   mapSizeX: 30
   mapSizeY: 30
   offset: 0.2
