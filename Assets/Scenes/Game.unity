@@ -8313,6 +8313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   scalingSpeed: 1
+  scalingSpeedTouch: 0.05
   minScale: 1
   maxScale: 20
   canvas: {fileID: 43139690}

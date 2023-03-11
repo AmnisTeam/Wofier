@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.WSA.Input;
 
 public class MoveOnMapCamera : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class MoveOnMapCamera : MonoBehaviour
 
     public float speed;
     public float scalingSpeed = 1;
+    public float scalingSpeedTouch = 0.1f;
     public float minScale = 1;
     public float maxScale = 20;
     public WorkDetector workDetector;
@@ -43,6 +45,10 @@ public class MoveOnMapCamera : MonoBehaviour
     private Vector3 dragOrigin;
 
     public bool isLocked = false;
+
+    private Vector2 f0Start, f1Start;
+    private float oldTouchScaling = 0;
+    private int oldCountTouch;
 
     private void Awake()
     {
@@ -85,14 +91,35 @@ public class MoveOnMapCamera : MonoBehaviour
     private void cameraScalingByMouse()
     {
         Vector3 mouseWorldPos = cam.ScreenToWorldPoint(Input.mousePosition);
-
         float scaling = Input.GetAxis("Mouse ScrollWheel") * cam.orthographicSize * scalingSpeed;
+
+        if (Input.touchCount == 2)
+        {
+            if (oldCountTouch != Input.touchCount)
+            {
+                f0Start = Input.GetTouch(0).position;
+                f1Start = Input.GetTouch(1).position;
+            }
+
+            Vector2 f0Position = Input.GetTouch(0).position;
+            Vector2 f1Position = Input.GetTouch(1).position;
+
+            mouseWorldPos = cam.ScreenToWorldPoint((f0Position + f1Position) / 2);
+
+            float deltaScaling = Vector2.Distance(f0Position, f1Position) - Vector2.Distance(f0Start, f1Start);
+            if (oldCountTouch != Input.touchCount)
+            {
+                oldTouchScaling = scaling;
+            }
+            scaling = (deltaScaling - oldTouchScaling) * scalingSpeedTouch;
+            oldTouchScaling = deltaScaling;
+        }
 
         Vector2 cameraSize0 = new Vector2(2.0f * cam.orthographicSize * cam.aspect, 2.0f * cam.orthographicSize);
         Vector2 cameraLeftBottom0 = cam.transform.position.ToXY() - cameraSize0 / 2.0f;
         Vector2 precents = (mouseWorldPos.ToXY() - cameraLeftBottom0) / cameraSize0;
 
-        cam.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * cam.orthographicSize * scalingSpeed;
+        cam.orthographicSize -= scaling;
         cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minScale, maxScale);
 
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
@@ -103,12 +130,16 @@ public class MoveOnMapCamera : MonoBehaviour
 
             cam.transform.position = new Vector3(cameraCenter.x, cameraCenter.y, cam.transform.position.z);
         }
+
+        oldCountTouch = Input.touchCount;
     }
 
     private void HandleCameraTransformationMouse()
     {
         if (workDetector.getPass())
-            cameraMovementByMouse();
+            if ((Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor) || (Application.platform == RuntimePlatform.Android && Input.touchCount == 1))
+                cameraMovementByMouse();
+
         cameraScalingByMouse();
     }
 
@@ -140,7 +171,7 @@ public class MoveOnMapCamera : MonoBehaviour
         if (!isLocked)
         {
             HandleCameraTransformationMouse();
-            HandleCameraTransformationTouch();
+            //HandleCameraTransformationTouch();
         }
     }
 }
