@@ -8,6 +8,8 @@ public class DragInventoryItems : MonoBehaviour, IDropHandler, IPointerEnterHand
 {
     public int idSlot;
     private bool mouseOver = false;
+    GameObject soundGameObject;
+    SoundEffects soundEffects;
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -46,7 +48,8 @@ public class DragInventoryItems : MonoBehaviour, IDropHandler, IPointerEnterHand
 
     void Start()
     {
-        
+        soundGameObject = GameObject.FindWithTag("SOUND_EFFECTS_TAG");
+        soundEffects = soundGameObject.GetComponent<SoundEffects>();
     }
 
     void Update()

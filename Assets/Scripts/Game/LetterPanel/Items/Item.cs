@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,14 +17,17 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public Inventory inventory;
 
-    void Start()
+    GameObject soundGameObject;
+    SoundEffects soundEffects;
+
+    public virtual void ItemStart()
     {
-        
+        soundGameObject = GameObject.FindWithTag("SOUND_EFFECTS_TAG");
+        soundEffects = soundGameObject.GetComponent<SoundEffects>();
     }
 
-    void Update()
+    public virtual void ItemUpdate()
     {
-
     }
 
     public void ConstructorItem(Inventory inventory, int idInInventory)
@@ -75,9 +79,10 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         MouseObject.draggedObject = null;
         MouseObject.isDrag = false;
-        Camera.main.GetComponent<MoveOnMapCamera>().workDetector.RemoveLocker("drag_item");
+        
         GetComponent<CanvasGroup>().blocksRaycasts = true;
         GetComponent<Image>().raycastTarget = true;
+        Camera.main.GetComponent<MoveOnMapCamera>().workDetector.RemoveLocker("drag_item");
         Debug.Log(inventory.gamePlayManager.me.nickname);
         Debug.Log(inventory.gamePlayManager.idPlayingPerson);
         if (inventory.gamePlayManager.me.id == inventory.gamePlayManager.personManager.persons[inventory.gamePlayManager.idPlayingPerson].id)
@@ -86,6 +91,16 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             GameObject tile = GetTile();
             if (tile && tile.GetComponent<Tile>().isCanSetItem)
             {
+                try
+                {
+                    soundEffects.PlaySound("tile_set");
+                }
+                catch
+                {
+                    Console.WriteLine("Perhaps forgot to initialize Item Start in the class heir");
+                    throw new Exception("Perhaps forgot to initialize Item Start in the class heir");
+                }
+
                 tile.GetComponent<Tile>().OnSetItem(this, inventory.gamePlayManager.me);
                 //tile.GetComponent<Tile>().OnSetItem(this, inventory.gamePlayManager.me);
                 if (idInInventory >= 0)
@@ -94,11 +109,13 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             }
             else
             {
+                soundEffects.PlaySound("tile_error");
                 MoveItemToSlot(idInInventory);
             }
         }
         else
         {
+            soundEffects.PlaySound("tile_error");
             MoveItemToSlot(idInInventory);
         }
     }
