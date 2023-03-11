@@ -114,21 +114,31 @@ personRowPrifab.GetComponent<RectTransform>().rect.width / 2 - showScoreTableBut
                 personRowPrifab.GetComponent<RectTransform>().rect.width / 2 - hiddenScoreTableButton.GetComponent<RectTransform>().rect.width / 2,
                 -(personRowPrifab.GetComponent<RectTransform>().rect.height + offset) * personRows.Count);
 
-            if (isHidden)
-            {
-                showScoreTableButton.SetActive(true);
-                showScoreTableButton.GetComponent<CanvasGroup>().alpha = 1;
+            if (personManager.gamePlayManager.personManager.persons.Count > 3) { 
+                if (isHidden)
+                {
+                    showScoreTableButton.SetActive(true);
+                    showScoreTableButton.GetComponent<CanvasGroup>().alpha = 1;
 
-                hiddenScoreTableButton.SetActive(false);
-                hiddenScoreTableButton.GetComponent<CanvasGroup>().alpha = 0;
+                    hiddenScoreTableButton.SetActive(false);
+                    hiddenScoreTableButton.GetComponent<CanvasGroup>().alpha = 0;
+                }
+                else
+                {
+                    showScoreTableButton.SetActive(false);
+                    showScoreTableButton.GetComponent<CanvasGroup>().alpha = 0;
+
+                    hiddenScoreTableButton.SetActive(true);
+                    hiddenScoreTableButton.GetComponent<CanvasGroup>().alpha = 1;
+                }
             }
             else
             {
                 showScoreTableButton.SetActive(false);
                 showScoreTableButton.GetComponent<CanvasGroup>().alpha = 0;
 
-                hiddenScoreTableButton.SetActive(true);
-                hiddenScoreTableButton.GetComponent<CanvasGroup>().alpha = 1;
+                hiddenScoreTableButton.SetActive(false);
+                hiddenScoreTableButton.GetComponent<CanvasGroup>().alpha = 0;
             }
         }
     }
