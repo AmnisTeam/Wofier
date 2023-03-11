@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IIdexable
+public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IIdexable, IDestroyable
 {
     public GameObject draggedObjectPrifab;
     public bool canDragging = true;
@@ -14,6 +14,8 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public float sizeOnDrag = 0.8f;
     public int idInInventory;
     public int type_id;
+
+    public float timeToDestroyAnimation = 0.2f;
 
     public Inventory inventory;
 
@@ -28,6 +30,12 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public virtual void ItemUpdate()
     {
+    }
+
+    public virtual bool OnSetItem(Tile tile, Person person)
+    {
+        Destroy(gameObject);
+        return true;
     }
 
     public void ConstructorItem(Inventory inventory, int idInInventory)
@@ -101,11 +109,18 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                     throw new Exception("Perhaps forgot to initialize Item Start in the class heir");
                 }
 
-                tile.GetComponent<Tile>().OnSetItem(this, inventory.gamePlayManager.me);
-                //tile.GetComponent<Tile>().OnSetItem(this, inventory.gamePlayManager.me);
-                if (idInInventory >= 0)
-                    inventory.items[idInInventory] = null;
-                Destroy(gameObject);
+                bool settled = OnSetItem(tile.GetComponent<Tile>(), inventory.gamePlayManager.me);
+                if (settled)
+                {
+                    if (idInInventory >= 0)
+                        inventory.items[idInInventory] = null;
+                    OnDestroyObject();
+                }
+                else
+                {
+                    soundEffects.PlaySound("tile_error");
+                    MoveItemToSlot(idInInventory);
+                }
             }
             else
             {
@@ -128,5 +143,14 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void SetId(int id)
     {
         type_id = id;
+    }
+    public void OnDestroyObject()
+    {
+        LeanTween.value(1, 0, timeToDestroyAnimation).setEaseInOutCubic().setOnUpdate((float value) =>
+        {
+            transform.localScale = new Vector2(value, value);
+        }).setOnComplete(() => {
+            Destroy(gameObject);
+        });
     }
 }

@@ -46,18 +46,6 @@ public class LetterTile : Tile
         inventory.gamePlayManager.wordChecker.TryFindWord();
     }
 
-    public override void OnSetItem(Item item, Person person)
-    {
-        base.OnSetItem(item, person);
-        LetterItem letterItem = item as LetterItem;
-        if(letterItem)
-        {
-            SetLetter(letterItem.letter, person);
-            inventory.gamePlayManager.wordChecker.TryFindWord();
-            RPC_Request(true, person);
-        }
-    }
-
     public float GetLetterPrice()
     {
         return LetterItem.GetLetterPrice(letter, priceFactor);
@@ -276,7 +264,7 @@ public class LetterTile : Tile
 
 
 
-    private void RPC_Request(bool isSet, Person person)
+    public void RPC_Request(bool isSet, Person person)
     {
         Vector2 sizeTile = inventory.mapGenerator.GetSizeTile();
         Vector2 mapPos = inventory.mapGenerator.GetLeftTopMap();

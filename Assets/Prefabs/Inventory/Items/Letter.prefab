@@ -139,6 +139,7 @@ MonoBehaviour:
   sizeOnDrag: 0.8
   idInInventory: 0
   type_id: 0
+  timeToDestroyAnimation: 0.2
   inventory: {fileID: 0}
   letterText: {fileID: 5577972741738998581}
   price: {fileID: 1648016388853642748}

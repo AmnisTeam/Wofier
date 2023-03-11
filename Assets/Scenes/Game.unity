@@ -1151,6 +1151,10 @@ MonoBehaviour:
   isSwap: 0
   timeToAppearanceSwapButton: 0.5
   timeToAppearanceShufleButton: 0.5
+  timeOffsetToAppearanceItems: 0.05
+  timeToAppearanceScaleItem: 0.1
+  timeMoveYItem: 0.3
+  appearanceOffsetY: 70
 --- !u!114 &300185218
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -22,6 +22,11 @@ public class Inventory : MonoBehaviour
 
     public float timeToAppearanceSwapButton;
     public float timeToAppearanceShufleButton;
+    public float timeOffsetToAppearanceItems;
+    public float timeToAppearanceScaleItem;
+    public float timeMoveYItem;
+
+    public float appearanceOffsetY;
 
     private string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     //private string alphabet = "HELLOHELLOHELLOHELLO";
@@ -39,6 +44,7 @@ public class Inventory : MonoBehaviour
     {
         if (count > slots.Length)
             count = slots.Length;
+        float delay = 0;
         for(int x = 0; x < count; x++)
         {
             int id = GetLastFreeSlotId();
@@ -49,6 +55,12 @@ public class Inventory : MonoBehaviour
                 //letter.GetComponent<LetterItem>().letter = alphabet[id];
                 letter.GetComponent<LetterItem>().ConstructorItem(this, id);
                 items[id] = letter;
+
+                letter.transform.localScale = new Vector2(0, 0);
+                letter.transform.localPosition = new Vector2(0, appearanceOffsetY);
+                letter.transform.LeanScale(new Vector3(1, 1), timeToAppearanceScaleItem).setEaseOutCubic().setDelay(delay);
+                letter.transform.LeanMoveLocalY(0, timeMoveYItem).setEaseOutCubic().setDelay(delay);
+                delay += timeOffsetToAppearanceItems;
             }
         }
     }
@@ -62,7 +74,7 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < items.Length; i++)
         {
             if (items[i] != null)
-                Destroy(items[i]);
+                items[i].GetComponent<IDestroyable>().OnDestroyObject();
             items[i] = null;
         }
 

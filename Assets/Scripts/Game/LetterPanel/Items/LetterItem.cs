@@ -44,6 +44,19 @@ public class LetterItem : Item
         }
     }
 
+    public override bool OnSetItem(Tile tile, Person person)
+    {
+        if (tile is LetterTile)
+        {
+            LetterTile letterTile = tile as LetterTile;
+            letterTile.SetLetter(letter, person);
+            inventory.gamePlayManager.wordChecker.TryFindWord();
+            letterTile.RPC_Request(true, person);
+            return true;
+        }
+        return false;
+    }
+
     private void Awake()
     {
         oldLetter = letter;
