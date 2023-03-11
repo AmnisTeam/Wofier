@@ -70,7 +70,6 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        MouseObject.Drag(gameObject);
         Camera.main.GetComponent<MoveOnMapCamera>().workDetector.AddLoker("drag_item");
         GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
@@ -144,8 +143,7 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     }
     public void OnDestroyObject()
     {
-        GetComponent<CanvasGroup>().blocksRaycasts = true;
-        GetComponent<Image>().raycastTarget = true;
+        enabled = false;
         GameObject item = gameObject;
         LeanTween.value(1, 0, timeToDestroyAnimation).setEaseInOutCubic().setOnUpdate((float value) =>
         {

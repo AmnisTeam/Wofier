@@ -231,13 +231,14 @@ public class LetterTile : Tile
     void OnMouseDown()
     {
         if (!inWord)
-            if (isHaveLetter && person.id == inventory.gamePlayManager.me.id)
+            if (isHaveLetter && person.id == inventory.gamePlayManager.me.id && !MouseObject.isDrag)
             {
                 GameObject item = Instantiate(GameObject.Find("RegisterItems").GetComponent<RegisterGameObjects>().gameObjects[0], inventory.transform);
                 item.GetComponent<LetterItem>().ConstructorItem(inventory, -1);
                 item.GetComponent<LetterItem>().letter = letter;
                 item.transform.position = transform.position;
                 item.GetComponent<LetterItem>().OnBeginDrag(null);
+                MouseObject.Drag(item);
                 _isDrag = 1;
                 UnsetLetter();
                 RPC_Request(false, person);
@@ -248,7 +249,7 @@ public class LetterTile : Tile
     {
         if (MouseObject.isDrag)
         {
-            if(MouseObject.draggedObject)
+            //if(MouseObject.draggedObject)
                 MouseObject.draggedObject.GetComponent<LetterItem>().OnDrag(null);
         }
     }
