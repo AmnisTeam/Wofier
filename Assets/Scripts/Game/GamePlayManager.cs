@@ -40,6 +40,8 @@ public class GamePlayManager : MonoBehaviour
     public GameObject acceptText;
     public TMPro.TMP_Text scoresText;
 
+    public GameObject clue;
+
     public TMPro.TMP_Text stepsText;
 
     public bool wordIsFind = false;
@@ -58,6 +60,8 @@ public class GamePlayManager : MonoBehaviour
     public float findingMenuShowingTime;
     private float findingMenuShowingTimer = float.NaN;
 
+    public float timeToAppearanceClue;
+
     public float timeToAppearanceAcceptWordButton;
 
     public string avatarSpritesTag;
@@ -72,12 +76,30 @@ public class GamePlayManager : MonoBehaviour
     public WordChecker wordChecker;
     public EndGameManager endGameManager;
 
+    public void CheckToShowClueMenu()
+    {
+        if (numberOfPlayerStep == 0 && me.id == personManager.persons[idPlayingPerson].id)
+        {
+            clue.SetActive(true);
+            clue.GetComponent<CanvasGroup>().LeanAlpha(1, timeToAppearanceClue);
+        }
+        else
+        {
+            clue.GetComponent<CanvasGroup>().LeanAlpha(0, timeToAppearanceClue).setOnComplete(() => {
+                clue.SetActive(false);
+            });
+        }
+    }
+
     public void SelectNextPersonToPlay()
     {
         idPlayingPerson = (idPlayingPerson + 1) % personManager.persons.Count;
-        gameSteps++;
+        if(numberOfPlayerStep != 0)
+            gameSteps++;
         stepsText.text = gameSteps + "/" + countStepsToEndGame;
         timerToPlayerOnePerson = timeToPlayingOnePerson;
+
+        CheckToShowClueMenu();
 
         findingMenuNickname.text = personManager.persons[idPlayingPerson].nickname;
         findingMenuNickname.color = personManager.persons[idPlayingPerson].color;
@@ -85,7 +107,7 @@ public class GamePlayManager : MonoBehaviour
         findingMenu.GetComponent<CanvasGroup>().LeanAlpha(1, timeToAppearanceFindingMenu);
         findingMenuShowingTimer = findingMenuShowingTime;
 
-        timeNickname.text = personManager.persons[idPlayingPerson].nickname;
+        timeNickname.text = me.id == personManager.persons[idPlayingPerson].id ? "You" : personManager.persons[idPlayingPerson].nickname;
         timeNickname.color = personManager.persons[idPlayingPerson].color;
 
         scoreTableManager.updateTable();
@@ -276,6 +298,7 @@ public class GamePlayManager : MonoBehaviour
         SelectNextPersonToPlay();
         PV = GetComponent<PhotonView>();
         me = personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1];
+        CheckToShowClueMenu();
     }
 
     void Update()

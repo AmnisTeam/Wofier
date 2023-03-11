@@ -10,6 +10,14 @@ public class MouseObject
     public static void Drag(GameObject draggedObject)
     {
         isDrag = true;
+        //if (MouseObject.draggedObject)
+        //{
+        //    IDestroyable destroyable = draggedObject.GetComponent<IDestroyable>();
+        //    if (destroyable != null)
+        //        destroyable.OnDestroyObject();
+        //    else
+        //        GameObject.Destroy(draggedObject);
+        //}
         MouseObject.draggedObject = draggedObject;
     }
 

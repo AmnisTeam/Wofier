@@ -92,8 +92,8 @@ public class Inventory : MonoBehaviour
                 GameObject temp1 = items[rand1];
                 GameObject temp2 = items[rand2];
 
-                Destroy(items[rand1]);
-                Destroy(items[rand2]);
+                items[rand1].GetComponent<Item>().OnDestroyObject();
+                items[rand2].GetComponent<Item>().OnDestroyObject();
                 items[rand1] = null;
                 items[rand2] = null;
 

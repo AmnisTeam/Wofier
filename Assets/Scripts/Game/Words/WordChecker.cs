@@ -54,6 +54,9 @@ public class WordChecker
                     TileWord horizonralTileWord = new TileWord();
                     TileWord verticalTileWord = new TileWord();
 
+                    float horizontalWordAcceptScore = 0;
+                    float verticalWordAcceptScore = 0;
+
                     horizonralTileWord.person = gamePlayManager.me;
                     verticalTileWord.person = gamePlayManager.me;
 
@@ -93,14 +96,26 @@ public class WordChecker
                     Array.Reverse(reverseWord);
                     verticalWord = new string(reverseWord);
 
-                    if (!isCheckWord.ContainsKey(keyHorizontalWord) && horizontalWord.Length > 1 && gamePlayManager.wordDictionary.checkWord(horizontalWord))
+                    for(int i = 0; i < horizonralTileWord.tiles.Count; i++)
+                    {
+                        LetterTile horizontalTile = gamePlayManager.mapGenerator.map[horizonralTileWord.tiles[i].x][horizonralTileWord.tiles[i].y].GetComponent<LetterTile>();
+                        horizontalWordAcceptScore += horizontalTile.CanCompleteWord(horizonralTileWord);
+                    }
+
+                    for (int i = 0; i < verticalTileWord.tiles.Count; i++)
+                    {
+                        LetterTile verticalTile = gamePlayManager.mapGenerator.map[verticalTileWord.tiles[i].x][verticalTileWord.tiles[i].y].GetComponent<LetterTile>();
+                        verticalWordAcceptScore += verticalTile.CanCompleteWord(verticalTileWord);
+                    }
+
+                    if (!isCheckWord.ContainsKey(keyHorizontalWord) && horizontalWord.Length > 1 && gamePlayManager.wordDictionary.checkWord(horizontalWord) && horizontalWordAcceptScore >= 0)
                     {
                         countScore += horizontalScore;
                         isCheckWord.Add(keyHorizontalWord, true);
                         words.Add(horizonralTileWord);
                     }
 
-                    if (!isCheckWord.ContainsKey(keyVerticalWord) && verticalWord.Length > 1 && gamePlayManager.wordDictionary.checkWord(verticalWord))
+                    if (!isCheckWord.ContainsKey(keyVerticalWord) && verticalWord.Length > 1 && gamePlayManager.wordDictionary.checkWord(verticalWord) && verticalWordAcceptScore >= 0)
                     {
                         countScore += verticalScore;
                         isCheckWord.Add(keyVerticalWord, true);
@@ -110,9 +125,9 @@ public class WordChecker
                     //≈сли ставитс€ первое слово
                     bool isFistWord = gamePlayManager.numberOfPlayerStep == 0 && gamePlayManager.personManager.persons[gamePlayManager.idPlayingPerson].id == gamePlayManager.me.id;
                     //“олько горизонтальное слово (вертикальное = 1)
-                    bool haveHorizontalWord = verticalWord.Length == 1 && horizontalWord.Length > 1 && gamePlayManager.wordDictionary.checkWord(horizontalWord) && (isInWordHorizontal || isFistWord);
+                    bool haveHorizontalWord = verticalWord.Length == 1 && horizontalWord.Length > 1 && gamePlayManager.wordDictionary.checkWord(horizontalWord) && (isInWordHorizontal || isFistWord) && horizontalWordAcceptScore >= 0;
                     //“олько вертикальное слово (горизонтальное = 1)
-                    bool haveVerticalWord = horizontalWord.Length == 1 && verticalWord.Length > 1 && gamePlayManager.wordDictionary.checkWord(verticalWord) && (isInWordVertical || isFistWord);
+                    bool haveVerticalWord = horizontalWord.Length == 1 && verticalWord.Length > 1 && gamePlayManager.wordDictionary.checkWord(verticalWord) && (isInWordVertical || isFistWord) && verticalWordAcceptScore >= 0;
                     //» вертикальное слово, и горизонтальное слово
                     bool haveVerticalHorizontalWord = horizontalWord.Length > 1 && verticalWord.Length > 1 && gamePlayManager.wordDictionary.checkWord(horizontalWord) && gamePlayManager.wordDictionary.checkWord(verticalWord) && (isInWordHorizontal && isInWordVertical || isFistWord);
 

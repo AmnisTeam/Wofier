@@ -30,7 +30,7 @@ public class LetterTile : Tile
 
     public PhotonView PV;
 
-    private int _isDrag = 0;
+    public int _isDrag = 0;
 
     public void SetLetter(char letter, Person person)
     {
@@ -88,6 +88,13 @@ public class LetterTile : Tile
             letterObject.gameObject.SetActive(false);
             GetComponent<SpriteRenderer>().color = colorWithoutLetter;
         }
+    }
+
+    public virtual int CanCompleteWord(TileWord word)
+    {
+        if (inventory.gamePlayManager.numberOfPlayerStep == 0)
+            return -1;
+        return 1;
     }
 
     void Awake()
@@ -172,7 +179,7 @@ public class LetterTile : Tile
 
         if(_isDrag == 2)
         {
-            if(MouseObject.isDrag)
+            if(MouseObject.draggedObject)
                 MouseObject.draggedObject.GetComponent<LetterItem>().OnEndDrag(null);
             MouseObject.EndDrag();
             _isDrag = 0;
@@ -231,7 +238,6 @@ public class LetterTile : Tile
                 item.GetComponent<LetterItem>().letter = letter;
                 item.transform.position = transform.position;
                 item.GetComponent<LetterItem>().OnBeginDrag(null);
-                MouseObject.Drag(item);
                 _isDrag = 1;
                 UnsetLetter();
                 RPC_Request(false, person);
@@ -242,7 +248,8 @@ public class LetterTile : Tile
     {
         if (MouseObject.isDrag)
         {
-            MouseObject.draggedObject.GetComponent<LetterItem>().OnDrag(null);
+            if(MouseObject.draggedObject)
+                MouseObject.draggedObject.GetComponent<LetterItem>().OnDrag(null);
         }
     }
 

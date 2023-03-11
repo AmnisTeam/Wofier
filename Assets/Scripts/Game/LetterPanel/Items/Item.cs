@@ -57,7 +57,7 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void MoveItemToSlot(int id)
     {
         if(idInInventory >= 0)
-        inventory.items[idInInventory] = null;
+            inventory.items[idInInventory] = null;
 
         idInInventory = id >= 0 ? id : inventory.GetLastFreeSlotId();
         transform.SetParent(inventory.slots[idInInventory].transform);
@@ -70,8 +70,7 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        MouseObject.draggedObject = gameObject;
-        MouseObject.isDrag = true;
+        MouseObject.Drag(gameObject);
         Camera.main.GetComponent<MoveOnMapCamera>().workDetector.AddLoker("drag_item");
         GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
@@ -85,8 +84,7 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        MouseObject.draggedObject = null;
-        MouseObject.isDrag = false;
+        MouseObject.EndDrag();
         
         GetComponent<CanvasGroup>().blocksRaycasts = true;
         GetComponent<Image>().raycastTarget = true;
@@ -146,11 +144,16 @@ public abstract class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     }
     public void OnDestroyObject()
     {
+        GetComponent<CanvasGroup>().blocksRaycasts = true;
+        GetComponent<Image>().raycastTarget = true;
+        GameObject item = gameObject;
         LeanTween.value(1, 0, timeToDestroyAnimation).setEaseInOutCubic().setOnUpdate((float value) =>
         {
-            transform.localScale = new Vector2(value, value);
+            if(item)
+                transform.localScale = new Vector2(value, value);
         }).setOnComplete(() => {
-            Destroy(gameObject);
+            if(item)
+                Destroy(gameObject);
         });
     }
 }

@@ -20,6 +20,8 @@ public class MapGenerator : MonoBehaviour
 
     public GameObject[][] map;
 
+    public int[] idToRandSpawn;
+
     public bool saveMap = true;
 
     string result = "";
@@ -40,11 +42,11 @@ public class MapGenerator : MonoBehaviour
     public GameObject getRandomTilePrifab()
     {
         RegisterGameObjects registerTiles = GameObject.Find("RegisterTiles").GetComponent<RegisterGameObjects>();
-        float[] probabilities = new float[registerTiles.gameObjects.Length];
-        for (int x = 0; x < registerTiles.gameObjects.Length; x++)
-            probabilities[x] = registerTiles.gameObjects[x].GetComponent<Tile>().probability;
+        float[] probabilities = new float[idToRandSpawn.Length];
+        for (int x = 0; x < idToRandSpawn.Length; x++)
+            probabilities[x] = registerTiles.gameObjects[idToRandSpawn[x]].GetComponent<Tile>().probability;
 
-        return registerTiles.gameObjects[MyMath.SelectRandomElement(probabilities)];
+        return registerTiles.gameObjects[idToRandSpawn[MyMath.SelectRandomElement(probabilities)]];
     }
 
     public void GenerateMap()
@@ -56,8 +58,12 @@ public class MapGenerator : MonoBehaviour
             map[x] = new GameObject[mapSizeY];
             for (int y = 0; y < mapSizeY; y++)
             {
-                map[x][y] = Instantiate(getRandomTilePrifab(), GetLeftTopMap() + new Vector3(x * sizeTile.x, y * sizeTile.y),
-                    Quaternion.identity);
+                GameObject prifab = getRandomTilePrifab();
+                if (x == mapSizeX / 2 && y == mapSizeY / 2)
+                    prifab = GameObject.Find("RegisterTiles").GetComponent<RegisterGameObjects>().gameObjects[5]; //Центральный тайл
+
+                map[x][y] = Instantiate(prifab, GetLeftTopMap() + new Vector3(x * sizeTile.x, y * sizeTile.y),
+                        Quaternion.identity);
                 map[x][y].GetComponent<Tile>().ConstructorTile(inventory);
             }
         }

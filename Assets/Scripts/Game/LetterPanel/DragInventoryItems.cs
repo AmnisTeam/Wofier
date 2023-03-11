@@ -37,6 +37,7 @@ public class DragInventoryItems : MonoBehaviour, IDropHandler, IPointerEnterHand
             Item item = MouseObject.draggedObject.GetComponent<Item>();
             item.GetComponent<CanvasGroup>().blocksRaycasts = true;
             item.GetComponent<Image>().raycastTarget = true;
+            Camera.main.GetComponent<MoveOnMapCamera>().workDetector.RemoveLocker("drag_item");
             if (!item.inventory.items[idSlot])
                 item.MoveItemToSlot(idSlot);
             else

@@ -21,16 +21,18 @@ public class ButtonAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExit
         transform.LeanScale(new Vector3(scaleOnDown, scaleOnDown, scaleOnDown), timeOnDown).setEaseInOutCubic();
         LeanTween.value(0, 1, timeOnDown).setOnUpdate((float value) =>
         {
-            background.color = colorOnIdle + (colorOnDown - colorOnIdle) * value;
+            if(background)
+                background.color = colorOnIdle + (colorOnDown - colorOnIdle) * value;
         }).setEaseInOutCubic();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         transform.LeanScale(new Vector3(scaleOnIdle, scaleOnIdle, scaleOnIdle), timeOnDown).setEaseInOutCubic();
-        LeanTween.value(1, 0, timeOnDown).setOnUpdate((float value) =>
+        LTDescr colorLT = LeanTween.value(1, 0, timeOnDown).setOnUpdate((float value) =>
         {
-            background.color = colorOnIdle + (colorOnDown - colorOnIdle) * value;
+            if (background)
+                background.color = colorOnIdle + (colorOnDown - colorOnIdle) * value;
         }).setEaseInOutCubic();
     }
 
