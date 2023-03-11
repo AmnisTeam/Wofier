@@ -5,6 +5,7 @@ using Photon.Realtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static Photon.Pun.Demo.Shared.DocLinks;
 
@@ -75,6 +76,7 @@ public class GamePlayManager : MonoBehaviour
     private ColorsHolder instanceColorHolder;
     public WordChecker wordChecker;
     public EndGameManager endGameManager;
+
 
     public void CheckToShowClueMenu()
     {
