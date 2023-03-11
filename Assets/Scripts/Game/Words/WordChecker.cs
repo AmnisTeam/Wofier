@@ -54,6 +54,9 @@ public class WordChecker
                     TileWord horizonralTileWord = new TileWord();
                     TileWord verticalTileWord = new TileWord();
 
+                    horizonralTileWord.person = gamePlayManager.me;
+                    verticalTileWord.person = gamePlayManager.me;
+
                     int pointerX = x - 1;
                     while (pointerX >= 0 && IsLetterTileWithLetter(gamePlayManager.mapGenerator.map[pointerX][y].GetComponent<LetterTile>()))
                         pointerX--;

@@ -10,6 +10,7 @@ using static Photon.Pun.Demo.Shared.DocLinks;
 
 public class TileWord
 {
+    public Person person = null;
     public List<Vector2Int> tiles;
 
     public TileWord()
@@ -62,12 +63,14 @@ public class GamePlayManager : MonoBehaviour
     public string avatarSpritesTag;
     GameObject avatarSprites;
     IconsContent iconsContent;
-    //Sprite[] icons;
+
+    public List<TileWord> words;
 
     public string colorsHolderTag;
     private GameObject colorsHolder;
     private ColorsHolder instanceColorHolder;
     public WordChecker wordChecker;
+    public EndGameManager endGameManager;
 
     public void SelectNextPersonToPlay()
     {
@@ -159,10 +162,9 @@ public class GamePlayManager : MonoBehaviour
                 }
 
                 completeWordTile.CompleteWord(findWords[x]);
-
-
-                
+                words.Add(findWords[x]);
             }
+
             me.score += addedScore;
             PV.RPC("UpdateScore", RpcTarget.All, me.id, me.score);
 
@@ -236,6 +238,7 @@ public class GamePlayManager : MonoBehaviour
 
     void Awake()
     {
+        words = new List<TileWord>();
         stepsText.text = gameSteps + "/" + countStepsToEndGame;
         wordChecker = new WordChecker(this);
         avatarSprites = GameObject.FindGameObjectWithTag(avatarSpritesTag);
@@ -296,7 +299,15 @@ public class GamePlayManager : MonoBehaviour
         int minutes = (int)(timerToPlayerOnePerson / 60);
 
         time.text = minutes.ToString("00") + ":" + secundes.ToString("00");
+
+        if(gameSteps >= countStepsToEndGame)
+        {
+            endGameManager.enabled = true;
+            enabled = false;
+            endGameManager.OpenEndGameMenu();
+        }
     }
+
     /*
     private void OnEnable()
     {

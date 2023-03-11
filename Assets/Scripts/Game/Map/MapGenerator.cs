@@ -12,6 +12,7 @@ public class MapGenerator : MonoBehaviour
     public GameObject tilePrifab;
     public Inventory inventory;
     public PhotonView PV;
+    public GamePlayManager gamePlayManager;
 
     public int mapSizeX;
     public int mapSizeY;
@@ -89,14 +90,18 @@ public class MapGenerator : MonoBehaviour
     {
         for (int i = 0; i < coordX.Length; i++)
         {
+            TileWord tileWord = new TileWord();
             for (int j = 0; j < coordX[i].Length; j++)
             {
                 LetterTile letterTile = map[coordX[i][j]][coordY[i][j]].GetComponent<LetterTile>();
+                tileWord.tiles.Add(new Vector2Int(coordX[i][j], coordY[i][j]));
 
                 Person person = null;
                 for (int z = 0; z < inventory.gamePlayManager.personManager.persons.Count; z++)
                     if (inventory.gamePlayManager.personManager.persons[z].id == personID[i][j])
                         person = inventory.gamePlayManager.personManager.persons[z];
+
+                tileWord.person = person;
 
                 /*Color colorInWord = new UnityEngine.Color(colorInWordArr[0], colorInWordArr[1], colorInWordArr[2]);
                 Color letterText = new UnityEngine.Color(letterTextArr[0], letterTextArr[1], letterTextArr[2]);
@@ -116,6 +121,8 @@ public class MapGenerator : MonoBehaviour
 
 
             }
+
+            gamePlayManager.words.Add(tileWord);
         }
     }
 
@@ -132,6 +139,42 @@ public class MapGenerator : MonoBehaviour
             }
             map[completeWordTileX[x]][completeWordTileY[x]].GetComponent<Tile>().CompleteWord(tileWord);
         }
+    }
+
+    public List<Vector2Int> FindPointsInGame(int maxCountPoints)
+    {
+        List<Vector2Int> points = new List<Vector2Int>();
+
+        for(int x = 0; x < mapSizeX; x++)
+            for(int y = 0; y < mapSizeY; y++)
+            {
+                LetterTile tile = map[x][y].GetComponent<LetterTile>();
+                if(tile && tile.isHaveLetter && tile.inWord)
+                {
+                    points.Add(new Vector2Int(x, y));
+                    break;
+                }
+            }
+
+        int minX = points[0].x;
+        int maxX = points[points.Count - 1].x;
+        float offset = (float)(maxX - minX) / maxCountPoints;
+        List<Vector2Int> offsetedPoints = new List<Vector2Int>();
+
+        float leftPointer = 0;
+        float rightPointer = offset;
+
+        for(int x = 0; x < points.Count; x++)
+        {
+            if(points[x].x >= leftPointer && points[x].x < rightPointer)
+            {
+                leftPointer += offset;
+                rightPointer += offset;
+                offsetedPoints.Add(points[x]);
+            }
+        }
+
+        return offsetedPoints;
     }
 
     void Awake()

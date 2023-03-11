@@ -42,6 +42,8 @@ public class MoveOnMapCamera : MonoBehaviour
     private Camera cam;
     private Vector3 dragOrigin;
 
+    public bool isLocked = false;
+
     private void Awake()
     {
         workDetector = new WorkDetector();
@@ -107,7 +109,7 @@ public class MoveOnMapCamera : MonoBehaviour
     {
         if (workDetector.getPass())
             cameraMovementByMouse();
-        //cameraScalingByMouse();
+        cameraScalingByMouse();
     }
 
     public void UpdateIsWork()
@@ -135,7 +137,10 @@ public class MoveOnMapCamera : MonoBehaviour
     private void Update()
     {
         UpdateIsWork();
-        HandleCameraTransformationMouse();
-        HandleCameraTransformationTouch();
+        if (!isLocked)
+        {
+            HandleCameraTransformationMouse();
+            HandleCameraTransformationTouch();
+        }
     }
 }
