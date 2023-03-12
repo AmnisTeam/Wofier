@@ -14864,7 +14864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6947563504236517478, guid: 0f38362d42df71e49a09924c63c15eba, type: 3}
       propertyPath: m_text
-      value: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435"
+      value: Enter a name
       objectReference: {fileID: 0}
     - target: {fileID: 6947563504236517478, guid: 0f38362d42df71e49a09924c63c15eba, type: 3}
       propertyPath: m_fontSize
@@ -15005,11 +15005,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8233861575600692081, guid: 0a2cf74114f70a0428d7d9559cb7a282, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -155
+      value: -246
       objectReference: {fileID: 0}
     - target: {fileID: 8233861575600692081, guid: 0a2cf74114f70a0428d7d9559cb7a282, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.0000070837
       objectReference: {fileID: 0}
     - target: {fileID: 8233861575600692081, guid: 0a2cf74114f70a0428d7d9559cb7a282, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -15106,7 +15106,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -522.1, y: 9.3}
+  m_AnchoredPosition: {x: -565, y: 12}
   m_SizeDelta: {x: 73.14, y: 97.52}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &366322016
@@ -44288,7 +44288,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -450, y: 0}
+  m_AnchoredPosition: {x: -398.5, y: 0}
   m_SizeDelta: {x: 587, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &630622607
@@ -44311,7 +44311,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0418\u043A\u043E\u043D\u043A\u0430"
+  m_text: Icon
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -54638,9 +54638,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -959, y: 0}
+  m_AnchoredPosition: {x: -811, y: 0.0000021833}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5000001, y: 0.5}
 --- !u!114 &1074337199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59686,7 +59686,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -604, y: 0}
+  m_AnchoredPosition: {x: -530, y: -0}
   m_SizeDelta: {x: 587, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1184993074
@@ -59709,7 +59709,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043B\u043E\u0431\u0431\u0438"
+  m_text: Lobby name
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -59832,7 +59832,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 596018238487090626, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
       propertyPath: m_text
-      value: "\u041D\u0430\u0437\u0430\u0434"
+      value: Back
       objectReference: {fileID: 0}
     - target: {fileID: 596018238487090629, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -60059,9 +60059,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -651, y: 0}
+  m_AnchoredPosition: {x: -541, y: 0}
   m_SizeDelta: {x: 116.38, y: 83.13}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.49999997, y: 0.5}
 --- !u!114 &1263289129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69793,7 +69793,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0421\u043E\u0437\u0434\u0430\u043D\u0438\u0435 \u043B\u043E\u0431\u0431\u0438"
+  m_text: Creating a lobby
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -70011,7 +70011,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -396, y: -1.0459e-11}
+  m_AnchoredPosition: {x: -420, y: 0.0000070836}
   m_SizeDelta: {x: 587, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1317606647
@@ -70034,7 +70034,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041A\u043E\u0434"
+  m_text: Code
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -70120,7 +70120,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 596018238487090626, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
       propertyPath: m_text
-      value: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043B\u043E\u0431\u0431\u0438"
+      value: Create a lobby
       objectReference: {fileID: 0}
     - target: {fileID: 596018239386280912, guid: 298965fb5d9f6aa4cb8f333124e0412b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -70563,7 +70563,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6947563504236517478, guid: 0f38362d42df71e49a09924c63c15eba, type: 3}
       propertyPath: m_text
-      value: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043A\u043E\u0434"
+      value: Enter a code
       objectReference: {fileID: 0}
     - target: {fileID: 6947563504236517478, guid: 0f38362d42df71e49a09924c63c15eba, type: 3}
       propertyPath: m_fontSize

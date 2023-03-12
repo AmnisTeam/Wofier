@@ -160,11 +160,11 @@ public class WordChecker
             if (wordIsFind)
             {
                 if (addedScore == 1)
-                    gamePlayManager.scoresText.text = "(" + addedScore.ToString() + " очко)";
+                    gamePlayManager.scoresText.text = "(" + addedScore.ToString() + " point)";
                 else if (addedScore >= 2 && addedScore <= 4)
-                    gamePlayManager.scoresText.text = "(" + addedScore.ToString() + " очка)";
+                    gamePlayManager.scoresText.text = "(" + addedScore.ToString() + " points)";
                 else
-                    gamePlayManager.scoresText.text = "(" + addedScore.ToString() + " очков)";
+                    gamePlayManager.scoresText.text = "(" + addedScore.ToString() + " points)";
 
                 gamePlayManager.acceptWordButton.SetActive(true);
                 gamePlayManager.acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(1, gamePlayManager.timeToAppearanceAcceptWordButton);
