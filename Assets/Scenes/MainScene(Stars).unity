@@ -78884,7 +78884,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaa508c687ed2224bbcad1fa5e1fac93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colors: []
+  colors:
+  - serializedVersion: 2
+    rgba: 4278190260
+  - serializedVersion: 2
+    rgba: 4278236160
+  - serializedVersion: 2
+    rgba: 4289986560
+  - serializedVersion: 2
+    rgba: 4278236340
+  - serializedVersion: 2
+    rgba: 4289986740
+  - serializedVersion: 2
+    rgba: 4290032640
   freeColorsIdx: 
 --- !u!1 &1854628242
 GameObject:
