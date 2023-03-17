@@ -76,6 +76,7 @@ public class GamePlayManager : MonoBehaviour
     private ColorsHolder instanceColorHolder;
     public WordChecker wordChecker;
     public EndGameManager endGameManager;
+    public PlayerNumbering playerNumbering;
 
 
     public void CheckToShowClueMenu()
@@ -296,10 +297,15 @@ public class GamePlayManager : MonoBehaviour
 
     void Start()
     {
-        me = personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1];
+        int idx = 0;
+        foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
+        {
+            if (PhotonNetwork.LocalPlayer.ActorNumber == player.ActorNumber)
+                me = personManager.persons[idx];
+            idx++;
+        }
         SelectNextPersonToPlay();
         PV = GetComponent<PhotonView>();
-        me = personManager.persons[PhotonNetwork.LocalPlayer.ActorNumber - 1];
         CheckToShowClueMenu();
     }
 
