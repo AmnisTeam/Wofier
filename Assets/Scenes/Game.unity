@@ -2582,8 +2582,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -13.92, y: 0}
-  m_SizeDelta: {x: 27.84, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0.0000019073486, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &636007838
 MonoBehaviour:
@@ -4446,7 +4446,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -373.84, y: -353.68}
+  m_AnchoredPosition: {x: -373.83997, y: -353.68}
   m_SizeDelta: {x: 715.24, y: 366.91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1089417968
@@ -6337,7 +6337,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -70.510025}
+  m_AnchoredPosition: {x: 0, y: -70.51001}
   m_SizeDelta: {x: 0, y: 141.02}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1480019239
@@ -6735,7 +6735,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1637800399
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6753,7 +6753,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -18.3, y: 0}
+  m_AnchoredPosition: {x: -18.300003, y: 0}
   m_SizeDelta: {x: -29.21, y: 68.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1637800400
@@ -7097,10 +7097,10 @@ RectTransform:
   m_Father: {fileID: 1972291106}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -13.690002, y: 0}
-  m_SizeDelta: {x: -27.38, y: 68.24}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1666342298
 MonoBehaviour:
@@ -7122,7 +7122,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "0/\u221E"
+  m_text: Steps 130/130
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7156,7 +7156,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -8802,8 +8802,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -147.59985, y: -74.73007}
-  m_SizeDelta: {x: 262.75, y: 114.839966}
+  m_AnchoredPosition: {x: -157.43, y: -68.48999}
+  m_SizeDelta: {x: 282.41, y: 102.36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1994361584
 GameObject:
@@ -8915,8 +8915,8 @@ MonoBehaviour:
   idPlayingPerson: -1
   numberOfPlayerStep: 0
   gameSteps: 0
-  countStepsToEndGame: 40
-  timeToPlayingOnePerson: 15
+  countStepsToEndGame: 6
+  timeToPlayingOnePerson: 30
   timeToAppearanceFindingMenu: 1
   findingMenuShowingTime: 3
   timeToAppearanceClue: 0.5
@@ -9163,8 +9163,12 @@ PrefabInstance:
       value: PrizeWinnerLongestWord
       objectReference: {fileID: 0}
     - target: {fileID: 3463948072111814964, guid: 92a6a6ad891b7ca4492038b9a54f0047, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 467.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3463948072111814964, guid: 92a6a6ad891b7ca4492038b9a54f0047, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 324
+      value: 391.94
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92a6a6ad891b7ca4492038b9a54f0047, type: 3}
@@ -9958,8 +9962,12 @@ PrefabInstance:
       value: PrizeWinnerTopWord
       objectReference: {fileID: 0}
     - target: {fileID: 3463948072111814964, guid: 92a6a6ad891b7ca4492038b9a54f0047, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 460.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 3463948072111814964, guid: 92a6a6ad891b7ca4492038b9a54f0047, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 324
+      value: 393.71
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92a6a6ad891b7ca4492038b9a54f0047, type: 3}

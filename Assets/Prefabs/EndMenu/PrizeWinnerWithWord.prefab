@@ -195,6 +195,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5021337278484864228, guid: ab6451a9af3b0b44ebac9504dc4f221e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 321.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021337278484864228, guid: ab6451a9af3b0b44ebac9504dc4f221e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 316.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 7462923838004010009, guid: ab6451a9af3b0b44ebac9504dc4f221e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569059415907934080, guid: ab6451a9af3b0b44ebac9504dc4f221e, type: 3}
+      propertyPath: m_text
+      value: 39 points
+      objectReference: {fileID: 0}
     - target: {fileID: 7574958760402114732, guid: ab6451a9af3b0b44ebac9504dc4f221e, type: 3}
       propertyPath: m_Name
       value: PrizeWinner

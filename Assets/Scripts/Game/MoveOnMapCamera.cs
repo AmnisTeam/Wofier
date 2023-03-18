@@ -137,7 +137,12 @@ public class MoveOnMapCamera : MonoBehaviour
     private void HandleCameraTransformationMouse()
     {
         if (workDetector.getPass())
-            if ((Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor) || (Application.platform == RuntimePlatform.Android && Input.touchCount == 1))
+            if ((Application.platform == RuntimePlatform.WindowsPlayer 
+                || Application.platform == RuntimePlatform.WindowsEditor 
+                || Application.platform == RuntimePlatform.LinuxPlayer 
+                || Application.platform == RuntimePlatform.LinuxEditor)
+                || 
+                (Application.platform == RuntimePlatform.Android && Input.touchCount == 1))
                 cameraMovementByMouse();
 
         cameraScalingByMouse();

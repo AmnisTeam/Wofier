@@ -76,7 +76,6 @@ public class GamePlayManager : MonoBehaviour
     private ColorsHolder instanceColorHolder;
     public WordChecker wordChecker;
     public EndGameManager endGameManager;
-    public PlayerNumbering playerNumbering;
 
 
     public void CheckToShowClueMenu()
@@ -99,7 +98,7 @@ public class GamePlayManager : MonoBehaviour
         idPlayingPerson = (idPlayingPerson + 1) % personManager.persons.Count;
         if(numberOfPlayerStep != 0)
             gameSteps++;
-        stepsText.text = gameSteps + "/" + countStepsToEndGame;
+        stepsText.text = "Steps " + gameSteps + "/" + countStepsToEndGame;
         timerToPlayerOnePerson = timeToPlayingOnePerson;
 
         CheckToShowClueMenu();
@@ -264,7 +263,7 @@ public class GamePlayManager : MonoBehaviour
     void Awake()
     {
         words = new List<TileWord>();
-        stepsText.text = gameSteps + "/" + countStepsToEndGame;
+        stepsText.text = "Steps " + gameSteps + "/" + countStepsToEndGame;
         wordChecker = new WordChecker(this);
         avatarSprites = GameObject.FindGameObjectWithTag(avatarSpritesTag);
         iconsContent = avatarSprites.GetComponent<IconsContent>();
@@ -287,7 +286,8 @@ public class GamePlayManager : MonoBehaviour
                 instanceColorHolder.colors[(int)player.CustomProperties["playerColorIndex"]],
                 (int)player.CustomProperties["playerIconId"]));
         }
-
+        countStepsToEndGame = PhotonNetwork.PlayerList.Length * 30;
+        countStepsToEndGame = 5;
 
 
         //personManager.persons[1].score = 200;
