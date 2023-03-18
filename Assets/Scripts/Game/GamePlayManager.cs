@@ -61,6 +61,9 @@ public class GamePlayManager : MonoBehaviour
     public float findingMenuShowingTime;
     private float findingMenuShowingTimer = float.NaN;
 
+    public float timePlayersSync = 2f;
+    private float timerPlayersSync = 0;
+
     public float timeToAppearanceClue;
 
     public float timeToAppearanceAcceptWordButton;
@@ -208,8 +211,6 @@ public class GamePlayManager : MonoBehaviour
             acceptWordButton.SetActive(false);
             acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(0, timeToAppearanceAcceptWordButton);
             PV.RPC("SelectNextPersonToPlayRPC", RpcTarget.All);
-            PV.RPC("UpdateIdPlayingPerson", RpcTarget.Others, idPlayingPerson);
-            PV.RPC("UpdateSteps", RpcTarget.Others, numberOfPlayerStep);
         }
     }
 /*
@@ -217,29 +218,6 @@ public class GamePlayManager : MonoBehaviour
     {
         this.timerToPlayerOnePerson = f;
     }*/
-
-    [PunRPC]
-    public void SelectNextPersonToPlayRPC()
-    {
-        SelectNextPersonToPlay();
-    }
-
-    [PunRPC]
-    public void UpdateIdPlayingPerson(int id)
-    {
-        idPlayingPerson = id;
-    }
-    [PunRPC]
-    public void UpdateSteps(int step)
-    {
-        numberOfPlayerStep = step;
-    }
-
-    [PunRPC]
-    public void UpdateStep(int step)
-    {
-        numberOfPlayerStep = step;
-    }
 
     [PunRPC]
     public void UpdateScore(int playerID, float score)
@@ -258,6 +236,48 @@ public class GamePlayManager : MonoBehaviour
             person.score = score;
             scoreTableManager.updateTable();
         }
+    }
+
+
+    [PunRPC]
+    public void SelectNextPersonToPlayRPC()
+    {
+        SelectNextPersonToPlay();
+    }
+
+    [PunRPC]
+    public void UpdateIdPlayingPerson(int id)
+    {
+        idPlayingPerson = id;
+    }
+
+    [PunRPC]
+    public void UpdateStep(int step)
+    {
+        numberOfPlayerStep = step;
+    }
+
+    [PunRPC]
+    public void UpdateTimerToPlayerOnePerson(float time)
+    {
+        timerToPlayerOnePerson = time;
+    }
+
+    [PunRPC]
+    public void UpdateGameSteps(int step)
+    {
+        gameSteps = step;
+        stepsText.text = "Steps " + gameSteps + "/" + countStepsToEndGame;
+    }
+
+
+    public void PlayersSync()
+    {
+        PV.RPC("UpdateIdPlayingPerson", RpcTarget.Others, idPlayingPerson);
+        PV.RPC("UpdateStep", RpcTarget.Others, numberOfPlayerStep);
+        PV.RPC("UpdateGameSteps", RpcTarget.Others, gameSteps);
+        PV.RPC("UpdateTimerToPlayerOnePerson", RpcTarget.Others, timerToPlayerOnePerson);
+        stepsText.text = "Steps " + gameSteps + "/" + countStepsToEndGame;
     }
 
     void Awake()
@@ -324,6 +344,13 @@ public class GamePlayManager : MonoBehaviour
             acceptWordButton.SetActive(false);
             acceptWordButton.GetComponent<CanvasGroup>().LeanAlpha(0, timeToAppearanceAcceptWordButton);
             SelectNextPersonToPlay();
+        }
+
+        timerPlayersSync += Time.deltaTime;
+        if (timerPlayersSync > timePlayersSync && PhotonNetwork.LocalPlayer.IsMasterClient)
+        {
+            timerPlayersSync = 0;
+            PlayersSync();
         }
 
         int secundes = (int)(timerToPlayerOnePerson % 60);

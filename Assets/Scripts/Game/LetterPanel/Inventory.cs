@@ -69,8 +69,8 @@ public class Inventory : MonoBehaviour
     {
         isSwap = true;
         gamePlayManager.PV.RPC("SelectNextPersonToPlayRPC", RpcTarget.All);
-        gamePlayManager.PV.RPC("UpdateIdPlayingPerson", RpcTarget.Others, gamePlayManager.idPlayingPerson);
-        gamePlayManager.PV.RPC("UpdateSteps", RpcTarget.Others, gamePlayManager.numberOfPlayerStep);
+        /*gamePlayManager.PV.RPC("UpdateIdPlayingPerson", RpcTarget.Others, gamePlayManager.idPlayingPerson);
+        gamePlayManager.PV.RPC("UpdateStep", RpcTarget.Others, gamePlayManager.numberOfPlayerStep);*/
         for (int i = 0; i < items.Length; i++)
         {
             if (items[i] != null)
