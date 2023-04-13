@@ -1655,6 +1655,7 @@ GameObject:
   - component: {fileID: 352240674}
   - component: {fileID: 352240673}
   - component: {fileID: 352240676}
+  - component: {fileID: 352240677}
   m_Layer: 5
   m_Name: SwapButton
   m_TagString: Untagged
@@ -1789,6 +1790,35 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &352240677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352240671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1994361591}
+          m_TargetAssemblyTypeName: PlaySound, Assembly-CSharp
+          m_MethodName: SoundPlay
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: button_click
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &373527277
 GameObject:
   m_ObjectHideFlags: 0
@@ -4286,6 +4316,7 @@ GameObject:
   - component: {fileID: 1066916668}
   - component: {fileID: 1066916667}
   - component: {fileID: 1066916666}
+  - component: {fileID: 1066916669}
   m_Layer: 5
   m_Name: Leave
   m_TagString: Untagged
@@ -4408,6 +4439,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1066916664}
   m_CullTransparentMesh: 1
+--- !u!114 &1066916669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066916664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1994361591}
+          m_TargetAssemblyTypeName: PlaySound, Assembly-CSharp
+          m_MethodName: SoundPlay
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: button_click
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1089417966
 GameObject:
   m_ObjectHideFlags: 0
@@ -7984,6 +8044,7 @@ GameObject:
   - component: {fileID: 1856446526}
   - component: {fileID: 1856446525}
   - component: {fileID: 1856446524}
+  - component: {fileID: 1856446528}
   m_Layer: 5
   m_Name: ShufleButton
   m_TagString: Untagged
@@ -8118,6 +8179,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1856446522}
   m_CullTransparentMesh: 1
+--- !u!114 &1856446528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856446522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1994361591}
+          m_TargetAssemblyTypeName: PlaySound, Assembly-CSharp
+          m_MethodName: SoundPlay
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: button_click
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1859010656
 GameObject:
   m_ObjectHideFlags: 0
@@ -8819,6 +8909,7 @@ GameObject:
   - component: {fileID: 1994361587}
   - component: {fileID: 1994361590}
   - component: {fileID: 1994361589}
+  - component: {fileID: 1994361591}
   m_Layer: 0
   m_Name: ManagersObject
   m_TagString: Untagged
@@ -8901,6 +8992,7 @@ MonoBehaviour:
   mapGenerator: {fileID: 1994361585}
   inventory: {fileID: 300185217}
   PV: {fileID: 0}
+  playSound: {fileID: 1994361591}
   findingMenu: {fileID: 114015920}
   findingMenuNickname: {fileID: 1660992241}
   timeNickname: {fileID: 20431598}
@@ -8915,10 +9007,11 @@ MonoBehaviour:
   idPlayingPerson: -1
   numberOfPlayerStep: 0
   gameSteps: 0
-  countStepsToEndGame: 6
+  countStepsToEndGame: 25
   timeToPlayingOnePerson: 30
   timeToAppearanceFindingMenu: 1
   findingMenuShowingTime: 3
+  timePlayersSync: 2
   timeToAppearanceClue: 0.5
   timeToAppearanceAcceptWordButton: 0.2
   avatarSpritesTag: ICONS_CONTENT_TAG
@@ -8965,6 +9058,18 @@ MonoBehaviour:
   cameraPosition: {fileID: 43937347}
   cameraSize: 10
   timeToAppereanceTransitionScreen: 0.6
+--- !u!114 &1994361591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994361584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfa6d2fde6af4ee4baa5581906921279, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1995823606
 GameObject:
   m_ObjectHideFlags: 0

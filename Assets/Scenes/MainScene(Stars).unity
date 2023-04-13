@@ -54153,6 +54153,10 @@ MonoBehaviour:
     sound: {fileID: 8300000, guid: ca75383646a35b44984fb124db74131f, type: 3}
   - tag: button_click
     sound: {fileID: 8300000, guid: 07452d0bd289dec4a8cd6c709605af1c, type: 3}
+  - tag: right_answer
+    sound: {fileID: 8300000, guid: afba4aedc87749b4c97a790e1cbddccc, type: 3}
+  - tag: your_turn
+    sound: {fileID: 8300000, guid: 9267a57eb1dc4fe478395e06decc331b, type: 3}
   soundVolume: 0
 --- !u!82 &1247736753
 AudioSource:

@@ -28,6 +28,8 @@ public class GamePlayManager : MonoBehaviour
     public MapGenerator mapGenerator;
     public Inventory inventory;
     public PhotonView PV;
+    GameObject soundGameObject;
+    public SoundEffects soundEffects;
 
     public WordDictionary wordDictionary;
 
@@ -99,6 +101,10 @@ public class GamePlayManager : MonoBehaviour
     public void SelectNextPersonToPlay()
     {
         idPlayingPerson = (idPlayingPerson + 1) % personManager.persons.Count;
+
+        if (personManager.persons[idPlayingPerson].id == me.id)
+            soundEffects.PlaySound("your_turn");
+
         if(numberOfPlayerStep != 0)
             gameSteps++;
         stepsText.text = "Steps " + gameSteps + "/" + countStepsToEndGame;
@@ -197,6 +203,7 @@ public class GamePlayManager : MonoBehaviour
 
             if (findWords.Count > 0)
             {
+                soundEffects.PlaySound("right_answer");
                 inventory.mapGenerator.PV.RPC("UpdateWordOnAccept", RpcTarget.Others, coordX, coordY, 
                                               chars, personsID);
                 inventory.mapGenerator.PV.RPC("UpdateCompletedWord", RpcTarget.Others, completeWordTileX, 
@@ -306,8 +313,7 @@ public class GamePlayManager : MonoBehaviour
                 instanceColorHolder.colors[(int)player.CustomProperties["playerColorIndex"]],
                 (int)player.CustomProperties["playerIconId"]));
         }
-        countStepsToEndGame = PhotonNetwork.PlayerList.Length * 30;
-        countStepsToEndGame = 5;
+        //countStepsToEndGame = PhotonNetwork.PlayerList.Length * 30;
 
 
         //personManager.persons[1].score = 200;
@@ -317,6 +323,9 @@ public class GamePlayManager : MonoBehaviour
 
     void Start()
     {
+        soundGameObject = GameObject.FindWithTag("SOUND_EFFECTS_TAG");
+        soundEffects = soundGameObject.GetComponent<SoundEffects>();
+
         int idx = 0;
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {

@@ -84,6 +84,7 @@ public class MapGenerator : MonoBehaviour
             }
             if (isEdit)
             {
+                gamePlayManager.soundEffects.PlaySound("tile_set");
                 letterTile.SetLetter(' ', person);
             }
             else
